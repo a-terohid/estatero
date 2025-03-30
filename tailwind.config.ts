@@ -1,5 +1,5 @@
-import { styleGuide_colors } from "./src/utils/StyleGuide/StyleGuide_Colors";
-import { StyleGuid_Text } from "./src/utils/StyleGuide/StyleGuide_Text";
+import { styleGuide_colors } from "./src/constants/StyleGuide_Colors";
+import { StyleGuid_Text } from "./src/constants/StyleGuide_Text";
 import plugin from "tailwindcss/plugin";
 
 const config = {
@@ -7,11 +7,14 @@ const config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './public/svgs/*.{js,ts,jsx,tsx,mdx,svg}',
+    './public/icon/*.{js,ts,jsx,tsx,mdx,svg}',
   ], 
   darkMode: 'class',
   theme: {
     extend: {
+      backgroundImage: {
+        'footer-texture': "url('/img/FooterBG.png')",
+      },
       colors: styleGuide_colors
     },
     fontFamily: {
@@ -21,7 +24,7 @@ const config = {
     },
     container: {
       center: true,
-      padding: "3rem"
+      padding: "2rem"
     },
   },
   plugins: [
