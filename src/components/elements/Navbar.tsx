@@ -45,8 +45,8 @@ const Navbar = () => {
                     <div>
                         <ul className='items-center gap-x-4 text-Body-RL-Large hidden lg:flex'>
                             {
-                                navItems.map(it =><li>
-                                    <Link onMouseEnter={it?.children ? () => setPcPageMenue(true) :undefined} className='p-1 flex items-center gap-x-1' href={it.href} key={it.href}>{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
+                                navItems.map(it =><li key={it.href}>
+                                    <Link onMouseEnter={it?.children ? () => setPcPageMenue(true) :undefined} className='p-1 flex items-center gap-x-1' href={it.href} >{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
                                     {
                                         PcPageMenue && it?.children ? <div onMouseLeave={ () => setPcPageMenue(false) } className='z-40 absolute bg-primary-200 px-4 py-5  rounded-b-lg'>
                                             <ul className='flex flex-col gap-y-3'>
@@ -80,8 +80,8 @@ const Navbar = () => {
                             <div className='py-7 px-6 bg-primary-200 container'>
                                 <ul className='text-Body-RL-Medium flex flex-col gap-y-3'>
                                 {
-                                    navItems.map( it =><li>
-                                        <Link  className='p-1 flex items-center gap-x-1' href={it.href} key={it.href}>{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
+                                    navItems.map( it =><li key={it.href}>
+                                        <Link  className='p-1 flex items-center gap-x-1' href={it.href}>{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
                                         {
                                             it?.children ? <div className='ml-9 my-4'>
                                                 <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small'>

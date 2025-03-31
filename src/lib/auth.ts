@@ -1,6 +1,8 @@
+import Log from "@/models/log";
 import User from "@/models/user";
 import { UserRole } from "@/types/generalEnums";
 import { ERROR } from "@/types/MessageUnum";
+import { LOG_Interface } from "@/types/modelTypes";
 import { hashPassword, verifyPassword } from "@/utils/auth"; 
 import connectDB from "@/utils/connectDB";
 import NextAuth, { NextAuthOptions } from "next-auth";
@@ -44,6 +46,16 @@ export const authOptions: NextAuthOptions = {
                         createdAt : new Date(),
                         updatedAt : new Date(),
                     });
+
+                    const newLog  = await Log.create({
+                        title: `New user with email ${email} hav been registerd`,
+                        action: "new user registerd",
+                        user_id: "0",
+                        createdAt: new Date()
+                    })
+
+                    console.log(newLog.title)
+
                 } else {
                     const isValid = await verifyPassword(password, user.password);
                     if (!isValid) throw new Error(ERROR.WRONG_PASSWORD);

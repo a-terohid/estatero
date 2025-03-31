@@ -20,7 +20,7 @@ const Footer = () => {
                         Your Dream Home Awaits – Let’s Make It Happen
                     </h1>
                     <p className='text-Body-RL-Medium md:text-Body-RL-Large mt-4 mb-12'>
-                        Whether you're buying, selling, or investing, we're here to guide you. Every step of the way. Start your journey today!
+                        Whether you`re buying, selling, or investing, we`re here to guide you. Every step of the way. Start your journey today!
                     </p>
 
                     {/* Call-to-action buttons */}
