@@ -14,6 +14,7 @@ const config = {
     extend: {
       backgroundImage: {
         'footer-texture': "url('/img/FooterBG.png')",
+        'homepageHero-texture': "url('/img/HomePageHeroBG.png')",
       },
       colors: styleGuide_colors
     },

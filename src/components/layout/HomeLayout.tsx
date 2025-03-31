@@ -11,7 +11,7 @@ const HomeLayout = ({ children } : {children: React.ReactNode}) => {
     return (
         <body className="font-Manrope">
             {!hideLayout && <Navbar />}
-            <div className={ ` bg-red-700 h-80`}>{children}</div>
+            <div className={ ``}>{children}</div>
             {/* <div className={ !hideLayout && `pt-[68px] lg:pt-24`}>{children}</div> */}
             {!hideLayout && <Footer />}
         </body>

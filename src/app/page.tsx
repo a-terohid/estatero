@@ -1,8 +1,9 @@
+import HomePage from "@/template/HomePage"
 
 const page = () => {
     return (
       <>
-        home page
+        <HomePage />
       </>
     );
 };
