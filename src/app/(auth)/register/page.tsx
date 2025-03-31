@@ -16,11 +16,11 @@ export const metadata = {
       title: "Register | Estatero - Create Your Account",
       description:
         "Sign up for Estatero to buy, sell, and rent properties effortlessly. Join now and start your real estate journey with us.",
-      url: "https://estatero.com/register",
+      url: "https://estatero.vercel.app/register",
       type: "website",
       images: [
         {
-          url: "/thumbnail.png", // You can create a custom image for the register page
+          url: "/img/thumbnail.png", // You can create a custom image for the register page
           width: 1200,
           height: 630,
           alt: "Register on Estatero - Buy, Sell, and Rent Properties",
@@ -32,7 +32,7 @@ export const metadata = {
       title: "Register | Estatero - Create Your Account",
       description:
         "Sign up for Estatero to buy, sell, and rent properties effortlessly. Join now and start your real estate journey with us.",
-      images: ["/thumbnail.png"],
+      images: ["/img/thumbnail.png"],
     },
   };
 

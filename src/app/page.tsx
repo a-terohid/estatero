@@ -18,11 +18,11 @@ export const metadata = {
     title: "Estatero | Buy, Sell, and Rent Properties",
     description:
       "Estatero is a real estate platform for buying, selling, and renting properties. Find your dream home with the best real estate agents.",
-    url: "https://estatero.com",
+    url: "https://estatero.vercel.app",
     type: "website",
     images: [
       {
-        url: "/thumbnail.png", // Replace with a suitable OpenGraph image
+        url: "/img/thumbnail.png", // Replace with a suitable OpenGraph image
         width: 1200,
         height: 630,
         alt: "Estatero - Buy, Sell, and Rent Properties",
@@ -34,7 +34,7 @@ export const metadata = {
     title: "Estatero | Buy, Sell, and Rent Properties",
     description:
       "Estatero is a real estate platform for buying, selling, and renting properties. Find your dream home with the best real estate agents.",
-    images: ["/thumbnail.png"],
+    images: ["/img/thumbnail.png"],
   },
 };
 
