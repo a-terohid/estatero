@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions = {
                     existingUser = await User.create({
                         email: user.email,
                         name: user.name,
-                        password: "", // No password required for Google authentication
+                        password: "oauth_no_password", // No password required for Google authentication
                         role: UserRole.Client, // Default role
                         createdAt: new Date(),
                         updatedAt: new Date(),
