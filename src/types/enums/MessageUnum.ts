@@ -10,9 +10,17 @@ export enum ERROR {
     NO_USER = "There is no user!",
     ACCESS_DENIED = "access denied!",
     LOGIN = "please login first",
+    REQUIRED_FIELD = "This field must be filled.",
+    REQUIRED_NAME = "Name is required for sign-up.",
+    INVALID_EMAIL_FORMAT = "Invalid email format.",
+    NAME_ATLEAST = "Name must be at least 3 characters.",
+    LASTNAME_ATLEAST = "Last name must be at least 3 characters.",
+    PASSWORD_ATLEAST = "Password must be at least 6 characters.",
+    PASSWORD_DONT_MACH = "Passwords do not match.",
 }
 
 export enum MESSAGE {
     NEW_USER = "User cteated successfully!",
     USER_DELETE = "User deleted successfully!",
 }
+

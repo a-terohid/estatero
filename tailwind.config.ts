@@ -15,6 +15,7 @@ const config = {
       backgroundImage: {
         'footer-texture': "url('/img/FooterBG.png')",
         'homepageHero-texture': "url('/img/HomePageHeroBG.png')",
+        'LoginBanner-texture': "url('/img/LoginBanner.png')",
       },
       colors: styleGuide_colors
     },

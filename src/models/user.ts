@@ -1,5 +1,5 @@
 
-import { UserRole } from "@/types/generalEnums";
+import { UserRole } from "@/types/enums/generalEnums";
 import { User_Interface } from "@/types/modelTypes";
 import { Schema, model, models } from "mongoose";
 

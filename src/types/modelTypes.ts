@@ -1,4 +1,4 @@
-import { UserRole } from "./generalEnums";
+import { UserRole } from "./enums/generalEnums";
 
 export interface LOG_Interface {
     _id?: string;
