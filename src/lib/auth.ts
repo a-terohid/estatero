@@ -13,88 +13,112 @@ import GoogleProvider from "next-auth/providers/google";
  * Authentication options for NextAuth, including session strategy and provider configurations.
  */
 export const authOptions: NextAuthOptions = {
-    debug: true, // Enables debugging logs in the console
-    session: { strategy: "jwt" }, // Uses JWT for session handling
+    debug: true, // Enable debugging logs
+    session: { strategy: "jwt" }, // Use JWT for session handling
     providers: [
         CredentialsProvider({
-            credentials: {
-                email: {}, // Email input field
-                password: {}, // Password input field
-                name: {}, // Name input field
-                last_name: {} // Last name input field
-            },
+            credentials: { email: {}, password: {}, name: {}, last_name: {} },
             async authorize(credentials: any) {
                 const { email, password, name, last_name } = credentials;
 
-                try {
-                    // Connects to the database
-                    await connectDB();
-                } catch (err) {
-                    console.log(err);
-                    throw new Error(ERROR.SERVER_ERROR); // Throws a server error if connection fails
-                }
+                // Connect to the database
+                await connectDB();
 
-                // Checks if email and password are provided
+                // Validate required credentials
                 if (!email || !password) throw new Error(ERROR.INVALID_DATA);
 
-                // Finds the user by email in the database
+                // Find the user in the database
                 let user = await User.findOne({ email });
-
                 if (!user) {
-                    // Validates name input
-                    if (!name) throw new Error(ERROR.REQUIRED_NAME);
-                    else if (name.length < 3) throw new Error(ERROR.NAME_ATLEAST);
-                   
-                    // Validates last name input
-                    if (!last_name) throw new Error(ERROR.REQUIRED_FIELD);
-                    else if (last_name.length < 3) throw new Error(ERROR.LASTNAME_ATLEAST);
-                    
-                    // Validates email format
-                    if (!email) throw new Error(ERROR.REQUIRED_FIELD);
-                    else if (!/\S+@\S+\.\S+/.test(email)) throw new Error(ERROR.INVALID_DATA);
-                    
-                    // Validates password length
-                    if (!password) throw new Error(ERROR.REQUIRED_FIELD);
-                    else if (password.length < 6) throw new Error(ERROR.PASSWORD_ATLEAST);
-                    
-                    // Hashes the password before saving
-                    const hashedPassword = await hashPassword(password);
+                    // Validate name and last name
+                    if (!name || name.length < 3) throw new Error(ERROR.NAME_ATLEAST);
+                    if (!last_name || last_name.length < 3) throw new Error(ERROR.LASTNAME_ATLEAST);
 
-                    // Creates a new user in the database
+                    // Validate email format
+                    if (!/\S+@\S+\.\S+/.test(email)) throw new Error(ERROR.INVALID_DATA);
+
+                    // Validate password length
+                    if (!password || password.length < 6) throw new Error(ERROR.PASSWORD_ATLEAST);
+
+                    // Hash the password before storing
+                    const hashedPassword = await hashPassword(password);
                     user = await User.create({
                         email,
                         password: hashedPassword,
                         name,
                         last_name,
-                        role: UserRole.Client, // Assigns default role as Client
+                        role: UserRole.Client, // Default role
                         createdAt: new Date(),
                         updatedAt: new Date(),
                     });
 
-                    // Logs the new user registration
-                    const newLog = await Log.create({
+                    // Log user registration
+                    await Log.create({
                         title: `New user with email ${email} has been registered`,
                         action: "new user registered",
                         user_id: "0",
-                        createdAt: new Date()
+                        createdAt: new Date(),
                     });
-
-                    console.log(newLog.title);
                 } else {
-                    // Verifies the password for an existing user
+                    // Verify password for existing users
                     const isValid = await verifyPassword(password, user.password);
                     if (!isValid) throw new Error(ERROR.WRONG_PASSWORD);
                 }
 
-                // Returns user details to store in the session
+                // Return user data for session
                 return { id: user._id, email: user.email, name: user.name, role: user.role };
             }
         }), 
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
         }),
-    ]
+    ],
+    callbacks: {
+        async signIn({ user, account, profile }) {
+            if (account?.provider === "google") {
+                // Connect to the database
+                await connectDB();
+                let existingUser = await User.findOne({ email: user.email });
+
+                // If user does not exist, create a new entry in the database
+                if (!existingUser) {
+                    existingUser = await User.create({
+                        email: user.email,
+                        name: user.name,
+                        password: "", // No password required for Google authentication
+                        role: UserRole.Client, // Default role
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                    });
+
+                    // Log Google user registration
+                    await Log.create({
+                        title: `New user with email ${user.email} has been registered via Google`,
+                        action: "new google user registered",
+                        user_id: "0",
+                        createdAt: new Date(),
+                    });
+                }
+            }
+            return true;
+        },
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+                token.role = user.role;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (token) {
+                session.user = session.user || {}; // Ensure session.user exists
+                (session.user as any).id = token.id; 
+                (session.user as any).role = token.role; 
+            }
+            return session;
+        }
+    }
 };
 
 // Handles authentication requests (GET and POST)
