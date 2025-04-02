@@ -117,7 +117,7 @@ const LoginPage = () => {
                         </button>
                     )}
                     <p className="text-Greyscale-700 text-Body-MD-Small">
-                        Don't Have Account? <Link href="/register" className="text-Body-SM-Small">Register Now</Link>
+                        Don`t Have Account? <Link href="/register" className="text-Body-SM-Small">Register Now</Link>
                     </p>
                 </div>
                 <div className="flex items-center relative justify-center">
