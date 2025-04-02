@@ -14,3 +14,15 @@ export interface registerDataError_interface {
     password_error : string;
     confirmPassword_error : string;
 }
+
+
+export interface loginData_interface {
+    email : string;
+    password : string;
+}
+
+
+export interface loginDataError_interface {
+    email_error : string;
+    password_error : string;
+}

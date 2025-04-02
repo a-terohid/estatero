@@ -1,4 +1,8 @@
+import { authOptions } from '@/lib/auth';
 import RegisterPage from '@/template/RegisterPage';
+import connectDB from '@/utils/connectDB';
+import { getServerSession } from 'next-auth';
+import { redirect } from "next/navigation";
 
 export const metadata = {
     title: "Register | Estatero - Create Your Account",
@@ -20,8 +24,7 @@ export const metadata = {
       type: "website",
       images: [
         {
-          url: "/img/thumbnail.png", // You can create a custom image for the register page
-          width: 1200,
+          url: "/img/thumbnail.png",
           height: 630,
           alt: "Register on Estatero - Buy, Sell, and Rent Properties",
         },
@@ -36,7 +39,13 @@ export const metadata = {
     },
   };
 
-const page = () => {
+const page = async () => {
+
+  await connectDB();
+  const session = await getServerSession( authOptions )
+  console.log(session);
+  
+  if ( session ) redirect("/")
     return ( <RegisterPage /> );
 };
 
