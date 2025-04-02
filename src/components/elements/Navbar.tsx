@@ -8,8 +8,13 @@ import React, { useEffect, useState } from 'react';
 import { navItems } from '@/constants/NavbarItems';
 import { MdArrowDropDown } from "react-icons/md";
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { IoMdPerson } from "react-icons/io";
 
 const Navbar = () => {
+    
+    //Get user session
+    const { status } = useSession();
 
      // State to manage the menu open/close state
      const [isOpen, setIsOpen] = useState(false);
@@ -61,9 +66,13 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className='flex items-center gap-x-6'>
-                        <div className='md:flex items-center gap-x-3 lg:text-Body-MD-Small text-Body-MD-XSmall hidden'>
-                            <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900'>Register</Link>
-                            <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900 hover:bg-primary-200 hover:text-Neutral'>Login</Link>
+                        <div className='md:flex  hidden lg:text-Body-MD-Small text-Body-MD-XSmall'>
+                            {
+                                status == "authenticated"  ? <Link href="/dashboard" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900 flex gap-x-2 items-center'  ><IoMdPerson/> Dashboard</Link> : <div className='items-center gap-x-3'>
+                                <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900'>Register</Link>
+                                <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900 hover:bg-primary-200 hover:text-Neutral'>Login</Link>
+                                </div> 
+                            }
                         </div>
                         {/* Mobile Navigation Toggle Button */}
                         <div className="lg:hidden text-Neutral text-2xl">
@@ -94,10 +103,15 @@ const Navbar = () => {
                                     </li>)
                                 }
                                 </ul>
-                                <div className='md:hidden items-center pt-4 lg:text-Body-MD-Small text-Body-MD-XSmall flex mt-5 border-t justify-between border-t-primary-50'>
-                                    <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 bg-Neutral rounded-full text-Greyscale-900'>Register</Link>
-                                    <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900'>Login</Link>
+                                <div className='pt-4 border-t border-t-primary-50 lg:text-Body-MD-Small text-Body-MD-XSmall mt-5'>
+                                    {
+                                         status == "authenticated"  ? <Link href="/dashboard" className='lg:py-3 py-2 lh:px-8 px-5 bg-Neutral rounded-full text-Greyscale-900 flex items-center gap-x-2 w-fit'  ><IoMdPerson/> Dashboard</Link> : <div className='items-center flex  justify-between'>
+                                                <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 bg-Neutral rounded-full text-Greyscale-900'>Register</Link>
+                                                <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900'>Login</Link>
+                                            </div>
+                                    }
                                 </div>
+
                             </div>
                             <div onClick={handler} className='bg-black/40 '></div>
                         </div> : null 
