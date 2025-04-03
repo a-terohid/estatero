@@ -22,5 +22,7 @@ export enum ERROR {
 export enum MESSAGE {
     NEW_USER = "User cteated successfully!",
     USER_DELETE = "User deleted successfully!",
+    PASSWORD_RESET_EMAIL = "Password reset email sent successfully.",
+    PASSWORD_RESET = "Password reset successfully.",
 }
 

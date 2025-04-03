@@ -6,13 +6,12 @@ import { usePathname } from "next/navigation";
 
 const HomeLayout = ({ children } : {children: React.ReactNode}) => {
     const pathname = usePathname();
-    const hideLayout = ["/login", "/register"].includes(pathname); 
+    const hideLayout = ["/login", "/register" , "/forgot-password" , "/reset-password"].includes(pathname); 
 
     return (
         <body className="font-Manrope">
             {!hideLayout && <Navbar />}
-            <div className={ ``}>{children}</div>
-            {/* <div className={ !hideLayout && `pt-[68px] lg:pt-24`}>{children}</div> */}
+            <div className={``}>{children}</div>
             {!hideLayout && <Footer />}
         </body>
     );
