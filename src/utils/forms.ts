@@ -1,4 +1,4 @@
-import { loginData_interface, loginDataError_interface, registerData_interface, registerDataError_interface } from '@/types/StatesTypes';
+import { forgotPassword_interface, forgotPasswordError_interface, loginData_interface, loginDataError_interface, registerData_interface, registerDataError_interface } from '@/types/StatesTypes';
 import { ERROR } from "@/types/enums/MessageUnum";
 
 // Validates the registration form data and returns an object containing error messages.
@@ -92,6 +92,29 @@ export const LoginFormsValidation = (data: loginData_interface, date_error: logi
         errors.password_error = ERROR.PASSWORD_ATLEAST;
     } else {
         errors.password_error = "";
+    }
+
+    return errors;
+};
+
+
+export const forgotPasswordFormsValidation = (data: forgotPassword_interface, date_error: forgotPasswordError_interface) : forgotPasswordError_interface => {
+   
+    // Destructuring user input fields
+    const { email } = data;
+
+    // Initializing error object with existing errors
+    let errors: forgotPasswordError_interface = {
+        email_error: date_error.email_error,
+    };
+
+    // Validate Email
+    if (!email) {
+        errors.email_error = ERROR.REQUIRED_FIELD;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        errors.email_error = ERROR.INVALID_DATA;
+    } else {
+        errors.email_error = "";
     }
 
     return errors;

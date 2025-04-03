@@ -31,7 +31,7 @@ export const POST = async (req: Request) => {
         }
 
         // Generate a random reset token (not secure, should be improved)
-        const resetToken = (Math.random() * 6).toString();
+        const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
         const hashedToken = await hashPassword(resetToken); // Hash the token for security
 
         // Store the hashed token and expiration time in the user document

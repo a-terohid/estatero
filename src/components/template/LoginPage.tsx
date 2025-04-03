@@ -135,7 +135,7 @@ const LoginPage = () => {
                         />
                         <p>Remember Me</p>
                     </div>
-                    <Link href='/forgotPassword'>Forgot Password?</Link>
+                    <Link href='/forgot-password'>Forgot Password?</Link>
                 </div>
                 
                 {/* Login button */}

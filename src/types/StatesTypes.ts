@@ -26,3 +26,13 @@ export interface loginDataError_interface {
     email_error : string;
     password_error : string;
 }
+
+
+export interface forgotPassword_interface {
+    email : string;
+}
+
+
+export interface forgotPasswordError_interface {
+    email_error : string;
+}
