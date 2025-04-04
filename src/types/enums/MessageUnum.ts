@@ -17,6 +17,8 @@ export enum ERROR {
     LASTNAME_ATLEAST = "Last name must be at least 3 characters.",
     PASSWORD_ATLEAST = "Password must be at least 6 characters.",
     PASSWORD_DONT_MACH = "Passwords do not match.",
+    RESET_LINK_EXPIRED = "Your reset link has expired. Please request a new one.",
+    INVALID_TOKEN = "Invalid token. Please try again.",
 }
 
 export enum MESSAGE {
@@ -24,5 +26,6 @@ export enum MESSAGE {
     USER_DELETE = "User deleted successfully!",
     PASSWORD_RESET_EMAIL = "Password reset email sent successfully.",
     PASSWORD_RESET = "Password reset successfully.",
+    VALID_TOKEN = "Valid token. you can reset your password.",
 }
 

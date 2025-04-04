@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const HomeLayout = ({ children } : {children: React.ReactNode}) => {
     const pathname = usePathname();
-    const hideLayout = ["/login", "/register" , "/forgot-password" , "/reset-password"].includes(pathname); 
+    const hideLayout = ["/login", "/register" , "/forgot-password" , "/reset-password", "/set-password"].includes(pathname); 
 
     return (
         <body className="font-Manrope">

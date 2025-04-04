@@ -45,7 +45,7 @@ const ForgotPasswordPage = () => {
         if (resData?.error) {
             toast.error(resData?.error); // Show error notification if there's an issue
         } else {
-            router.push("/reset-password"); // Redirect user to reset password page
+            router.push(`/reset-password?email=${email}`); // Redirect user to reset password page
         }
     };
 
@@ -61,9 +61,7 @@ const ForgotPasswordPage = () => {
                     {/* Form heading and description */}
                     <div className='flex flex-col items-center justify-center text-center lg:mx-8'>
                         <h3 className='text-Heading-4 md:text-Heading-3 lg:text-Heading-2 text-Greyscale-900 mt-6 mb-4'>Forgot Your Password?</h3>
-                        <p className='text-Body-RL-Medium lg:text-Body-RL-Large text-Greyscale-700'>
-                            Don’t worry, it happens! Enter your email below, and we’ll send you a link to reset your password.
-                        </p>
+                        <p className='text-Body-RL-Medium lg:text-Body-RL-Large text-Greyscale-700'>Don’t worry, it happens! Enter your email below, and we’ll send you a link to reset your password.</p>
                     </div>
 
                     {/* Email input field */}
@@ -82,17 +80,11 @@ const ForgotPasswordPage = () => {
 
                     {/* Submit button and login link */}
                     <div className='w-full mt-8 flex flex-col items-center justify-center gap-y-4'> 
-                        {loading ? (
+                        {loading ? 
                             <Loader /> // Show loader while processing
-                        ) : (
-                            <button onClick={handleForgotPasswords} className="text-primary-0 bg-primary-50 rounded-full py-3 text-Body-MD-Small w-full hover:bg-primary-100">
-                                Send Reset Link
-                            </button>
-                        )}
-                        <p className="text-Greyscale-700 text-Body-MD-Small">
-                            Remember your Password? 
-                            <Link href="/login" className="text-Body-SM-Small"> Login Here</Link>
-                        </p>
+                         : <button onClick={handleForgotPasswords} className="text-primary-0 bg-primary-50 rounded-full py-3 text-Body-MD-Small w-full hover:bg-primary-100">Send Reset Link</button>
+                        }
+                        <p className="text-Greyscale-700 text-Body-MD-Small">Remember your Password? <Link href="/login" className="text-Body-SM-Small"> Login Here</Link></p>
                     </div>
                 </div>
             </div>

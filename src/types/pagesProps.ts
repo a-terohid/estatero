@@ -15,3 +15,10 @@ export interface LogoCP_props {
     img_Width?: string
     fontsize?: string
 }
+
+export interface resetpassword_props {
+    email : string
+    token : string
+    error : string
+    expire :string
+}
