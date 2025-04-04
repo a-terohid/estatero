@@ -3,6 +3,38 @@ import ResetPasswordPage from "@/template/forgot-password/ResetPasswordPage";
 import { ERROR } from "@/types/enums/MessageUnum";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+    title: "Reset Password | DWLFNDR",
+    description: "Enter the verification code sent to your email to reset your password securely.",
+    keywords: [
+        "reset password",
+        "password recovery",
+        "OTP verification",
+        "account security",
+        "DWLFNDR"
+    ],
+    openGraph: {
+        title: "Reset Password | DWLFNDR",
+        description: "Verify your email with the OTP code to reset your password securely.",
+        url: "https://estatero.vercel.app/reset-password",
+        type: "website",
+        images: [
+            {
+                url: "/img/thumbnail.png",
+                width: 1200,
+                height: 630,
+                alt: "Reset Password Page"
+            }
+        ]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Reset Password | DWLFNDR",
+        description: "Enter the OTP code sent to your email to proceed with password recovery.",
+        images: ["/img/thumbnail.png"]
+    }
+};
+
 const page = async ({ searchParams }: any) => {
     // Extract email and token from the URL search parameters
     const { email, token } = searchParams;

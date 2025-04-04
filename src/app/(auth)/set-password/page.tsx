@@ -1,6 +1,5 @@
-import React from 'react';
 
-const page = () => {
+const page = async ({ searchParams }: any) => {
     return (
         <div>
             set-password
