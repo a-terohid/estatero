@@ -56,7 +56,7 @@ const ForgotPasswordPage = () => {
                 <div className='bg-Neutral w-screen md:w-3/4 lg:w-1/2 rounded-xl py-8 md:py-12 px-4 md:px-12 flex flex-col items-center justify-center'>
                     
                     {/* Display the logo at the top */}
-                    <LogoCP color="black" fontsize="text-2xl" img_Width="w-7" />
+                    <LogoCP color="black" fontsize="text-2xl lg:text-3xl" img_Width="w-7" />
 
                     {/* Form heading and description */}
                     <div className='flex flex-col items-center justify-center text-center lg:mx-8'>

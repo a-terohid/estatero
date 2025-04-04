@@ -36,3 +36,15 @@ export interface forgotPassword_interface {
 export interface forgotPasswordError_interface {
     email_error : string;
 }
+
+
+export interface setPassword_interface {
+    password : string;
+    confirmPassword : string;
+}
+
+
+export interface setPasswordError_interface {
+    password_error : string;
+    confirmPassword_error : string;
+}

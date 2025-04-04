@@ -1,6 +1,7 @@
 import User from "@/models/user";
 import ResetPasswordPage from "@/template/forgot-password/ResetPasswordPage";
 import { ERROR } from "@/types/enums/MessageUnum";
+import { hashPassword } from "@/utils/auth";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -57,9 +58,10 @@ const page = async ({ searchParams }: any) => {
     let error;
 
     if (token) {
-        // If the token is still valid, redirect the user to the login page
+        // If the token is still valid, redirect the user to the set-password page
         if (!isExpired) {
-            redirect("/login");
+            const hashedEmail = await hashPassword(email);
+            redirect(`/set-password?email=${email}&verify=${hashedEmail}`);
         } else {
             // If the token is expired, set the appropriate error message
             error = ERROR.RESET_LINK_EXPIRED;
