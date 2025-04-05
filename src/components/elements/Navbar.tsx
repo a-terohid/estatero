@@ -68,7 +68,7 @@ const Navbar = () => {
                     <div className='flex items-center gap-x-6'>
                         <div className='md:flex  hidden lg:text-Body-MD-Small text-Body-MD-XSmall'>
                             {
-                                status == "authenticated"  ? <Link href="/dashboard" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900 flex gap-x-2 items-center'  ><IoMdPerson/> Dashboard</Link> : <div className='items-center gap-x-3'>
+                                status == "authenticated"  ? <Link href="/dashboard" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900 flex gap-x-2 items-center'  ><IoMdPerson/> Dashboard</Link> : <div className=' flex items-center gap-x-3'>
                                 <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 hover:bg-Neutral rounded-full hover:text-Greyscale-900'>Register</Link>
                                 <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900 hover:bg-primary-200 hover:text-Neutral'>Login</Link>
                                 </div> 

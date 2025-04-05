@@ -6,7 +6,7 @@ import Loader from '@/module/Loader'; // Loader component for showing a loading 
 import { forgotPasswordFormsValidation } from '@/utils/forms'; // Function to validate the form
 import Link from 'next/link'; // For navigation between pages
 import { useRouter } from 'next/navigation'; // Next.js router for page redirection
-import React, { useState } from 'react'; // React hooks for state management
+import React, { useEffect, useState } from 'react'; // React hooks for state management
 import toast, { Toaster } from 'react-hot-toast'; // Library for showing toast notifications
 
 const ForgotPasswordPage = () => {
@@ -21,8 +21,12 @@ const ForgotPasswordPage = () => {
     // Function to handle input changes
     const changeHandler = (event: any) => {
         setEmail(event?.target?.value); // Update email state
-        setEmailError(forgotPasswordFormsValidation({ email }, { email_error }).email_error); // Validate the email input
     };
+
+    // Validate the email input
+    useEffect(()=> {
+        setEmailError(forgotPasswordFormsValidation({ email }, { email_error }).email_error); 
+    },[ email])
 
     // Function to handle form submission when the user clicks "Send Reset Link"
     const handleForgotPasswords = async (event: any) => {

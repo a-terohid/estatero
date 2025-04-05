@@ -3,7 +3,7 @@
 const HomePage = () => {
     return (
         <>
-            <div className="bg-homepageHero-texture h-96">
+            <div className="bg-homepageHero-texture h-96 bg-cover bg-top">
 
             </div>
             <div>

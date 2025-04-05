@@ -37,6 +37,10 @@ const LoginPage = () => {
     const router = useRouter();
 
     useEffect(() => {
+
+        // Validate the forms inputs
+        setDataError(LoginFormsValidation(DATA, DATA_Error));
+
         // Retrieve saved email from localStorage if "Remember Me" was selected
         const savedEmail = localStorage.getItem("rememberedEmail");
         const isRemembered = localStorage.getItem("rememberMe") === "true";
@@ -48,13 +52,12 @@ const LoginPage = () => {
             }));
             setRememberMe(true);
         }
-    }, []);
+    }, [DATA]);
     
     // Handle input changes
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setData((prev) => ({ ...prev, [name]: value }));
-        setDataError(LoginFormsValidation(DATA, DATA_Error));
     };
 
     // Toggle "Remember Me" checkbox
@@ -158,7 +161,15 @@ const LoginPage = () => {
             
             {/* Right side banner */}
             <div className="items-end relative hidden md:flex">
-                <img className="w-screen lg:h-full" src="/img/LoginBanner.png" alt="LoginBanner" />
+                <img className="hidden md:block w-screen lg:h-screen" src="/img/LoginBanner.png" alt="Login Banner" />
+                <div className="absolute m-8">
+                    <p className="text-Heading-4 text-Neutral">
+                        “Having dealt with many real estate firms over the years, Dwellfinder stands out for their exceptional service and understanding of the luxury market. Their discretion, and attention”
+                    </p>
+                    <p className="text-Heading-5 mt-6 text-primary-50">
+                        Robert Thompson <span className="text-Neutral">•</span> First-Time Homebuyers
+                    </p>
+                </div>
             </div>
             <Toaster />
         </div>

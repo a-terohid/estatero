@@ -3,7 +3,7 @@
 import INPUT from "@/elements/INPUT";
 import LogoCP from "@/elements/LogoCP";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { registerData_interface, registerDataError_interface } from "@/types/StatesTypes";
 import { RegisterFormsValidation } from "@/utils/forms";
@@ -47,8 +47,12 @@ const RegisterPage = () => {
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setData((prev) => ({ ...prev, [name]: value }));
-        setDataError(RegisterFormsValidation(DATA, DATA_Error));
     };
+    
+    // Validate the forms inputs
+    useEffect(() => {
+        setDataError(RegisterFormsValidation(DATA, DATA_Error));
+    } , [DATA]);
 
     // Function to handle user registration
     const handleSignUp = async (event: any) => {

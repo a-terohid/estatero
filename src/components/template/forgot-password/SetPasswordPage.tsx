@@ -7,7 +7,7 @@ import { setPassword_interface, setPasswordError_interface } from "@/types/State
 import { SetPasswordFormsValidation } from "@/utils/forms";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const SetPasswordPage = ({email}: {email : string}) => {
@@ -34,6 +34,11 @@ const SetPasswordPage = ({email}: {email : string}) => {
             setData((prev) => ({ ...prev, [name]: value }));
             setDataError(SetPasswordFormsValidation(data, data_error));
         };
+
+        // Validate the password input
+        useEffect(()=> {
+            setDataError(SetPasswordFormsValidation(data, data_error));
+        }, [ data ])
 
         const handleSetPasswords = async (event: any) => {
             event.preventDefault(); // Prevent default form submission behavior
