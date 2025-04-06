@@ -45,15 +45,15 @@ const Navbar = () => {
     return (
         <div>
             <div className={`${isOpen || !isTop ? "bg-primary-200" : "bg-primary-200/0"} z-30 fixed w-screen h-fit`}>
-                <div className=' container py-4 lg:py-8 flex justify-between items-center text-Greyscale-100'>
+                <div className=' container py-4 lg:py-6 flex justify-between items-center text-Greyscale-100'>
                     <LogoCP />
                     <div>
-                        <ul className='items-center gap-x-4 text-Body-RL-Large hidden lg:flex'>
+                        <ul className='items-center gap-x-4 text-Body-RL-Medium hidden lg:flex'>
                             {
                                 navItems.map(it =><li key={it.href}>
                                     <Link onMouseEnter={it?.children ? () => setPcPageMenue(true) :undefined} className='p-1 flex items-center gap-x-1' href={it.href} >{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
                                     {
-                                        PcPageMenue && it?.children ? <div onMouseLeave={ () => setPcPageMenue(false) } className='z-40 absolute bg-primary-200 px-4 py-5  rounded-b-lg'>
+                                        PcPageMenue && it?.children ? <div onMouseLeave={ () => setPcPageMenue(false) } className={`z-40 absolute ${isOpen || !isTop ? "bg-primary-200" : "bg-primary-200/0"} px-4 py-5  rounded-b-lg`}>
                                             <ul className='flex flex-col gap-y-3'>
                                                 {
                                                     it?.children.map( ch => <li className='hover:cursor-pointer' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
@@ -90,15 +90,22 @@ const Navbar = () => {
                                 <ul className='text-Body-RL-Medium flex flex-col gap-y-3'>
                                 {
                                     navItems.map( it =><li key={it.href}>
-                                        <Link  className='p-1 flex items-center gap-x-1' href={it.href}>{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
                                         {
-                                            it?.children ? <div className='ml-9 my-4'>
-                                                <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small'>
-                                                    {
-                                                        it?.children.map(ch => <li className='hover:cursor-pointer' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
-                                                    }
-                                                </ul>
-                                            </div> :null
+                                            it?.children ? <div className=''>
+                                                <details className="group ">
+                                                    <summary className="flex items-center justify-between cursor-pointer">
+                                                        <Link  className='p-1 flex items-center gap-x-1' href={it.href}>{it.name}</Link>
+                                                        <span className="text-2xl lg:text-3xl ml-3 text-primary-500 transition-transform duration-500 group-open:rotate-45"><MdArrowDropDown /></span>
+                                                    </summary>
+                                                    <div className='ml-8 my-3'>
+                                                            <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small'>
+                                                            {
+                                                                it?.children.map(ch => <li className='hover:cursor-pointer' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
+                                                            }
+                                                            </ul>
+                                                    </div>
+                                                </details>
+                                            </div> :<Link  className='p-1 flex items-center gap-x-1' href={it.href}>{it.name}</Link>
                                         }
                                     </li>)
                                 }
