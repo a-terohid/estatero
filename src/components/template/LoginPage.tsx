@@ -36,12 +36,9 @@ const LoginPage = () => {
 
     const router = useRouter();
 
+    // Retrieve saved email from localStorage if "Remember Me" was selected
     useEffect(() => {
 
-        // Validate the forms inputs
-        setDataError(LoginFormsValidation(DATA, DATA_Error));
-
-        // Retrieve saved email from localStorage if "Remember Me" was selected
         const savedEmail = localStorage.getItem("rememberedEmail");
         const isRemembered = localStorage.getItem("rememberMe") === "true";
     
@@ -52,6 +49,13 @@ const LoginPage = () => {
             }));
             setRememberMe(true);
         }
+    }, []);
+
+    // Validate the forms inputs
+    useEffect(() => {
+
+        setDataError(LoginFormsValidation(DATA, DATA_Error));
+
     }, [DATA]);
     
     // Handle input changes
@@ -69,7 +73,7 @@ const LoginPage = () => {
     const handleSignUp = async (event: any)  => {
         event.preventDefault();
         setLoading(true);
-
+               
         // Store only email in localStorage if "Remember Me" is checked
         if (rememberMe) {
             localStorage.setItem("rememberedEmail", email);
