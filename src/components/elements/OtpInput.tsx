@@ -41,7 +41,7 @@ const OTPInput = ({ onComplete }: InputProps) => {
       {Array.from({ length: 6 }, (_, index) => (
         <input
           key={index}
-          type="text"
+          type="number"
           maxLength={1}
           value={OTP[index]}
           onChange={(e) => handleTextChange(e.target.value, index)} // Handle the text change for each input
