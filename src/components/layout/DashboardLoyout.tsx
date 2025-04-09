@@ -2,7 +2,6 @@ import { DashboardItems } from "@/constants/DashboardItems";
 import { UserRole } from "@/types/enums/generalEnums";
 import { DashboardLoyout_prop } from "@/types/pagesProps";
 import Link from "next/link";
-
 import { BsPersonCircle } from "react-icons/bs"
 import { DashboardItem_interface } from "@/types/generalTypes";
 import { roleStyles } from "@/constants/roleStyle";
@@ -43,11 +42,10 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                                 DashboardItems.map( (item: DashboardItem_interface) => 
                                     item.accessibility.includes(UserRole.ALL) || item.accessibility.includes(role as UserRole) ? 
                                     <li key={item.href}>
-                                        {/* If the menu item has children, render using RenderDashboardMenuItem */}
+                                        {/*render using RenderDashboardMenuItem */}
                                         {
-                                            item?.children.length ?  <RenderDashboardMenuItem item={item} />  
-                                            :
-                                            <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.name}</Link>  /* Simple link for items without children */
+                                             <RenderDashboardMenuItem item={item} />  
+                                            
                                         }
                                     </li> : null)  /* Only show items that the user has access to */
                             }
@@ -56,7 +54,7 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                 </div>
 
                 {/* Main content area */}
-                <div className='w-full rounded-xl shadow-xl bg-Greyscale-100'>
+                <div className='w-full rounded-xl shadow-xl bg-Greyscale-100  text-Greyscale-600'>
                     { children }  {/* Render the child content passed to the dashboard */}
                 </div>
             </div>

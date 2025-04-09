@@ -16,9 +16,16 @@ export const DashboardItems : DashboardItem_interface[] = [
         accessibility: [UserRole.ALL],
         icon : <IoMdPerson/>,
         children : [
+            // { 
+            //     name: "Profile", 
+            //     href: "/dashboard/profile" , 
+            //     accessibility: [UserRole.ALL],
+            //     icon : <IoMdPerson/>,
+            //     children : []
+            // },
             { 
-                name: "Edite Profile", 
-                href: "/dashboard/profile/edite" , 
+                name: "Edit Profile", 
+                href: "/dashboard/profile/edit" , 
                 accessibility: [UserRole.ALL],
                 icon : <IoMdPerson/>,
                 children : []
