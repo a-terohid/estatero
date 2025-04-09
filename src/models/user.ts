@@ -43,7 +43,7 @@ const UserSchema = new Schema<User_Interface>({
     role : {
         type : String,
         required: true,
-        default : UserRole.Client
+        default : UserRole.CLIENT
     },
     createdAt: {
         type: Date,

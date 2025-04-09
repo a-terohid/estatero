@@ -1,8 +1,9 @@
 export enum UserRole {
-    Client = "Client",
-    Agent = "Agent",
-    Admin = "Admin",
-    Owner = "Owner",
-    AgentAdmin = "Agent/Admin",
-    AgentOwner = "Agent/Owner",
+    CLIENT = "Client",
+    AGENT = "Agent",
+    ADMIN = "Admin",
+    OWNER = "Owner",
+    AGENTADMIN = "Agent/Admin",
+    AGENTOWNER = "Agent/Owner",
+    ALL = "all"
 }

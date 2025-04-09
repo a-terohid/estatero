@@ -1,3 +1,5 @@
+import { UserRole } from "./enums/generalEnums";
+
 export interface inputComponent_input {
     changeHandler : Function;
     value : string;
@@ -21,4 +23,11 @@ export interface resetpassword_props {
     token : string
     error : string
     expire :string
+}
+
+
+export interface DashboardLoyout_prop {
+    children : React.ReactNode
+    email: string,
+    role : UserRole
 }

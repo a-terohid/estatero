@@ -17,6 +17,7 @@ const config = {
         'homepageHero-texture': "url('/img/HomePageHeroBG.png')",
         'LoginBanner-texture': "url('/img/LoginBanner.png')",
         'ForgotPassword-texture': "url('/img/ForgotPasswordBG.png')",
+        'dashboardBG-texture': "url('/img/dashboardBG.png')",
       },
       colors: styleGuide_colors
     },

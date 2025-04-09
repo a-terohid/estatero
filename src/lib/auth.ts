@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
                         password: hashedPassword,
                         name,
                         last_name,
-                        role: UserRole.Client, // Default role
+                        role: UserRole.CLIENT, // Default role
                         createdAt: new Date(),
                         updatedAt: new Date(),
                     });
@@ -87,7 +87,7 @@ export const authOptions: NextAuthOptions = {
                         email: user.email,
                         name: user.name,
                         password: "oauth_no_password", // No password required for Google authentication
-                        role: UserRole.Client, // Default role
+                        role: UserRole.CLIENT, // Default role
                         createdAt: new Date(),
                         updatedAt: new Date(),
                     });
