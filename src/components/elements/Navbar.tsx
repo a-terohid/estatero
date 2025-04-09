@@ -10,8 +10,12 @@ import { MdArrowDropDown } from "react-icons/md";
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { IoMdPerson } from "react-icons/io";
+import { DashboardItems } from '@/constants/DashboardItems';
+import { DashboardItem_interface } from '@/types/generalTypes';
+import { UserRole } from '@/types/enums/generalEnums';
+import RenderDashboardNavbarItem from './RenderDashboardNavbarItem';
 
-const Navbar = () => {
+const Navbar = ({role}: {role : UserRole}) => {
     
     //Get user session
     const { status } = useSession();
@@ -98,9 +102,9 @@ const Navbar = () => {
                                                         <span className="text-2xl lg:text-3xl ml-3 text-primary-500 transition-transform duration-500 group-open:rotate-45"><MdArrowDropDown /></span>
                                                     </summary>
                                                     <div className='ml-8 my-3'>
-                                                            <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small'>
+                                                            <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small scale-up-ver-top'>
                                                             {
-                                                                it?.children.map(ch => <li className='hover:cursor-pointer' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
+                                                                it?.children.map(ch => <li className='hover:cursor-pointer ' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
                                                             }
                                                             </ul>
                                                     </div>
@@ -110,9 +114,24 @@ const Navbar = () => {
                                     </li>)
                                 }
                                 </ul>
-                                <div className='pt-4 border-t border-t-primary-50 lg:text-Body-MD-Small text-Body-MD-XSmall mt-5'>
+                                <div className='pt-4 border-t border-t-primary-50 lg:text-Body-MD-Small mt-5'>
                                     {
-                                         status == "authenticated"  ? <Link href="/dashboard" className='lg:py-3 py-2 lh:px-8 px-5 bg-Neutral rounded-full text-Greyscale-900 flex items-center gap-x-2 w-fit'  ><IoMdPerson/> Dashboard</Link> : <div className='items-center flex  justify-between'>
+                                         status == "authenticated"  ? <div>
+                                            <ul>
+                                            {
+                                                DashboardItems.map( (item: DashboardItem_interface) => 
+                                                    item.accessibility.includes(UserRole.ALL) || item.accessibility.includes(role as UserRole) ? 
+                                                    <li key={item.href}>
+                                                        {/* If the menu item has children, render using RenderDashboardMenuItem */}
+                                                        {
+                                                            item?.children.length ?  <RenderDashboardNavbarItem item={item} />  
+                                                            :
+                                                            <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.name}</Link>  /* Simple link for items without children */
+                                                        }
+                                                    </li> : null)  /* Only show items that the user has access to */
+                                            }
+                                            </ul>
+                                         </div> : <div className='items-center flex  justify-between'>
                                                 <Link href="/register" className='lg:py-3 py-2 lh:px-8 px-5 bg-Neutral rounded-full text-Greyscale-900'>Register</Link>
                                                 <Link href="/login" className='bg-Neutral lg:py-3 py-2 lg:px-8 px-5 rounded-full text-Greyscale-900'>Login</Link>
                                             </div>

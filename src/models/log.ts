@@ -27,6 +27,6 @@ const LogSchema = new Schema<LOG_Interface>({
  * Creates a Mongoose model for logs.
  */
 
-const Log = models.Log || model("Log", LogSchema);
+const Log = models?.Log || model("Log", LogSchema);
 
 export default Log;

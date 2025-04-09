@@ -71,6 +71,6 @@ const UserSchema = new Schema<User_Interface>({
 } , { collection : "User" , timestamps: true })
 
 
-const User = models.User || model("User", UserSchema);
+const User = models?.User || model("User", UserSchema);
 
 export default User;

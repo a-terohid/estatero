@@ -1,8 +1,9 @@
-import { DashboardItem_interface } from "@/types/generalTypes";
-import Link from "next/link";
-import { MdArrowDropDown } from "react-icons/md";
+import { DashboardItem_interface } from '@/types/generalTypes';
+import Link from 'next/link';
+import React from 'react';
+import { MdArrowDropDown } from 'react-icons/md';
 
-const RenderDashboardMenuItem = ({item} : {item: DashboardItem_interface}) => {
+const RenderDashboardNavbarItem = ({item} : {item: DashboardItem_interface}) => {
     return (
         <div className=''>
             {/* Details tag used for collapsible menu */}
@@ -17,8 +18,8 @@ const RenderDashboardMenuItem = ({item} : {item: DashboardItem_interface}) => {
                     </span>
                 </summary>
                 {/* Submenu items, rendered if there are any children */}
-                <div className='ml-8 my-3'>
-                    <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small scale-up-ver-top'>
+                <div className='ml-8 my-3 scale-up-ver-top'>
+                    <ul className='flex flex-col gap-y-3 list-disc text-Body-RL-Small'>
                         {/* Loop through each child item and render a list item with a link */}
                         {
                             item?.children.map(ch => 
@@ -34,4 +35,4 @@ const RenderDashboardMenuItem = ({item} : {item: DashboardItem_interface}) => {
     );
 };
 
-export default RenderDashboardMenuItem;
+export default RenderDashboardNavbarItem;
