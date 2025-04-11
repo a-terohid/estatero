@@ -126,7 +126,7 @@ const Navbar = ({role}: {role : UserRole}) => {
                                                         {
                                                             item?.children.length ?  <RenderDashboardNavbarItem item={item} />  
                                                             :
-                                                            <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.name}</Link>  /* Simple link for items without children */
+                                                            <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.icon}{item.name}</Link>  /* Simple link for items without children */
                                                         }
                                                     </li> : null)  /* Only show items that the user has access to */
                                             }

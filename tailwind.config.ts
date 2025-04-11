@@ -9,6 +9,15 @@ const config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './public/icon/*.{js,ts,jsx,tsx,mdx,svg}',
   ], 
+  safelist: [
+    'bg-Success-100',
+    'text-Success-300',
+    'bg-Sky-50',
+    'text-Sky-200',
+    'bg-Warning-50',
+    'text-Warning-200',
+    'hidden',
+  ],
   darkMode: 'class',
   theme: {
     extend: {

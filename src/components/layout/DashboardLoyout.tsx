@@ -4,10 +4,13 @@ import { DashboardLoyout_prop } from "@/types/pagesProps";
 import Link from "next/link";
 import { BsPersonCircle } from "react-icons/bs"
 import { DashboardItem_interface } from "@/types/generalTypes";
-import { roleStyles } from "@/constants/roleStyle";
 import RenderDashboardMenuItem from "@/elements/RenderDashboardMenuItem";
+import { roleStyles } from "@/constants/roleStyle";
+
+
 const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => {
 
+    
     return (
         <div>
             {/* Dashboard background section */}
@@ -31,7 +34,7 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                         <BsPersonCircle className=" text-4xl mb-2 " /> {/* User icon */}
                         <p className=' mb-3'>{ email }</p> {/* Display user email */}
                         { role in roleStyles &&  // Check if the user role exists in the role styles
-                            <p className={`px-3 py-[2px] text-Body-RL-Small rounded-md ${roleStyles[role].labelClass}`}>
+                            <p className={`px-3 py-[2px] text-Body-RL-Small rounded-md ${roleStyles[role].labelClass} `}>
                                 {role} {/* Display the user role */}
                             </p>
                         }
