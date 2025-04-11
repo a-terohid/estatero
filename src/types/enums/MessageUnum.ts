@@ -20,6 +20,7 @@ export enum ERROR {
     RESET_LINK_EXPIRED = "Your reset link has expired. Please request a new one.",
     INVALID_TOKEN = "Invalid token. Please try again.",
     OTP_REQUIRED = "OTP Code is required!",
+        UNAUTHORIZED = "You dont have permission to edit this user."
 }
 
 export enum MESSAGE {
@@ -28,5 +29,6 @@ export enum MESSAGE {
     PASSWORD_RESET_EMAIL = "Password reset email sent successfully.",
     PASSWORD_RESET = "Password reset successfully.",
     VALID_TOKEN = "Valid token. you can reset your password.",
+    PROFILE_EDIT = "Your profile edited successfully.",
 }
 
