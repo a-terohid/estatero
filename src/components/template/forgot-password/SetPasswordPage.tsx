@@ -2,7 +2,7 @@
 
 import INPUT from "@/elements/INPUT";
 import LogoCP from "@/elements/LogoCP";
-import Loader from "@/module/Loader";
+import Loader from "@/elements/Loader";
 import { setPassword_interface, setPasswordError_interface } from "@/types/StatesTypes";
 import { SetPasswordFormsValidation } from "@/utils/forms";
 import Link from "next/link";

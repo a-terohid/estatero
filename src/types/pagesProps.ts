@@ -31,3 +31,10 @@ export interface DashboardLoyout_prop {
     email: string,
     role : UserRole
 }
+
+
+export interface resetDate_interface {
+    userEmail: string
+    token : string
+    expire: string
+}

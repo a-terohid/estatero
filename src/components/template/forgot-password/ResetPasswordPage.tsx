@@ -3,7 +3,7 @@
 import LogoCP from '@/elements/LogoCP';
 import OTPInput from '@/elements/OtpInput';
 import OtpInput from '@/elements/OtpInput';
-import Loader from '@/module/Loader';
+import Loader from '@/elements/Loader';
 import { ERROR, MESSAGE } from '@/types/enums/MessageUnum';
 import { resetpassword_props } from '@/types/pagesProps';
 import { hashPassword, verifyPassword } from '@/utils/auth';

@@ -2,7 +2,7 @@
 
 import INPUT from '@/elements/INPUT'; // Input component for email input
 import LogoCP from '@/elements/LogoCP'; // Logo component
-import Loader from '@/module/Loader'; // Loader component for showing a loading indicator
+import Loader from '@/elements/Loader'; // Loader component for showing a loading indicator
 import { forgotPasswordFormsValidation } from '@/utils/forms'; // Function to validate the form
 import Link from 'next/link'; // For navigation between pages
 import { useRouter } from 'next/navigation'; // Next.js router for page redirection

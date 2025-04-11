@@ -19,6 +19,7 @@ export enum ERROR {
     PASSWORD_DONT_MACH = "Passwords do not match.",
     RESET_LINK_EXPIRED = "Your reset link has expired. Please request a new one.",
     INVALID_TOKEN = "Invalid token. Please try again.",
+    OTP_REQUIRED = "OTP Code is required!",
 }
 
 export enum MESSAGE {

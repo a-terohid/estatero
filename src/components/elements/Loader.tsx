@@ -1,10 +1,10 @@
 import { ThreeDots } from "react-loader-spinner";
 
-function Loader() {
+function Loader({w} : {w?: number}) {
   return (
     <ThreeDots
       color="#32A6FE"
-      height={45}
+      height={ w || 45}
       ariaLabel="three-dots-loading"
       visible={true}
       wrapperStyle={{ margin: "auto" }}

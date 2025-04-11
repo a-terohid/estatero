@@ -46,7 +46,7 @@ const OTPInput = ({ onComplete }: InputProps) => {
           value={OTP[index]}
           onChange={(e) => handleTextChange(e.target.value, index)} // Handle the text change for each input
           ref={(el: HTMLInputElement | null) => (inputRef.current[index] = el as any)} // Use RefCallback to assign the reference to each input element
-          className="md:w-14 w-12 h-12 md:h-14 text-center text-xl border border-Greyscale-100 rounded-lg outline-none transition-all focus:border-Greyscale-900" 
+          className="md:w-14 w-10 h-10 md:h-14 text-center text-xl border border-Greyscale-100 rounded-lg outline-none transition-all focus:border-Greyscale-900" 
           style={{ marginRight: index === 5 ? '0' : '10px' }} // Add margin-right except for the last input
         />
       ))}

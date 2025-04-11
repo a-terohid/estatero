@@ -2,7 +2,7 @@
 
 import INPUT from "@/elements/INPUT";
 import LogoCP from "@/elements/LogoCP";
-import Loader from "@/module/Loader";
+import Loader from "@/elements/Loader";
 import { loginData_interface, loginDataError_interface } from "@/types/StatesTypes";
 import { LoginFormsValidation } from "@/utils/forms";
 import { signIn } from "next-auth/react";

@@ -10,7 +10,7 @@ import { RegisterFormsValidation } from "@/utils/forms";
 import { signIn } from "next-auth/react";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import Loader from "@/module/Loader";
+import Loader from "@/elements/Loader";
 
 
 const RegisterPage = () => {
