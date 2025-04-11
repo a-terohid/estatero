@@ -10,7 +10,7 @@ const layout =  async ({ children }: {children: React.ReactNode}) => {
 
     await connectDB();
     const session = await getServerSession( authOptions )
-    if ( !session ) redirect("/signin")
+    if ( !session ) redirect("/register")
 
     const user = await User.findOne({ email : session?.user?.email })
 
