@@ -113,7 +113,7 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
         // Submit new password to API
         const res = await fetch("/api/auth/set-password", {
             method: "POST",
-            body: JSON.stringify({ userEmail , password }),
+            body: JSON.stringify({  email : userEmail  , password }),
             headers: { "Content-Type": "application/json" },
         });
 
