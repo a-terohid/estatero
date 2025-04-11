@@ -54,7 +54,10 @@ const LoginPage = () => {
 
     // Validate data on input change after initial mount
     useEffect(() => {
-        if (!hasMounted.current) return;
+        if (!hasMounted.current) {
+            hasMounted.current = true;
+            return
+        }
 
         setDataError(LoginFormsValidation(DATA, DATA_Error));
 

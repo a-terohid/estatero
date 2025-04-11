@@ -28,8 +28,11 @@ const ForgotPasswordPage = () => {
 
     // Validate data on email input change after initial mount
     useEffect(() => {
-        if (!hasMounted.current) return;
-    setEmailError(forgotPasswordFormsValidation({ email }, { email_error }).email_error); 
+        if (!hasMounted.current) {
+            hasMounted.current = true;
+            return
+        }
+        setEmailError(forgotPasswordFormsValidation({ email }, { email_error }).email_error); 
     },[ email])
 
     // Function to handle form submission when the user clicks "Send Reset Link"

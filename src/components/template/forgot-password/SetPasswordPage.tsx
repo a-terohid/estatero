@@ -39,7 +39,10 @@ const SetPasswordPage = ({email}: {email : string}) => {
 
         // Validate data on password input change after initial mount
         useEffect(() => {
-            if (!hasMounted.current) return;
+            if (!hasMounted.current) {
+                hasMounted.current = true;
+                return
+            }
 
             setDataError(SetPasswordFormsValidation(data, data_error));
         }, [ data ])
