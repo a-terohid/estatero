@@ -103,7 +103,7 @@ const DashboardProfilePage = ({ user }: { user: User_Interface }) => {
                             <li>
                                 <Link 
                                     href={`/dashboard/profile/edit?id=${_id}`} 
-                                    className='flex items-center gap-x-1 bg-Secondary-200 text-Secondary-0 hover:bg-Secondary-50 hover:text-Secondary-300 py-1 px-2 rounded-lg'
+                                    className='flex items-center gap-x-1 bg-Secondary-200 text-Secondary-0 hover:bg-Secondary-50 hover:text-Secondary-300 p-2 rounded-lg'
                                 >
                                     <FiEdit className='text-lg' />
                                     Edit
@@ -112,10 +112,10 @@ const DashboardProfilePage = ({ user }: { user: User_Interface }) => {
                             <li>
                                 <Link 
                                     href={`/dashboard/profile/reset-password?id=${_id}`} 
-                                    className='flex items-center gap-x-1 bg-Secondary-200 text-Secondary-0 hover:bg-Secondary-50 hover:text-Secondary-300 py-1 px-2 rounded-lg'
+                                    className='flex items-center gap-x-1 bg-Secondary-200 text-Secondary-0 hover:bg-Secondary-50 hover:text-Secondary-300 p-2 rounded-lg'
                                 >
                                     <MdLockReset className='text-lg' />
-                                    Reset password
+                                    password
                                 </Link>
                             </li>
                             <LogoutButton />
