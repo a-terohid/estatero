@@ -1,7 +1,7 @@
 "use client";
 
-import Footer from "@/elements/Footer";
-import Navbar from "@/elements/Navbar";
+import Footer from "@/module/Footer";
+import Navbar from "@/module/Navbar";
 import { UserRole } from "@/types/enums/generalEnums";
 import { usePathname } from "next/navigation";
 

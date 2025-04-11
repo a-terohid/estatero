@@ -1,6 +1,9 @@
 import { UserRole } from "@/types/enums/generalEnums";
 import { DashboardItem_interface } from "@/types/generalTypes";
 import { IoMdPerson } from "react-icons/io";
+import { FiEdit } from "react-icons/fi";
+import { MdLockReset } from "react-icons/md";
+
 
 export const DashboardItems : DashboardItem_interface[] = [
     { 
@@ -27,7 +30,14 @@ export const DashboardItems : DashboardItem_interface[] = [
                 name: "Edit Profile", 
                 href: "/dashboard/profile/edit" , 
                 accessibility: [UserRole.ALL],
-                icon : <IoMdPerson/>,
+                icon : <FiEdit/>,
+                children : []
+            },
+            { 
+                name: "Reset Password", 
+                href: "/dashboard/profile/reset-password" , 
+                accessibility: [UserRole.ALL],
+                icon : <MdLockReset />,               
                 children : []
             },
         ]

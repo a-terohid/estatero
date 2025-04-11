@@ -13,7 +13,7 @@ import { IoMdPerson } from "react-icons/io";
 import { DashboardItems } from '@/constants/DashboardItems';
 import { DashboardItem_interface } from '@/types/generalTypes';
 import { UserRole } from '@/types/enums/generalEnums';
-import RenderDashboardNavbarItem from './RenderDashboardNavbarItem';
+import RenderDashboardNavbarItem from '../elements/RenderDashboardNavbarItem';
 
 const Navbar = ({role}: {role : UserRole}) => {
     

@@ -7,6 +7,7 @@ import { DashboardItem_interface } from "@/types/generalTypes";
 import { roleStyles } from "@/constants/roleStyle";
 import RenderDashboardMenuItem from "@/elements/RenderDashboardMenuItem";
 const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => {
+
     return (
         <div>
             {/* Dashboard background section */}
@@ -42,7 +43,7 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                                 DashboardItems.map( (item: DashboardItem_interface) => 
                                     item.accessibility.includes(UserRole.ALL) || item.accessibility.includes(role as UserRole) ? 
                                     <li key={item.href}>
-                                        {/*render using RenderDashboardMenuItem */}
+                                        {/* render using RenderDashboardMenuItem */}
                                         {
                                              <RenderDashboardMenuItem item={item} />  
                                             
