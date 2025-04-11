@@ -154,7 +154,7 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
                         )}
                     </div>
                     <div className='md:ml-6 ml-4'>
-                        <OTPInput onComplete={handleSubmit} />
+                        <OTPInput onComplete={handleSubmit}  />
                     </div>
                 </div>
 
