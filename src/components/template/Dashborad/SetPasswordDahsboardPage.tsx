@@ -44,8 +44,10 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
 
     // Validate data on input change after initial mount
     useEffect(() => {
-        if (!hasMounted.current) return;
-
+        if (!hasMounted.current) {
+            hasMounted.current = true;
+            return
+        }
         setDataError(SetPasswordFormsValidation(data, data_error));
     }, [data]);
 
@@ -87,6 +89,15 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
             return;
         }
 
+        // Verify OTP token
+        const isValid = await verifyPassword(otp, token);
+
+        if (!isValid) {
+            toast.error(ERROR.INVALID_TOKEN);
+            setLoading(false);
+            return;
+        }
+
         // Check token expiration
         const currentTime = new Date().getTime();
         const isExpired = currentTime > new Date(expire).getTime();
@@ -97,14 +108,7 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
             return;
         }
 
-        // Verify OTP token
-        const isValid = await verifyPassword(otp, token);
-
-        if (!isValid) {
-            toast.error(ERROR.INVALID_TOKEN);
-            setLoading(false);
-            return;
-        }
+        
 
         // Submit new password to API
         const res = await fetch("/api/auth/set-password", {
