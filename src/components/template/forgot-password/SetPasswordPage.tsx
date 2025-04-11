@@ -7,7 +7,7 @@ import { setPassword_interface, setPasswordError_interface } from "@/types/State
 import { SetPasswordFormsValidation } from "@/utils/forms";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const SetPasswordPage = ({email}: {email : string}) => {
@@ -35,8 +35,12 @@ const SetPasswordPage = ({email}: {email : string}) => {
             setDataError(SetPasswordFormsValidation(data, data_error));
         };
 
-        // Validate the password input
-        useEffect(()=> {
+            const hasMounted = useRef(false); // To avoid running useEffect on first render
+
+        // Validate data on password input change after initial mount
+        useEffect(() => {
+            if (!hasMounted.current) return;
+
             setDataError(SetPasswordFormsValidation(data, data_error));
         }, [ data ])
 

@@ -8,7 +8,7 @@ import { LoginFormsValidation } from "@/utils/forms";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
@@ -35,6 +35,7 @@ const LoginPage = () => {
     const { email_error , password_error } = DATA_Error;
 
     const router = useRouter();
+    const hasMounted = useRef(false); // To avoid running useEffect on first render
 
     // Retrieve saved email from localStorage if "Remember Me" was selected
     useEffect(() => {
@@ -51,8 +52,9 @@ const LoginPage = () => {
         }
     }, []);
 
-    // Validate the forms inputs
+    // Validate data on input change after initial mount
     useEffect(() => {
+        if (!hasMounted.current) return;
 
         setDataError(LoginFormsValidation(DATA, DATA_Error));
 

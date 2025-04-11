@@ -3,7 +3,7 @@
 import INPUT from "@/elements/INPUT";
 import LogoCP from "@/elements/LogoCP";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { registerData_interface, registerDataError_interface } from "@/types/StatesTypes";
 import { RegisterFormsValidation } from "@/utils/forms";
@@ -42,6 +42,7 @@ const RegisterPage = () => {
     const { name_error, last_name_error, email_error, password_error, confirmPassword_error } = DATA_Error;
 
     const router = useRouter();
+    const hasMounted = useRef(false); // To avoid running useEffect on first render
 
     // Function to handle input changes
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,8 +50,10 @@ const RegisterPage = () => {
         setData((prev) => ({ ...prev, [name]: value }));
     };
     
-    // Validate the forms inputs
+    // Validate data on input change after initial mount
     useEffect(() => {
+        if (!hasMounted.current) return;
+
         setDataError(RegisterFormsValidation(DATA, DATA_Error));
     } , [DATA]);
 
