@@ -36,39 +36,63 @@ export const metadata = {
     }
 };
 
+// Server component for rendering the set password page
 const page = async ({ searchParams }: any) => {
-    // Get user ID from the search parameters if available
     const { id } = searchParams;
 
-    // Connect to the database
+    // Connect to MongoDB
     await connectDB();
 
-    let user;
+    let user = null;
 
-    // Object to hold reset data to pass to the page
+    // Initial values to pass to the page
     let resetData = {
         userEmail: '',
         token: '',
         expire: '',
     };
 
-    // If ID is provided (e.g., from reset link), find user by ID
-    if (id) {
-        user = await User.findOne({ _id: id });
-        resetData.userEmail = user.email;
-    } else {
-        // Otherwise, get current session and find user by email
-        const session = await getServerSession(authOptions);
-        user = await User.findOne({ email: session?.user?.email });
+    try {
+        // If "id" is provided in the URL, use it to find the user
+        if (id) {
+            user = await User.findById(id);
+            console.log("User found by ID:", user);
+        } else {
+            // Otherwise, try to get user from server session
+            const session = await getServerSession(authOptions);
+            console.log("Session:", session);
+
+            // If no session or email, display error
+            if (!session?.user?.email) {
+                console.warn("No session or email found");
+                return <div>Session not found. Please log in.</div>;
+            }
+
+            // Find the user by their session email
+            user = await User.findOne({ email: session.user.email });
+            console.log("User found by session email:", user);
+        }
+
+        // If user or resetPassword is missing, return error message
+        if (!user || !user.resetPassword) {
+            console.warn("User not found or missing resetPassword data");
+            return <div>Invalid or expired reset link</div>;
+        }
+
+        // All good — extract reset password data
+        resetData = {
+            userEmail: user.email,
+            token: user.resetPassword.token,
+            expire: user.resetPassword.expires,
+        };
+
+    } catch (error) {
+        // Catch any unexpected errors
+        console.error("Error in reset-password page:", error);
+        return <div>Something went wrong. Please try again later.</div>;
     }
 
-    // Extract token and expiration date from user's reset password data
-    const userToken = user.resetPassword.token;
-    resetData.token = userToken;
-    const userExpires = user.resetPassword.expires;
-    resetData.expire = userExpires;
-
-    // Render the set password dashboard page with necessary props
+    // Render the SetPasswordDashboardPage with the required props
     return (
         <SetPasswordDahsboardPage
             userEmail={resetData.userEmail}
