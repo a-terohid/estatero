@@ -59,7 +59,7 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
 
         const res = await fetch("/api/auth/forgot-password", {
             method: "POST",
-            body: JSON.stringify({ userEmail }),
+            body: JSON.stringify({ email : userEmail }),
             headers: { "Content-Type": "application/json" },
         });
 
