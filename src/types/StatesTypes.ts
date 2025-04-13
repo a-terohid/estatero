@@ -48,3 +48,17 @@ export interface setPasswordError_interface {
     password_error : string;
     confirmPassword_error : string;
 }
+
+
+export interface editProfile_interface {
+    name : string;
+    last_name : string , 
+    phone_number : string;
+}
+
+
+export interface editProfileError_interface {
+    name_error : string;
+    last_name_error : string;
+    phone_number_error : string;
+}

@@ -16,11 +16,12 @@ export enum ERROR {
     NAME_ATLEAST = "Name must be at least 3 characters.",
     LASTNAME_ATLEAST = "Last name must be at least 3 characters.",
     PASSWORD_ATLEAST = "Password must be at least 6 characters.",
+    PHONE_ATLEAST = "Phone number must be 11 number.",
     PASSWORD_DONT_MACH = "Passwords do not match.",
     RESET_LINK_EXPIRED = "Your reset link has expired. Please request a new one.",
     INVALID_TOKEN = "Invalid token. Please try again.",
     OTP_REQUIRED = "OTP Code is required!",
-        UNAUTHORIZED = "You dont have permission to edit this user."
+    UNAUTHORIZED = "You dont have permission to edit this user."
 }
 
 export enum MESSAGE {
