@@ -6,6 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import React from 'react';
 import ImageWithFallback from '@/elements/ImageWithFallback';
 import LogoutButton from '@/elements/LogoutButton';
+import { mask } from '@/utils/mask';
 
 // DashboardProfilePage displays user's profile information such as email, name, role, etc.
 // Also provides actions like edit profile, reset password, and logout.
@@ -78,7 +79,7 @@ const DashboardProfilePage = ({ user }: { user: User_Interface }) => {
                         <p className='text-Body-SM-Medium'>
                             Phone number: 
                             {phone_number ? (
-                                <span className='text-Body-MD-Medium ml-1'>{phone_number}</span>
+                                <span className='text-Body-MD-Medium ml-1'>{mask(phone_number, "****-***-****")}</span>
                             ) : (
                                 <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
                             )}
