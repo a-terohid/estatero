@@ -1,32 +1,37 @@
 "use client";
 
-import Image from "next/image";
+import { useState, useEffect } from "react";
 
-// Reusable Image component with fallback, class support, and custom sizing via CSS
-const ImageWithFallback = ({
-  src,
-  alt,
-  style,
-}: {
+type Props = {
   src: string;
   alt: string;
   style?: string;
-}) => {
+};
 
+const ImageWithFallback = ({ src, alt, style }: Props) => {
   const fallbackSrc = "/img/ProfilePicurePlaceHolder2.png";
+  const [imgSrc, setImgSrc] = useState(src?.trim() || fallbackSrc);
 
-  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.src = fallbackSrc;
+  // If src is empty or only spaces, show fallback from the beginning
+  useEffect(() => {
+    if (!src || src.trim() === "") {
+      setImgSrc(fallbackSrc);
+    } else {
+      setImgSrc(src);
+    }
+  }, [src]);
+
+  const handleError = () => {
+    setImgSrc(fallbackSrc);
   };
 
   return (
-      <img
-        src={src || fallbackSrc}
-        alt={alt}
-        className={`${style} rounded-t-2xl`}
-        onError={handleError}
-      />
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={`${style ?? ""} rounded-t-2xl`}
+      onError={handleError}
+    />
   );
 };
 
