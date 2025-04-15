@@ -188,7 +188,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                                 onChange={fileChangeHandler}
                                 style={{ display: 'none' }}
                             />
-                            <label htmlFor="coverImageInput" className="...">
+                            <label htmlFor="coverImageInput" className="bg-primary-100 hover:bg-primary-50   text-Greyscale-50 hover:text-Greyscale-600 py-2 px-3  w-full rounded-lg text-Body-RL-XSmall lg:text-Body-RL-Small">
                                 {profile_picture ? profile_picture.name : "Select picture"}
                             </label>
                             {profile_picture_Preview && (
@@ -198,7 +198,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                                         alt="Cover Image Preview"
                                         className="w-56 mt-5 object-cover rounded-lg"
                                     />
-                                    <button onClick={ResetProfilePicture} className="..."><RiDeleteBin2Line /></button>
+                                    <button onClick={ResetProfilePicture} className="absolute mt-2 mr-2 top-0 right-0 bg-Error-50 hover:bg-Error-300 text-Error-300 hover:text-Error-50 rounded-full p-1"><RiDeleteBin2Line /></button>
                                 </div>
                             )}
                             {UploadProgress !== null && (
@@ -213,7 +213,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                         </div>
                     ) : (
                         <div className='w-2/3 md:w-1/3 relative'>
-                            <ImageWithFallback src={user.profile_picture || ""} alt={user.email} style="..." />
+                            <ImageWithFallback src={user.profile_picture || ""} alt={user.email} style={"rounded-b-2xl my-5"} />
                         </div>
                     )}
                 </div>
@@ -259,7 +259,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                     ) : (
                         <button
                             onClick={handleEditProfile}
-                            className="..."
+                            className="text-primary-0 bg-primary-100 rounded-xl py-3 text-Body-MD-Small w-full mt-6 hover:bg-primary-50"
                         >
                             Edit
                         </button>
