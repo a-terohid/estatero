@@ -1,4 +1,5 @@
 import { UserRole } from "./enums/generalEnums";
+import { LOG_Interface } from "./modelTypes";
 
 export interface inputComponent_input {
     changeHandler : Function;
@@ -37,4 +38,10 @@ export interface resetDate_interface {
     userEmail: string
     token : string
     expire: string
+}
+
+export interface LogDashboradPage_interface { 
+    logs: LOG_Interface[]
+    currentPage : number, 
+    totalPages : number
 }

@@ -4,6 +4,8 @@ import { IoMdPerson } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdLockReset } from "react-icons/md";
+import { RiFootprintFill } from "react-icons/ri";
+
 
 
 export const DashboardItems : DashboardItem_interface[] = [
@@ -42,5 +44,12 @@ export const DashboardItems : DashboardItem_interface[] = [
                 children : []
             },
         ]
+    },
+    { 
+        name: "Logs", 
+        href: "/dashboard/logs" , 
+        accessibility: [UserRole.ADMIN , UserRole.OWNER , UserRole.AGENTADMIN , UserRole.AGENTOWNER],
+        icon : <RiFootprintFill/>,
+        children : []
     },
 ];
