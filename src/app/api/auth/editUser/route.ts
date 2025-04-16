@@ -5,7 +5,7 @@ import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import fs from "fs";
-import path, { join } from "path";
+import path, { join, basename } from "path";
 import { mkdir, writeFile, stat } from "fs/promises";
 import mime from "mime";
 
@@ -57,15 +57,21 @@ export const PATCH = async (req: Request) => {
 
     // Handle new profile picture upload if checkbox is checked
     if (profile_picture && isCheckedCoverImage === "true") {
-      // Remove old profile picture if exists
+      // Delete old profile picture
       if (user.profile_picture) {
-        const coverImagePath = join(profile_picture_upload_dir, user.profile_picture);
-        if (fs.existsSync(coverImagePath)) {
-          fs.unlinkSync(coverImagePath);
+        const oldFileName = basename(user.profile_picture); // Extract just the file name
+        const coverImagePath = join(profile_picture_upload_dir, oldFileName);
+        try {
+          if (fs.existsSync(coverImagePath)) {
+            fs.unlinkSync(coverImagePath);
+            console.log("Old profile picture deleted:", coverImagePath);
+          }
+        } catch (err) {
+          console.error("Error removing old profile picture:", err);
         }
       }
 
-      // Generate new file name and save file
+      // Save new profile picture
       const mimeType = profile_picture.type;
       const uint8Array = new Uint8Array(await profile_picture.arrayBuffer());
       const extension = mime.getExtension(mimeType);
