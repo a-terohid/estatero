@@ -1,3 +1,5 @@
+import { LogsActions } from "./enums/generalEnums";
+
 export interface registerData_interface {
     name : string;
     last_name : string;
@@ -61,4 +63,19 @@ export interface editProfileError_interface {
     name_error : string;
     last_name_error : string;
     phone_number_error : string;
+}
+
+
+export interface LogsFilter_interfasce { 
+    sort : 'sort' | 'esc' | "desc",
+    action : LogsActions | "action" | "all"
+}
+
+
+export interface LogsPageSearchParams_interface {
+    page?: string, 
+    sort ?: string,
+    action ?: string,
+    startDate ?:string, 
+    endDate ?:string
 }

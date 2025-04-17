@@ -1,6 +1,6 @@
 import Log from "@/models/log";
 import User from "@/models/user";
-import { UserRole } from "@/types/enums/generalEnums";
+import { LogsActions, UserRole } from "@/types/enums/generalEnums";
 import { ERROR } from "@/types/enums/MessageUnum";
 import { hashPassword, verifyPassword } from "@/utils/auth"; 
 import connectDB from "@/utils/connectDB";
@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
                     // Log user registration
                     await Log.create({
                         title: `New user with email ${email} has been registered`,
-                        action: "new user registered",
+                        action: LogsActions.NEW_REGISTER,
                         user_id: "0",
                         createdAt: new Date(),
                     });
@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
                     // Log Google user registration
                     await Log.create({
                         title: `New user with email ${user.email} has been registered via Google`,
-                        action: "new google user registered",
+                        action: LogsActions.NEW_REGISTER_GOOGLE,
                         user_id: "0",
                         createdAt: new Date(),
                     });

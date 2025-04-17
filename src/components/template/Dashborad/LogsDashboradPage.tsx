@@ -1,3 +1,4 @@
+import LogFilterSection from "@/elements/LogFilterSection";
 import Logs_Card from "@/elements/Logs_Card";
 import PaginationButtons from "@/elements/PaginationButtons";
 import { LogDashboradPage_interface } from "@/types/pagesProps";
@@ -9,6 +10,7 @@ const LogsDashboradPage = ({ logs,  currentPage, totalPages  }: LogDashboradPage
         <div className='px-5 py-5 md:px-7'>
             <h1 className='text-Heading-4 mb-6'>Logs:</h1>
             <div>
+            <LogFilterSection />
             <div className="flex flex-col gap-y-2 mt-4">
                     {logs.length ? logs.map((log, index) => (
                                                <Logs_Card log={log} key={index} />

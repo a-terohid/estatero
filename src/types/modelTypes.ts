@@ -1,9 +1,9 @@
-import { UserRole } from "./enums/generalEnums";
+import { LogsActions, UserRole } from "./enums/generalEnums";
 
 export interface LOG_Interface {
     _id?: string;
     title: string;
-    action: string;
+    action: LogsActions;
     user_id: string;
     createdAt: Date;
 }

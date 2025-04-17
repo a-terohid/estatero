@@ -1,5 +1,6 @@
 import { UserRole } from "./enums/generalEnums";
 import { LOG_Interface } from "./modelTypes";
+import { LogsPageSearchParams_interface } from "./StatesTypes";
 
 export interface inputComponent_input {
     changeHandler : Function;

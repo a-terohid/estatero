@@ -8,6 +8,12 @@
 	        animation: scale-up-ver-top 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
+
+.date-picker-input {
+        @apply appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall;
+        background-color: white;
+      }
+
  @-webkit-keyframes scale-up-ver-top {
     0% {
       -webkit-transform: scaleY(0.4);

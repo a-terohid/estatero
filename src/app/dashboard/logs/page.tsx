@@ -1,5 +1,7 @@
+import { LogsActionFilters } from "@/constants/LogsActionFilterType";
 import Log from "@/models/log";
 import LogsDashboradPage from "@/template/Dashborad/LogsDashboradPage";
+import { LogsPageSearchParams_interface } from "@/types/StatesTypes";
 import connectDB from "@/utils/connectDB";
 import type { Metadata } from "next";
 
@@ -40,25 +42,63 @@ export const metadata: Metadata = {
     images: ["/img/thumbnail.png"],
   },
 };
-const page = async ({ searchParams }: { searchParams: { page?: string } }) => {
 
-    await connectDB();
+const page = async ({ searchParams }: { searchParams: LogsPageSearchParams_interface }) => {
+  await connectDB();
 
-    const LogsPerPage = 15;
-    const page = parseInt(searchParams.page || "1");
-    const totalLogs = await Log.countDocuments();
-    const totalPages = Math.ceil(totalLogs / LogsPerPage);
+  const { page, sort, action, startDate, endDate } = searchParams;
 
-    const currentPage = page > totalPages ? totalPages : page;
+  const sortValue = sort === "asc" ? 1 : -1;
+  const actionFilter = LogsActionFilters.find((item) => item.value === action)?.filter || {};
+
+ 
+  const dateFilter =
+  startDate && endDate
+    ? {
+        $expr: {
+          $and: [
+            {
+              $gte: [
+                { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
+                startDate.slice(0, 10),
+              ],
+            },
+            {
+              $lte: [
+                { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
+                endDate.slice(0, 10),
+              ],
+            },
+          ],
+        },
+      }
+    : {};
+
+  const combinedFilter = {
+      ...actionFilter,
+      ...dateFilter,
+  };
+
+  const LogsPerPage = 15;
+  
+  const Page = parseInt(page || "1");
+  const totalLogs = await Log.countDocuments(combinedFilter);
+  const totalPages = Math.ceil(totalLogs / LogsPerPage) || 1;
+  const currentPage = Math.min(Math.max(Page, 1), totalPages);
 
 
-    const Logs = await Log.find()
-        .skip((currentPage - 1) * LogsPerPage)
-        .limit(LogsPerPage)
-        
+  const Logs = await Log.find({ ...actionFilter, ...dateFilter })
+    .skip((currentPage - 1) * LogsPerPage)
+    .limit(LogsPerPage)
+    .sort({ updatedAt: sortValue });
 
-
-    return ( <LogsDashboradPage logs={Logs} totalPages={totalPages} currentPage={currentPage} /> );
+  return (
+      <LogsDashboradPage
+          logs={Logs}
+          totalPages={totalPages}
+          currentPage={currentPage}
+      />
+  );
 };
 
 export default page;

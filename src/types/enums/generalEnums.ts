@@ -7,3 +7,9 @@ export enum UserRole {
     AGENTOWNER = "Agent/Owner",
     ALL = "all"
 }
+
+
+export enum LogsActions  {
+    NEW_REGISTER = 'new user registered',
+    NEW_REGISTER_GOOGLE = 'new google user registered',
+}
