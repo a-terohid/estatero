@@ -105,7 +105,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-0 lg:grid-cols-2">
             <div className="container text-Greyscale-900 py-8 lg:ml-6">
                 <LogoCP color="black" fontsize="text-3xl" img_Width="w-9" />
                 <div className="mb-8">
@@ -170,7 +170,7 @@ const LoginPage = () => {
             
             {/* Right side banner */}
             <div className="items-end relative hidden md:flex">
-                <img className="hidden md:block w-screen lg:h-screen" src="/img/LoginBanner.png" alt="Login Banner" />
+                <img className="hidden md:block w-screen lg:h-full" src="/img/LoginBanner.png" alt="Login Banner" />
                 <div className="absolute m-8">
                     <p className="text-Heading-4 text-Neutral">
                         “Having dealt with many real estate firms over the years, Dwellfinder stands out for their exceptional service and understanding of the luxury market. Their discretion, and attention”

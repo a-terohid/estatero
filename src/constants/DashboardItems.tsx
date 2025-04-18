@@ -48,7 +48,7 @@ export const DashboardItems : DashboardItem_interface[] = [
     { 
         name: "Logs", 
         href: "/dashboard/logs" , 
-        accessibility: [UserRole.ADMIN , UserRole.OWNER , UserRole.AGENTADMIN , UserRole.AGENTOWNER],
+        accessibility: [ UserRole.OWNER ,UserRole.ADMIN , UserRole.AGENTADMIN , UserRole.AGENTOWNER],
         icon : <RiFootprintFill/>,
         children : []
     },
