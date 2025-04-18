@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { LogsActionFilters } from "@/constants/LogsActionFilterType";
 import { LogsFilter_interfasce } from "@/types/StatesTypes";
@@ -9,9 +9,11 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LogsActions } from "@/types/enums/generalEnums";
 
+// Type guard: checks if the sort value is valid
 const isValidSort = (val: string | null): val is LogsFilter_interfasce["sort"] =>
   val === "sort" || val === "desc" || val === "asc";
 
+// Type guard: checks if the action value is valid
 const isValidAction = (val: string | null): val is LogsFilter_interfasce["action"] =>
   val === "action" || val === "all" || Object.values(LogsActions).includes(val as LogsActions);
 
@@ -19,9 +21,11 @@ const LogFilterSection = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  // Get query parameters from the URL
   const initialSort = searchParams.get("sort");
   const initialAction = searchParams.get("action");
 
+  // Define initial filter values based on query parameters
   const initialFilter: LogsFilter_interfasce = {
     sort: isValidSort(initialSort) ? initialSort : "sort",
     action: isValidAction(initialAction) ? initialAction : "action",
@@ -30,10 +34,11 @@ const LogFilterSection = () => {
   const [filter, setFilter] = useState<LogsFilter_interfasce>(initialFilter);
   const { sort, action } = filter;
 
-  // تاریخ‌ها
+  // Get initial start and end date from query parameters
   const startDateParam = searchParams.get("startDate");
   const endDateParam = searchParams.get("endDate");
 
+  // Set initial date picker value if both dates are present
   const initialDateValue =
     startDateParam && endDateParam
       ? [
@@ -44,20 +49,20 @@ const LogFilterSection = () => {
 
   const [dateValue, setDateValue] = useState<DateObject[] | undefined>(initialDateValue);
 
-  // تغییر مقدار فیلترها
+  // Handle changes in dropdown inputs
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
   };
 
-  // تبدیل تاریخ‌ها به query
+  // Converts selected dates into query-friendly ISO format
   const getDateQuery = () => {
     if (!dateValue) return {};
 
     const convertStart = (val: DateObject) => val.toDate().toISOString();
     const convertEnd = (val: DateObject) => {
       const end = val.toDate();
-      end.setHours(23, 59, 59, 999);
+      end.setHours(23, 59, 59, 999); // Include the full end day
       return end.toISOString();
     };
 
@@ -89,7 +94,7 @@ const LogFilterSection = () => {
 
   const dateQuery = getDateQuery();
 
-  // JSX
+  // UI rendering
   return (
     <div className="mb-8 ">
       <h4 className="mb-4 text-Body-SM-Medium">Filter:</h4>
@@ -140,9 +145,9 @@ const LogFilterSection = () => {
           inputClass="date-picker-input"
         />
 
-        {/* Buttons */}
+        {/* Action Buttons */}
         <div className="flex items-center gap-x-2">
-          {/* Set Button */}
+          {/* Apply Filters Button */}
           <Link
             href={{
               pathname: "/dashboard/logs",
@@ -157,7 +162,7 @@ const LogFilterSection = () => {
             Set
           </Link>
 
-          {/* Reset Button */}
+          {/* Reset Filters Button */}
           <button
             onClick={() => {
               setFilter({ sort: "sort", action: "action" });

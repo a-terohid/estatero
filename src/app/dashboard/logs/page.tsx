@@ -44,60 +44,72 @@ export const metadata: Metadata = {
 };
 
 const page = async ({ searchParams }: { searchParams: LogsPageSearchParams_interface }) => {
+  // Connect to the database
   await connectDB();
 
+  // Destructure query parameters
   const { page, sort, action, startDate, endDate } = searchParams;
 
+  // Determine sorting order: 1 for ascending, -1 for descending
   const sortValue = sort === "asc" ? 1 : -1;
+
+  // Find the filter associated with the selected action (if any)
   const actionFilter = LogsActionFilters.find((item) => item.value === action)?.filter || {};
 
- 
+  // Build the date filter if both startDate and endDate are provided
   const dateFilter =
-  startDate && endDate
-    ? {
-        $expr: {
-          $and: [
-            {
-              $gte: [
-                { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
-                startDate.slice(0, 10),
-              ],
-            },
-            {
-              $lte: [
-                { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
-                endDate.slice(0, 10),
-              ],
-            },
-          ],
-        },
-      }
-    : {};
+    startDate && endDate
+      ? {
+          $expr: {
+            $and: [
+              {
+                $gte: [
+                  { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
+                  startDate.slice(0, 10),
+                ],
+              },
+              {
+                $lte: [
+                  { $dateToString: { format: "%Y-%m-%d", date: "$updatedAt" } },
+                  endDate.slice(0, 10),
+                ],
+              },
+            ],
+          },
+        }
+      : {};
 
+  // Combine all filters into one object
   const combinedFilter = {
-      ...actionFilter,
-      ...dateFilter,
+    ...actionFilter,
+    ...dateFilter,
   };
 
   const LogsPerPage = 15;
-  
+
+  // Parse the page number from the query or default to 1
   const Page = parseInt(page || "1");
+
+  // Count total logs matching the filters
   const totalLogs = await Log.countDocuments(combinedFilter);
+
+  // Calculate total pages and clamp current page within valid range
   const totalPages = Math.ceil(totalLogs / LogsPerPage) || 1;
   const currentPage = Math.min(Math.max(Page, 1), totalPages);
 
-
+  // Fetch logs from the database based on filters, pagination, and sorting
   const Logs = await Log.find({ ...actionFilter, ...dateFilter })
     .skip((currentPage - 1) * LogsPerPage)
     .limit(LogsPerPage)
     .sort({ updatedAt: sortValue });
 
+  // Return the logs dashboard page component with the fetched data
   return (
-      <LogsDashboradPage
-          logs={Logs}
-          totalPages={totalPages}
-          currentPage={currentPage}
-      />
+    <LogsDashboradPage
+      logs={Logs}
+      totalPages={totalPages}
+      currentPage={currentPage}
+    />
   );
 };
 
