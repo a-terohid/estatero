@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Logs | Heyat Saghai Abbasieh Jolan",
   description:
-    "View and monitor user activity logs and system events within the admin panel of Heyat Saghai Abbasieh Jolan.",
+    "View and monitor user activity logs and system events within the Estatero real estate admin dashboard.",
   keywords: [
     "User Logs",
     "Admin Dashboard",

@@ -79,3 +79,9 @@ export interface LogsPageSearchParams_interface {
     startDate ?:string, 
     endDate ?:string
 }
+
+
+export interface UsersPageSearchParams_interface {
+    page?: string, 
+
+}

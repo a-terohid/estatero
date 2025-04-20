@@ -5,6 +5,10 @@ import { FiEdit } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdLockReset } from "react-icons/md";
 import { RiFootprintFill } from "react-icons/ri";
+import { FaUserFriends } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
+import { FaBuildingUser } from "react-icons/fa6";
+
 
 
 
@@ -44,6 +48,27 @@ export const DashboardItems : DashboardItem_interface[] = [
                 children : []
             },
         ]
+    },
+    { 
+        name: "Users", 
+        href: "/dashboard/users" , 
+        accessibility: [ UserRole.OWNER ,UserRole.ADMIN , UserRole.AGENTOWNER],
+        icon : <FaUserFriends />,
+        children : []
+    },
+    { 
+        name: "Agents", 
+        href: "/dashboard/agents" , 
+        accessibility: [ UserRole.OWNER ,UserRole.ADMIN , UserRole.AGENTOWNER],
+        icon : <FaBuildingUser />,
+        children : []
+    },
+    { 
+        name: "Admins", 
+        href: "/dashboard/admins" , 
+        accessibility: [ UserRole.OWNER , UserRole.AGENTOWNER],
+        icon : <RiAdminFill />,
+        children : []
     },
     { 
         name: "Logs", 
