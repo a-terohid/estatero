@@ -11,6 +11,7 @@ export interface inputComponent_input {
     placeholder : string
     textarea : boolean
     error ?: string;
+    style ?: string
 }
 
 

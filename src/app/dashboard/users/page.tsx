@@ -5,67 +5,103 @@ import { UsersPageSearchParams_interface } from "@/types/StatesTypes";
 import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
 
+// SEO metadata for the Users Dashboard Page
 export const metadata: Metadata = {
+  title: "Users | Estatero Admin Panel",
+  description:
+    "Manage platform users, assign roles, and monitor user activity within the Estatero real estate admin dashboard.",
+  keywords: [
+    "Users",
+    "User Management",
+    "Estatero",
+    "Real Estate Platform",
+    "Admin Dashboard",
+    "User Roles",
+    "CRM",
+  ],
+  robots: "index, follow",
+  openGraph: {
     title: "Users | Estatero Admin Panel",
     description:
       "Manage platform users, assign roles, and monitor user activity within the Estatero real estate admin dashboard.",
-    keywords: [
-      "Users",
-      "User Management",
-      "Estatero",
-      "Real Estate Platform",
-      "Admin Dashboard",
-      "User Roles",
-      "CRM",
+    url: "https://estatero.vercel.app/dashboard/users",
+    type: "website",
+    images: [
+      {
+        url: "/img/thumbnail.png",
+        width: 1200,
+        height: 630,
+        alt: "Estatero Admin Users Page",
+      },
     ],
-    robots: "index, follow",
-    openGraph: {
-      title: "Users | Estatero Admin Panel",
-      description:
-        "Manage platform users, assign roles, and monitor user activity within the Estatero real estate admin dashboard.",
-      url: "https://estatero.vercel.app/dashboard/users",
-      type: "website",
-      images: [
-        {
-          url: "/img/thumbnail.png",
-          width: 1200,
-          height: 630,
-          alt: "Estatero Admin Users Page",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@Estatero",
-      title: "Users | Estatero Admin Panel",
-      description:
-        "Manage platform users, assign roles, and monitor user activity within the Estatero real estate admin dashboard.",
-      images: ["/img/thumbnail.png"],
-    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@Estatero",
+    title: "Users | Estatero Admin Panel",
+    description:
+      "Manage platform users, assign roles, and monitor user activity within the Estatero real estate admin dashboard.",
+    images: ["/img/thumbnail.png"],
+  },
+};
+
+// Server component for rendering the Users Dashboard Page
+const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_interface }) => {
+  // Connect to MongoDB
+  await connectDB();
+
+  // Destructure query params
+  const { page, sort, email, fullName } = searchParams;
+  const sortValue = sort === "asc" ? 1 : -1;
+
+  // Create MongoDB filter object to fetch users
+  const combinedFilter: any = {
+    role: UserRole.CLIENT,
   };
 
-const page = async ({searchParams} : { searchParams: UsersPageSearchParams_interface }) => {
+  // Filter by email (case-insensitive)
+  if (email) {
+    combinedFilter.email = { $regex: email, $options: "i" };
+  }
 
-    await connectDB()
+  // Filter by full name (supports first, last, or full name)
+  if (fullName) {
+    combinedFilter.$or = [
+      { name: { $regex: fullName, $options: "i" } },
+      { last_name: { $regex: fullName, $options: "i" } },
+      {
+        $expr: {
+          $regexMatch: {
+            input: { $concat: ["$name", " ", "$last_name"] },
+            regex: fullName,
+            options: "i",
+          },
+        },
+      },
+    ];
+  }
 
-    
-    const LogsPerPage = 15;
-    const Page = parseInt(searchParams.page || "1");
-    const totalUsers =  await User.countDocuments({role : UserRole.CLIENT})
-    
-    const totalPages = Math.ceil(totalUsers / LogsPerPage) || 1;
-    const currentPage = Math.min(Math.max(Page, 1), totalPages);
-    
-    const users = await User.find({role : UserRole.CLIENT})
-        .skip((currentPage - 1) * LogsPerPage)
-        .limit(LogsPerPage)
-        .sort({ updatedAt: -1 });
+  // Pagination logic
+  const LogsPerPage = 15;
+  const Page = parseInt(page || "1");
+  const totalUsers = await User.countDocuments(combinedFilter);
+  const totalPages = Math.ceil(totalUsers / LogsPerPage) || 1;
+  const currentPage = Math.min(Math.max(Page, 1), totalPages);
 
-    return ( <UsersDashboardPage 
-                users={users} 
-                totalPages={totalPages}
-                currentPage={currentPage}
-            />);
+  // Fetch filtered and paginated user data from the database
+  const users = await User.find(combinedFilter)
+    .skip((currentPage - 1) * LogsPerPage)
+    .limit(LogsPerPage)
+    .sort({ updatedAt: sortValue });
+
+  // Render the page with users and pagination info
+  return (
+    <UsersDashboardPage
+      users={users}
+      totalPages={totalPages}
+      currentPage={currentPage}
+    />
+  );
 };
 
 export default page;

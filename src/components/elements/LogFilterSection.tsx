@@ -8,14 +8,8 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LogsActions } from "@/types/enums/generalEnums";
+import { isValidAction, isValidSort } from "@/utils/filter";
 
-// Type guard: checks if the sort value is valid
-const isValidSort = (val: string | null): val is LogsFilter_interfasce["sort"] =>
-  val === "sort" || val === "desc" || val === "asc";
-
-// Type guard: checks if the action value is valid
-const isValidAction = (val: string | null): val is LogsFilter_interfasce["action"] =>
-  val === "action" || val === "all" || Object.values(LogsActions).includes(val as LogsActions);
 
 const LogFilterSection = () => {
   const searchParams = useSearchParams();

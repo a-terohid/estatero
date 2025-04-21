@@ -6,7 +6,7 @@ import { IoEyeOffSharp } from "react-icons/io5";
 import { IoEyeSharp } from "react-icons/io5";
 
 
-const INPUT = ({ changeHandler , value ,label , type , name , placeholder , textarea , error }:inputComponent_input) => {
+const INPUT = ({ changeHandler , value ,label , type , name , placeholder , textarea , error , style }:inputComponent_input) => {
 
     const [ newType , setType ] = useState(type)
 
@@ -14,11 +14,11 @@ const INPUT = ({ changeHandler , value ,label , type , name , placeholder , text
 
     return (
         <div className='flex flex-col gap-y-2 text-Body-MD-Small'>
-            <label>{ label }</label>
+            { label ? <label>{ label }</label> : null}
             {
                 !textarea ? <div className='flex items-center relative text-Greyscale-400 '>
                                 <input
-                                    className={` w-full text-Body-RL-Small p-3 border ${error ? 'border-Error-100' : 'border-Greyscale-100'} rounded-lg focus:text-Greyscale-900 ${error ? 'focus:border-Error-200' : 'focus:border-Greyscale-900'} focus:outline-none`} 
+                                    className={`${style ? style : ""} w-full text-Body-RL-Small p-3 border ${error ? 'border-Error-100' : 'border-Greyscale-100'} rounded-lg focus:text-Greyscale-900 ${error ? 'focus:border-Error-200' : 'focus:border-Greyscale-900'} focus:outline-none`} 
                                     type={ newType }
                                     value={ value }
                                     name={ name }

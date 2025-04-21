@@ -71,6 +71,12 @@ export interface LogsFilter_interfasce {
     action : LogsActions | "action" | "all"
 }
 
+export interface UserFilter_interfasce { 
+    sort : 'sort' | 'esc' | "desc",
+    email : string
+    fullName : string
+}
+
 
 export interface LogsPageSearchParams_interface {
     page?: string, 
@@ -83,5 +89,7 @@ export interface LogsPageSearchParams_interface {
 
 export interface UsersPageSearchParams_interface {
     page?: string, 
-
+    sort ?: string,
+    email ?: string
+    fullName ?: string
 }
