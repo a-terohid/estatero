@@ -2,7 +2,7 @@ import { Agent_Testimonials_reply_interface } from "@/types/modelTypes";
 import { Schema, model, models } from "mongoose";
 
 // Define the schema for agent testimonial replies
-const Agent_Testimonials_Reply_shema = new Schema<Agent_Testimonials_reply_interface>({
+const Agent_Testimonials_Reply_schema = new Schema<Agent_Testimonials_reply_interface>({
     // ID of the parent comment or reply
     parent_id: {
         type: String,
@@ -44,6 +44,6 @@ const Agent_Testimonials_Reply_shema = new Schema<Agent_Testimonials_reply_inter
 });
 
 // Create the model if it doesn't already exist
-const AgentTestimonialsReply = models?.AgentTestimonialsReply || model("AgentTestimonialsReply", Agent_Testimonials_Reply_shema);
+const AgentTestimonialsReply = models?.AgentTestimonialsReply || model("AgentTestimonialsReply", Agent_Testimonials_Reply_schema);
 
 export default AgentTestimonialsReply;
