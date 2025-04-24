@@ -12,4 +12,6 @@ export enum UserRole {
 export enum LogsActions  {
     NEW_REGISTER = 'new user registered',
     NEW_REGISTER_GOOGLE = 'new google user registered',
+    NEW_ADMIN = 'new Admin Promoted',
+    NEW_AGENT = 'new Admin Promoted',
 }

@@ -3,6 +3,7 @@ export enum ERROR {
     USER_EXIST = "This user already exists!",
     EMAIL_EXIST = "This email already exists!",
     CANT_FIND_USER = "This user cannot be found!",
+    CANT_FIND_HANDLER = "This admin cannot be found!",
     INVALID_DATA = "please enter a valid data!",
     INVALID_EMAIL = "please enter a valid email!",
     WRONG_PASSWORD = "Email or password is incorrect!",
@@ -12,6 +13,7 @@ export enum ERROR {
     LOGIN = "please login first",
     REQUIRED_FIELD = "This field must be filled.",
     REQUIRED_NAME = "Name is required for sign-up.",
+    REQUIRED_LINCENSE_NUMBER = "lincense number is required for create agent.",
     INVALID_EMAIL_FORMAT = "Invalid email format.",
     NAME_ATLEAST = "Name must be at least 3 characters.",
     LASTNAME_ATLEAST = "Last name must be at least 3 characters.",
@@ -21,7 +23,8 @@ export enum ERROR {
     RESET_LINK_EXPIRED = "Your reset link has expired. Please request a new one.",
     INVALID_TOKEN = "Invalid token. Please try again.",
     OTP_REQUIRED = "OTP Code is required!",
-    UNAUTHORIZED = "You dont have permission to edit this user."
+    UNAUTHORIZED = "You dont have permission to edit this user.",
+    ALREADY_PROMOTED = "This user alredy promoted to this level"
 }
 
 export enum MESSAGE {
@@ -31,5 +34,7 @@ export enum MESSAGE {
     PASSWORD_RESET = "Password reset successfully.",
     VALID_TOKEN = "Valid token. you can reset your password.",
     PROFILE_EDIT = "Your profile edited successfully.",
+    NEW_ADMIN = 'new Admin promoted successfully',
+    NEW_AGENT = 'new Admin promoted successfully',
 }
 

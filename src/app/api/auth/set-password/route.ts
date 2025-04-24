@@ -38,6 +38,7 @@ export const POST = async (req: Request) => {
 
         // Update the user's password with the new hashed password
         existUser.password = hashedPassword;
+        existUser.updatedAt = new Date()
 
         // Save the updated user document
         await existUser.save();
