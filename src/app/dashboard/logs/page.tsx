@@ -1,9 +1,14 @@
 import { LogsActionFilters } from "@/constants/LogsActionFilterType";
+import { authOptions } from "@/lib/auth";
 import Log from "@/models/log";
+import User from "@/models/user";
 import LogsDashboradPage from "@/template/Dashborad/LogsDashboradPage";
+import { UserRole } from "@/types/enums/generalEnums";
 import { LogsPageSearchParams_interface } from "@/types/StatesTypes";
 import connectDB from "@/utils/connectDB";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Logs | Heyat Saghai Abbasieh Jolan",
@@ -46,6 +51,14 @@ export const metadata: Metadata = {
 const page = async ({ searchParams }: { searchParams: LogsPageSearchParams_interface }) => {
   // Connect to the database
   await connectDB();
+
+  // Get the current session (logged-in user)
+    const session = await getServerSession(authOptions);
+  
+    // Fetch the session user's data from the database
+    const user = await User.findOne({ email: session?.user?.email });
+
+    if ( user.role === UserRole.CLIENT || user.role === UserRole.AGENT ) redirect("/dashboard/profile")
 
   // Destructure query parameters
   const { page, sort, action, startDate, endDate } = searchParams;

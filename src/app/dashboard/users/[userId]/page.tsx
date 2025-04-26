@@ -83,7 +83,7 @@ const Page = async ({ params }: { params: { userId: string } }) => {
     // Fetch the session user's data from the database
     const Handler = await User.findOne({ email: session?.user?.email });
 
-    if ( Handler.role === UserRole.CLIENT ) redirect("/dashboard/profile")
+    if ( Handler.role === UserRole.CLIENT || user.role === UserRole.AGENT ) redirect("/dashboard/profile")
   
     // If the target user is not found, render an error message
     if (!user) {
