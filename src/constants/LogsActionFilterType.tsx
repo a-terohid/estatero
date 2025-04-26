@@ -21,4 +21,19 @@ export const LogsActionFilters = [
     value: "google",
     filter: { action: LogsActions.NEW_REGISTER_GOOGLE },
   },
+  {
+    name: "new user Promoted",
+    value: "Promoted",
+    filter: { action: { $in: [LogsActions.NEW_ADMIN, LogsActions.NEW_AGENT] } },
+  },
+  {
+    name: "new user Promoted / Admin",
+    value: "admin",
+    filter: { action: LogsActions.NEW_ADMIN },
+  },
+  {
+    name: "new user Promoted / Agent",
+    value: "agent",
+    filter: { action: LogsActions.NEW_AGENT },
+  },
 ];
