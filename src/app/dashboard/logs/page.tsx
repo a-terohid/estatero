@@ -11,22 +11,22 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Logs | Heyat Saghai Abbasieh Jolan",
+  title: "Logs | Estatero Real Estate",
   description:
     "View and monitor user activity logs and system events within the Estatero real estate admin dashboard.",
   keywords: [
     "User Logs",
     "Admin Dashboard",
-    "Heyat Saghai Abbasieh Jolan",
+    "Estatero",
     "System Activity",
     "Audit Logs",
     "Monitoring",
   ],
   robots: "index, follow",
   openGraph: {
-    title: "Logs | Heyat Saghai Abbasieh Jolan",
+    title: "Logs | Estatero Real Estate",
     description:
-      "View and monitor user activity logs and system events within the admin panel of Heyat Saghai Abbasieh Jolan.",
+      "View and monitor user activity logs and system events within the Estatero real estate admin dashboard.",
     url: "https://estatero.vercel.app/dashboard/logs",
     type: "website",
     images: [
@@ -34,16 +34,16 @@ export const metadata: Metadata = {
         url: "/img/thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "Admin Logs Page - Heyat Saghai Abbasieh Jolan",
+        alt: "Admin Logs Page - Estatero Real Estate",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@Estatero",
-    title: "Logs | Heyat Saghai Abbasieh Jolan",
+    title: "Logs | Estatero Real Estate",
     description:
-      "View and monitor user activity logs and system events within the admin panel of Heyat Saghai Abbasieh Jolan.",
+      "View and monitor user activity logs and system events within the Estatero real estate admin dashboard.",
     images: ["/img/thumbnail.png"],
   },
 };
