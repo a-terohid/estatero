@@ -1,9 +1,13 @@
+import { authOptions } from '@/lib/auth';
 import User from '@/models/user';
 import UserDetailDashboard from '@/template/Dashborad/UserDetailDashboard';
+import { UserRole } from '@/types/enums/generalEnums';
 import { User_Interface } from '@/types/modelTypes';
 import connectDB from '@/utils/connectDB';
 import { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 // This function generates dynamic metadata for the page based on the user's data
@@ -65,25 +69,33 @@ export async function generateMetadata(
   };
 }
 
-// This is the main page component
+// This is the main page component that displays user details
 const Page = async ({ params }: { params: { userId: string } }) => {
-  // Connect to the database
-  await connectDB();
+    // Connect to the database
+    await connectDB();
+  
+    // Fetch the target user by ID from the database
+    const user = await User.findById(params.userId);
+  
+    // Get the current session (logged-in user)
+    const session = await getServerSession(authOptions);
+  
+    // Fetch the session user's data from the database
+    const Handler = await User.findOne({ email: session?.user?.email });
 
-  // Fetch the user by ID
-  const user = await User.findById(params.userId);
-
-  // If user not found, show an error message
-  if (!user) {
-    return (
-      <div className="p-4 text-red-600">
-        User not found.
-      </div>
-    );
-  }
-
-  // Render the user detail dashboard with the fetched user
-  return <UserDetailDashboard user={user} />;
-};
-
+    if ( Handler.role === UserRole.CLIENT ) redirect("/dashboard/profile")
+  
+    // If the target user is not found, render an error message
+    if (!user) {
+      return (
+        <div className="p-4 text-red-600">
+          User not found.
+        </div>
+      );
+    }
+  
+    // Render the user detail dashboard
+    // Pass the fetched user and the handler's role/Id to the dashboard component
+    return <UserDetailDashboard user={user} handlerRole={Handler.role} handlerId={Handler._id} />;
+  };
 export default Page;

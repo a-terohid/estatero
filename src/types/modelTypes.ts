@@ -52,7 +52,7 @@ export interface Agent_Interface {
         expires: Date;              // Expiration date for the token
     };
     bio?: string;                   // Short biography of the agent
-    lincense_number: string;        // License number of the agent
+    license_number: string;        // License number of the agent
     blogs?: string[];               // IDs of blogs written by the agent
     experience_years?: string;      // Number of years of experience
     properties_listed?: string[];   // IDs of properties listed by the agent

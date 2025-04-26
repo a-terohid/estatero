@@ -11,7 +11,7 @@ export const PATCH = async (req: Request) => {
         // Connect to the database
         await connectDB();
 
-        const { userID, clinet_Email, newRole, lincense_number } = await req.json();
+        const { userID, clinet_Email, newRole, license_number } = await req.json();
 
         // Validate required fields
         if (!userID || !clinet_Email || !newRole) {
@@ -39,7 +39,7 @@ export const PATCH = async (req: Request) => {
         }
 
         // License number is required when promoting to agent or agent admin
-        if ((newRole === UserRole.AGENT || newRole === UserRole.AGENTADMIN) && !lincense_number) {
+        if ((newRole === UserRole.AGENT || newRole === UserRole.AGENTADMIN) && !license_number) {
             return NextResponse.json(
                 { error: ERROR.REQUIRED_LINCENSE_NUMBER },
                 { status: 422 }
@@ -107,7 +107,7 @@ export const PATCH = async (req: Request) => {
                 createdAt: new Date(),
                 updatedAt: new Date(),
                 resetPassword: existClient.resetPassword,
-                lincense_number: lincense_number,
+                license_number: license_number,
             });
 
             // Remove the original user entry

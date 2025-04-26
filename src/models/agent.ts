@@ -59,7 +59,7 @@ const AgentSchema = new Schema<Agent_Interface>({
         type: String,
     },
     // License number of the agent
-    lincense_number: {
+    license_number: {
         type: String,
         required: true,
     },
