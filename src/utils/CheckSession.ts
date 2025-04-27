@@ -23,9 +23,5 @@ export const checkSession = async (): Promise<{ session: any; user: User_Interfa
     user = await User.findOne({ email: session.user.email });
   }
 
-  if (!user) {
-    throw new Error("User not found");
-  }
-
   return { session, user };
 };
