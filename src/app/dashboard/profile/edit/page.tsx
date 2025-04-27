@@ -1,10 +1,11 @@
-import { authOptions } from "@/lib/auth";
+import Agent from "@/models/agent";
 import User from "@/models/user";
 import EditProfileDashboardPage from "@/template/Dashborad/EditProfileDashboardPage";
 import { ERROR } from "@/types/enums/MessageUnum";
+import { checkSession } from "@/utils/CheckSession";
 import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth";
 
+// Metadata for SEO and social sharing
 export const metadata = {
     title: "Profile | Edit Profile | DWLFNDR",
     description: "Update your name, phone number, and profile picture to keep your account up-to-date.",
@@ -34,52 +35,42 @@ export const metadata = {
       description: "Manage your profile information to keep your account current.",
       images: ["/img/thumbnail.png"]
     }
-  };
+};
 
+// Page component for editing profile
 const page = async ({ searchParams }: any) => {
 
     const { id } = searchParams;
     
-        // Connect to MongoDB
-        await connectDB();
+    // Connect to MongoDB database
+    await connectDB();
     
-        let user = null;
+    let user = null;
     
-        try {
-            // If "id" is provided in the URL, use it to find the user
-            if (id) {
-                user = await User.findById(id);
-                console.log("User found by ID:", user);
-            } else {
-                // Otherwise, try to get user from server session
-                const session = await getServerSession(authOptions);
-                console.log("Session:", session);
-    
-                // If no session or email, display error
-                if (!session?.user?.email) {
-                    console.warn("No session or email found");
-                    return <div className="px-5 py-5 md:px-7">Session not found. Please log in.</div>;
-                }
-    
-                // Find the user by their session email
-                user = await User.findOne({ email: session.user.email });
-                console.log("User found by session email:", user);
-            }
-    
-            // If user or resetPassword is missing, return error message
-            if (!user || !user.resetPassword) {
-                console.warn("User not found");
-                return <div className="px-5 py-5 md:px-7">{ERROR.CANT_FIND_USER}</div>;
-            }
-    
-            
-        } catch (error) {
-            // Catch any unexpected errors
-            console.error("Error in reset-password page:", error);
-            return <div className='px-5 py-5 md:px-7'>Something went wrong. Please try again later.</div>;
+    try {
+        // If an "id" is provided in the URL, find the user by ID
+        if (id) {
+            user = await User.findById(id) || await Agent.findById(id);
+            console.log("User found by ID:", user);
+        } else {
+            // If no "id", check the session to get the logged-in user
+            user = (await checkSession()).user;
         }
 
-    return ( <EditProfileDashboardPage user={user} /> );
+        // If user or resetPassword is missing, display an error message
+        if (!user || !user.resetPassword) {
+            console.warn("User not found or resetPassword not set.");
+            return <div className="px-5 py-5 md:px-7">{ERROR.CANT_FIND_USER}</div>;
+        }
+
+    } catch (error) {
+        // Catch unexpected errors during user fetch or session check
+        console.error("Error fetching user data:", error);
+        return <div className='px-5 py-5 md:px-7'>Something went wrong. Please try again later.</div>;
+    }
+
+    // Return the Edit Profile Page if user data is valid
+    return (<EditProfileDashboardPage user={user} />);
 };
 
 export default page;

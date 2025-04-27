@@ -1,12 +1,9 @@
-import { authOptions } from '@/lib/auth';
 import User from '@/models/user';
 import UserDetailDashboard from '@/template/Dashborad/UserDetailDashboard';
 import { UserRole } from '@/types/enums/generalEnums';
-import { User_Interface } from '@/types/modelTypes';
+import { checkSession } from '@/utils/CheckSession';
 import connectDB from '@/utils/connectDB';
 import { Metadata } from 'next';
-import { getServerSession } from 'next-auth';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
@@ -17,10 +14,10 @@ export async function generateMetadata(
   // Connect to MongoDB
   await connectDB();
 
-  // Find the user by ID
+  // Find the user by ID from the database
   const user = await User.findById(userId);
 
-  // If user not found, return fallback metadata
+  // If user is not found, return fallback metadata
   if (!user) {
     return {
       title: "User Not Found | Estatero Admin Panel",
@@ -28,7 +25,7 @@ export async function generateMetadata(
     };
   }
 
-  // Construct full name from available user fields
+  // Construct the full name from available user fields (first name, last name)
   const fullName = `${user.name || ''} ${user?.last_name}`;
 
   // Return metadata populated with user-specific details
@@ -75,18 +72,19 @@ const Page = async ({ params }: { params: { userId: string } }) => {
     await connectDB();
   
     // Fetch the target user by ID from the database
-    const user = await User.findById(params.userId);
+    const Client = await User.findById(params.userId);
   
-    // Get the current session (logged-in user)
-    const session = await getServerSession(authOptions);
-  
-    // Fetch the session user's data from the database
-    const Handler = await User.findOne({ email: session?.user?.email });
+    // Get the current session (logged-in user) and user details
+    const { session , user } = await checkSession();
 
-    if ( Handler.role === UserRole.CLIENT || user.role === UserRole.AGENT ) redirect("/dashboard/profile")
+    // If no logged-in user, redirect to profile page
+    if( !user ) redirect("/dashboard/profile")
+      
+    // If the logged-in user is CLIENT or AGENT, redirect to profile page (they can't view other user details)
+    if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
   
     // If the target user is not found, render an error message
-    if (!user) {
+    if (!Client) {
       return (
         <div className="p-4 text-red-600">
           User not found.
@@ -94,8 +92,8 @@ const Page = async ({ params }: { params: { userId: string } }) => {
       );
     }
   
-    // Render the user detail dashboard
-    // Pass the fetched user and the handler's role/Id to the dashboard component
-    return <UserDetailDashboard user={user} handlerRole={Handler.role} handlerId={Handler._id} />;
-  };
+    // Render the user detail dashboard and pass the user data and handler's role/ID to the component
+    return <UserDetailDashboard user={Client} handlerRole={user.role} handlerId={user._id || ""} />;
+};
+
 export default Page;

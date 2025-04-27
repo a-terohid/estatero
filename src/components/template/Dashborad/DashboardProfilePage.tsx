@@ -1,5 +1,5 @@
 import { UserRole } from '@/types/enums/generalEnums';
-import { User_Interface } from '@/types/modelTypes';
+import { Agent_Interface, User_Interface } from '@/types/modelTypes';
 import Link from 'next/link';
 import { MdLockReset } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
@@ -10,7 +10,7 @@ import { mask } from '@/utils/mask';
 
 // DashboardProfilePage displays user's profile information such as email, name, role, etc.
 // Also provides actions like edit profile, reset password, and logout.
-const DashboardProfilePage = ({ user }: { user: User_Interface }) => {
+const DashboardProfilePage = ({ user }: { user: User_Interface | Agent_Interface }) => {
 
     const { _id, email, name, last_name, phone_number, profile_picture, role, password, createdAt, updatedAt } = user;
 

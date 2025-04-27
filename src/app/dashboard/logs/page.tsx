@@ -5,6 +5,7 @@ import User from "@/models/user";
 import LogsDashboradPage from "@/template/Dashborad/LogsDashboradPage";
 import { UserRole } from "@/types/enums/generalEnums";
 import { LogsPageSearchParams_interface } from "@/types/StatesTypes";
+import { checkSession } from "@/utils/CheckSession";
 import connectDB from "@/utils/connectDB";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -52,13 +53,10 @@ const page = async ({ searchParams }: { searchParams: LogsPageSearchParams_inter
   // Connect to the database
   await connectDB();
 
-  // Get the current session (logged-in user)
-    const session = await getServerSession(authOptions);
-  
-    // Fetch the session user's data from the database
-    const user = await User.findOne({ email: session?.user?.email });
+  // Get the current session (logged-in user) and user
+  const { session , user } = await checkSession();
 
-    if ( user.role === UserRole.CLIENT || user.role === UserRole.AGENT ) redirect("/dashboard/profile")
+  if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
 
   // Destructure query parameters
   const { page, sort, action, startDate, endDate } = searchParams;

@@ -1,8 +1,8 @@
-import { authOptions } from "@/lib/auth";
+import Agent from "@/models/agent";
 import User from "@/models/user";
 import SetPasswordDahsboardPage from "@/template/Dashborad/SetPasswordDahsboardPage";
+import { checkSession } from "@/utils/CheckSession";
 import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth";
 
 // Metadata for SEO and social sharing
 export const metadata = {
@@ -53,26 +53,14 @@ const page = async ({ searchParams }: any) => {
     };
 
     try {
-        // If "id" is provided in the URL, use it to find the user
-        if (id) {
-            user = await User.findById(id);
+         // If an "id" is provided in the URL, find the user by ID
+         if (id) {
+            user = await User.findById(id) || await Agent.findById(id);
             console.log("User found by ID:", user);
         } else {
-            // Otherwise, try to get user from server session
-            const session = await getServerSession(authOptions);
-            console.log("Session:", session);
-
-            // If no session or email, display error
-            if (!session?.user?.email) {
-                console.warn("No session or email found");
-                return <div>Session not found. Please log in.</div>;
-            }
-
-            // Find the user by their session email
-            user = await User.findOne({ email: session.user.email });
-            console.log("User found by session email:", user);
+            // If no "id", check the session to get the logged-in user
+            user = (await checkSession()).user;
         }
-
         // If user or resetPassword is missing, return error message
         if (!user || !user.resetPassword) {
             console.warn("User not found or missing resetPassword data");

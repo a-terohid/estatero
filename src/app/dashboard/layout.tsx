@@ -1,18 +1,11 @@
 import DashboardLoyout from "@/layout/DashboardLoyout";
-import { authOptions } from "@/lib/auth";
-import User from "@/models/user";
 import { ERROR } from "@/types/enums/MessageUnum";
-import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { checkSession } from "@/utils/CheckSession";
+
 
 const layout =  async ({ children }: {children: React.ReactNode}) => {
 
-    await connectDB();
-    const session = await getServerSession( authOptions )
-    if ( !session ) redirect("/register")
-
-    const user = await User.findOne({ email : session?.user?.email })
+    const { session , user } = await checkSession();
 
     if( !user ) {
         return( <div className='flex items-center justify-center h-[500px]' >

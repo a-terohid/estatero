@@ -10,17 +10,13 @@ export const checkSession = async (): Promise<{ session: any; user: User_Interfa
 
   const session = await getServerSession(authOptions);
 
-  if (!session || !session.user || !session.user.role) {
-    throw new Error("Unauthorized: No valid session found");
-  }
-
-  const role = session.user.role;
+  const role = session?.user.role;
   let user: User_Interface | Agent_Interface | null = null;
 
-  if (role.includes("agent")) {
-    user = await Agent.findOne({ email: session.user.email });
+  if (role.includes("Agent")) {
+    user = await Agent.findOne({ email: session?.user.email });
   } else {
-    user = await User.findOne({ email: session.user.email });
+    user = await User.findOne({ email: session?.user.email });
   }
 
   return { session, user };

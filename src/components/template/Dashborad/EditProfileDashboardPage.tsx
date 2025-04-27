@@ -2,7 +2,7 @@
 
 import ImageWithFallback from '@/elements/ImageWithFallback';
 import INPUT from '@/elements/INPUT';
-import { User_Interface } from '@/types/modelTypes';
+import { Agent_Interface, User_Interface } from '@/types/modelTypes';
 import React, { useEffect, useRef, useState } from 'react';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import Cropper, { Area } from "react-easy-crop"

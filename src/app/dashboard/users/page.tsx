@@ -2,8 +2,10 @@ import User from "@/models/user";
 import UsersDashboardPage from "@/template/Dashborad/UsersDashboardPage";
 import { UserRole } from "@/types/enums/generalEnums";
 import { UsersPageSearchParams_interface } from "@/types/StatesTypes";
+import { checkSession } from "@/utils/CheckSession";
 import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 // SEO metadata for the Users Dashboard Page
 export const metadata: Metadata = {
@@ -49,6 +51,11 @@ export const metadata: Metadata = {
 const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_interface }) => {
   // Connect to MongoDB
   await connectDB();
+
+  // Get the current session (logged-in user) and user
+    const { session , user } = await checkSession();
+  
+    if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
 
   // Destructure query params
   const { page, sort, email, fullName } = searchParams;
