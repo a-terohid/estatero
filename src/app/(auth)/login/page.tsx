@@ -1,9 +1,10 @@
-import { authOptions } from "@/lib/auth";
 import LoginPage from "@/template/LoginPage";
-import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth";
+import { checkSession } from "@/utils/CheckSession";
 import { redirect } from "next/navigation";
 
+/**
+ * Metadata for the login page, including SEO and social media information.
+ */
 export const metadata = {
     title: "Login | Estatero",
     description:
@@ -39,17 +40,24 @@ export const metadata = {
         "Log in to your Estatero account to manage your properties, buy, sell, and rent real estate easily. Secure and hassle-free access to your real estate dashboard.",
       image: ["/img/thumbnail.png"],
     },
-  };
+};
 
-const page  = async () => {
-
-    await connectDB();
-    const session = await getServerSession( authOptions )
+/**
+ * Login page component.
+ * 
+ * - If the user is already authenticated, redirects to the homepage.
+ * - Otherwise, renders the login page.
+ */
+const page = async () => {
+    // Check if a session already exists
+    const { session } = await checkSession();
     console.log(session);
     
-    if ( session ) redirect("/")
+    // If a session exists, redirect to the homepage
+    if (session) redirect("/");
 
-    return (<LoginPage /> );
+    // Render the login page
+    return <LoginPage />;
 };
 
 export default page;

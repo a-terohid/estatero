@@ -1,9 +1,11 @@
 import { authOptions } from '@/lib/auth';
 import RegisterPage from '@/template/RegisterPage';
+import { checkSession } from '@/utils/CheckSession';
 import connectDB from '@/utils/connectDB';
 import { getServerSession } from 'next-auth';
 import { redirect } from "next/navigation";
 
+// Metadata for SEO and social sharing
 export const metadata = {
     title: "Register | Estatero - Create Your Account",
     description:
@@ -37,16 +39,20 @@ export const metadata = {
         "Sign up for Estatero to buy, sell, and rent properties effortlessly. Join now and start your real estate journey with us.",
       images: ["/img/thumbnail.png"],
     },
-  };
+};
 
+// Page component to handle registration
 const page = async () => {
 
-  await connectDB();
-  const session = await getServerSession( authOptions )
+  // Check if the user already has an active session
+  const { session } = await checkSession();
   console.log(session);
   
-  if ( session ) redirect("/")
-    return ( <RegisterPage /> );
+  // If a session exists, redirect to the homepage
+  if (session) redirect("/");
+
+  // Otherwise, render the Register page
+  return (<RegisterPage />);
 };
 
 export default page;
