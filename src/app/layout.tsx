@@ -2,15 +2,12 @@ import { FONTS } from "@/constants/font";
 import "./globals.css";
 import HomeLayout from "@/layout/HomeLayout";
 import NextAuthProvider from "@/providers/NextAuthProvider";
-import connectDB from "@/utils/connectDB";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import { checkSession } from "@/utils/CheckSession";
 
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
 {   
-  await connectDB();
-  const session = await getServerSession( authOptions )
+  const { session } = await checkSession();
 
   return (
     <html lang="en" className={FONTS}>
