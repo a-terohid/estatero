@@ -1,3 +1,4 @@
+import Agent from "@/models/agent";
 import Log from "@/models/log";
 import User from "@/models/user";
 import { LogsActions, UserRole } from "@/types/enums/generalEnums";
@@ -28,7 +29,7 @@ export const authOptions: NextAuthOptions = {
                 if (!email || !password) throw new Error(ERROR.INVALID_DATA);
 
                 // Find the user in the database
-                let user = await User.findOne({ email });
+                let user = await User.findOne({ email })|| await Agent.findOne({ email })
                 if (!user) {
                     // Validate name and last name
                     if (!name || name.length < 3) throw new Error(ERROR.NAME_ATLEAST);
