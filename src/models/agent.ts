@@ -30,35 +30,29 @@ const AgentSchema = new Schema<Agent_Interface>({
     profile_picture: {
         type: String,
     },
-    // IDs of listings the user liked
+    // IDs of listings the agent liked
     liked_listings: {
         type: [String],
         default: [],
     },
-    // Role of the user (e.g., Admin, Agent, etc.)
+    // Address of the agent (optional)
+    address: {
+        type: String,
+    },
+    // Role of the agent
     role: {
         type: String,
         required: true,
     },
-    // Auto-generated creation date
-    createdAt: {
-        type: Date,
-        required: true,
-    },
-    // Auto-generated update date (optional)
-    updatedAt: {
-        type: Date,
-    },
-    // Object for handling password reset (optional)
-    resetPassword: {
-        token: { type: String },
-        expires: { type: Date },
-    },
-    // Short biography of the agent (optional)
+    // Short biography (optional)
     bio: {
         type: String,
     },
-    // License number of the agent
+    // Short professional title (optional)
+    short_title: {
+        type: String,
+    },
+    // License number
     license_number: {
         type: String,
         required: true,
@@ -70,10 +64,35 @@ const AgentSchema = new Schema<Agent_Interface>({
     },
     // Number of years of experience (optional)
     experience_years: {
-        type: String,
+        type: Number,
     },
     // IDs of properties listed by the agent (optional)
     properties_listed: {
+        type: [String],
+        default: [],
+    },
+    // IDs of testimonials received by the agent (optional)
+    testimonials: {
+        type: [String],
+        default: [],
+    },
+    // List of achievements (optional)
+    achievement: {
+        type: [String],
+        default: [],
+    },
+    // Languages the agent can speak (optional)
+    languages: {
+        type: [String],
+        default: [],
+    },
+    // Certifications obtained by the agent (optional)
+    certifications: {
+        type: [String],
+        default: [],
+    },
+    // Areas served by the agent (optional)
+    areas_served: {
         type: [String],
         default: [],
     },
@@ -88,14 +107,19 @@ const AgentSchema = new Schema<Agent_Interface>({
             default: 0,
         }
     },
-    // IDs of testimonials left for the agent (optional)
-    testimonials: {
-        type: [String],
-        default: [],
+    // Reset password information (optional)
+    resetPassword: {
+        token: { type: String },
+        expires: { type: Date },
+    },
+    // Social media links (optional)
+    social: {
+        instagram: { type: String },
+        linkedin: { type: String },
     }
 }, {
     collection: "Agents", // MongoDB collection name
-    timestamps: true // Automatically handles createdAt and updatedAt
+    timestamps: true      // Automatically handles createdAt and updatedAt
 });
 
 // Create and export the model
