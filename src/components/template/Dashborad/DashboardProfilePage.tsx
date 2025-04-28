@@ -10,9 +10,21 @@ import { mask } from '@/utils/mask';
 
 // DashboardProfilePage displays user's profile information such as email, name, role, etc.
 // Also provides actions like edit profile, reset password, and logout.
-const DashboardProfilePage = ({ user }: { user: User_Interface | Agent_Interface }) => {
+const DashboardProfilePage = ({ user }: { user: Agent_Interface | User_Interface }) => {
 
-    const { _id, email, name, last_name, phone_number, profile_picture, role, password, createdAt, updatedAt } = user;
+    const { _id, 
+            email, 
+            name, 
+            last_name, 
+            phone_number, 
+            profile_picture, 
+            role, 
+            password, 
+            createdAt, 
+            updatedAt,
+        } = user;
+
+        const isAgent: boolean = role.includes("Agent") ? true : false
 
     return (
         <div className='px-5 py-5 md:px-7' >
@@ -76,6 +88,16 @@ const DashboardProfilePage = ({ user }: { user: User_Interface | Agent_Interface
                                 <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
                             )}
                         </p>
+                        {
+                            isAgent && <p className='text-Body-SM-Medium'>
+                            License number: 
+                            {"license_number" in user ? (
+                                <span className='text-Body-MD-Medium ml-1'>{user?.license_number }</span>
+                            ) : (
+                                <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
+                            )}
+                        </p>
+                        }
                         <p className='text-Body-SM-Medium'>
                             Phone number: 
                             {phone_number ? (
@@ -86,6 +108,32 @@ const DashboardProfilePage = ({ user }: { user: User_Interface | Agent_Interface
                         </p>
                     </div>
 
+                    {/* bio */}
+                    {
+                        isAgent && <div className=' pb-5 mb-5 border-b  border-Greyscale-400'>
+                            <p className='text-Body-SM-Medium mb-2'>Bio:</p>
+                            {"bio" in user && user?.bio ? (
+                                <span className='text-Body-RL-Small ml-1 block text-justify'>{user?.bio }</span>
+                            ) : (
+                                <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
+                            )}
+                        </div>
+                    }
+                    
+                    <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
+                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                            experience years: 
+                            {"experience_years" in user && user?.experience_years ? (
+                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.experience_years }</span>
+                            ) : (
+                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                            )}
+                        </p>
+                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                            Rating: 
+                            { "rating" in user && user?.rating && <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.rating?.rate}</span>}
+                        </p>
+                    </div>
                     {/* Dates */}
                     <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
                         <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
