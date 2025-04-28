@@ -1,3 +1,4 @@
+import Agent from "@/models/agent";
 import User from "@/models/user";
 import { ERROR, MESSAGE } from "@/types/enums/MessageUnum";
 import { hashPassword } from "@/utils/auth";
@@ -22,7 +23,7 @@ export const POST = async (req: Request) => {
         }
 
         // Check if the user exists in the database
-        const existUser = await User.findOne({ email });
+        const existUser = await User.findOne({ email }) || await Agent.findOne({ email });
         if (!existUser) {
             return NextResponse.json(
                 { error: ERROR.CANT_FIND_USER }, 
