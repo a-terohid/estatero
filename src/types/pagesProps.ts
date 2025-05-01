@@ -54,3 +54,15 @@ export interface UsersDashboradPage_interface {
     currentPage : number, 
     totalPages : number
 }
+
+
+
+export interface ImageModalProps_interface {
+    show: boolean; // Determines whether the modal is visible
+    title?: string; // Optional title of the modal
+    imagePriview?: string; // Preview image URL
+    image?: File | null; // Original image file
+    setImage?: (file: File | null) => void;
+    setImagePreview?: (previewUrl: string | null) => void;
+    setShow?: (value: boolean) => void;
+  }

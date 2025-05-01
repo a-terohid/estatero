@@ -3,7 +3,7 @@
 import ImageWithFallback from '@/elements/ImageWithFallback';
 import INPUT from '@/elements/INPUT';
 import { Agent_Interface, User_Interface } from '@/types/modelTypes';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import Cropper, { Area } from "react-easy-crop"
 import ImageModule from '@/module/ImageModule';
@@ -18,26 +18,17 @@ import { ERROR } from '@/types/enums/MessageUnum';
 // Component for editing user profile in the dashboard
 const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
 
-    // States
-    const [isCheckedCoverImage, setIsCheckedCoverImage] = useState(false); // Checkbox state for editing/deleting profile picture
-    const [UploadProgress, setUploadProgress] = useState<number | null>(0); // Upload progress
-    const [loading, setLoading] = useState<boolean>(false); // Loading indicator
-    const [profile_picture, setProfile_picture] = useState<File | null>(null); // Selected file
-    const [profile_picture_Preview, setProfile_picture_Preview] = useState<string | null>(user?.profile_picture || null); // Preview of the selected image
+    const router = useRouter(); // Next.js router
+    const hasMounted = useRef(false); // Prevents validation on first render
 
-    // Cropper-related states
-    const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const [zoom, setZoom] = useState(1);
-    const [showCropModal, setShowCropModal] = useState(false);
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
-
-    // Form data and error states
-    const [data, setData] = useState({
+   
+    // Memoized initial form data based on the user prop
+    const initialData = useMemo(() => ({
         name: user.name || "",
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
         profile_picture: ""
-    });
+    }), [user]);
 
     const [dataError, setDataError] = useState({
         name_error: "",
@@ -45,11 +36,23 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         phone_number_error: "",
     });
 
+    // Form data state
+    const [data, setData] = useState(initialData);
     const { name, last_name, phone_number } = data;
 
-    const hasMounted = useRef(false); // Prevents validation on first render
+    // State for managing profile picture file and its preview
+    const [profile_picture, setProfile_picture] = useState<File | null>(null);
+    const [profile_picture_Preview, setProfile_picture_Preview] = useState<string | null>(null);
 
-    const router = useRouter(); // Next.js router
+    // Boolean for checkbox to reset existing profile picture
+    const [isCheckedCoverImage, setIsCheckedCoverImage] = useState(false);
+
+    // Modal visibility state for image cropping
+    const [showCropModal, setShowCropModal] = useState(false);
+
+    // Progress and loading states
+    const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+    const [loading, setLoading] = useState(false);
 
     // Run validation only after the component has mounted
     useEffect(() => {
@@ -60,66 +63,40 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         setDataError(editProfileFormsValidation(data, dataError));
     }, [data]);
 
-    // Handle form input changes
+    // Handler for input changes (name, last name, phone number)
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setData((prev) => ({ ...prev, [name]: value }));
-    };
+        setData((prev : any) => ({ ...prev, [name]: value }));
+        };
 
-    // Handle image file input change
-    const fileChangeHandler = (event: any) => {
-        const file = event.target.files[0] as File;
-        setProfile_picture(file);
+    // Handler for file input changes (profile picture)
+    const fileChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
         if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setProfile_picture_Preview(previewUrl);
+        setProfile_picture(file);
+        const previewUrl = URL.createObjectURL(file);
+        setProfile_picture_Preview(previewUrl);
+        setShowCropModal(true);
         }
-        setShowCropModal(true); // Open crop modal
-    };
+    }, []);
 
-    // Reset selected profile picture
-    const ResetProfilePicture = (): void => {
+  // Reset profile picture preview and file
+    const ResetProfilePicture = useCallback(() => {
         setProfile_picture(null);
         setProfile_picture_Preview(null);
-    };
+    }, []);
 
-    // Handle checkbox change
-    const handleIsCheckedCoverImage = (event: any): void => {
+    // Handle checkbox for removing existing profile image
+    const handleIsCheckedCoverImage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setIsCheckedCoverImage(event.target.checked);
-    };
+    }, []);
 
-    // Save cropped image
-    const handleCropSave = async () => {
-        if (!profile_picture_Preview || !croppedAreaPixels) return;
-        const croppedBlob = await getCroppedImg(profile_picture_Preview, croppedAreaPixels);
-
-        const croppedFile = new File([croppedBlob], profile_picture?.name || "cropped.jpg", { type: "image/jpeg" });
-
-        setProfile_picture(croppedFile);
-        const previewUrl = URL.createObjectURL(croppedFile);
-        setProfile_picture_Preview(previewUrl);
-        setShowCropModal(false);
-    };
-
-    // Cancel cropping
-    const handleCropeCancle = (): void => {
-        setShowCropModal(false);
-        ResetProfilePicture();
-    };
-
-    // Handle zoom on cropper
-    const handleZoom = (num: number): void => {
-        setZoom(zoom + num);
-    };
-
-    // Submit form to edit profile
-    const handleEditProfile = async (e: any) => {
-
+    // Submit handler to update user profile
+    const handleEditProfile = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setUploadProgress(0);
 
-        // create form data and append data 
         const formData = new FormData();
         formData.append("_id", user._id || "");
         formData.append("name", name);
@@ -127,21 +104,16 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         formData.append("phone_number", phone_number);
         formData.append("isCheckedCoverImage", String(isCheckedCoverImage));
 
-        if (profile_picture) {
-            formData.append("profile_picture", profile_picture);
-        }
+        if (profile_picture) formData.append("profile_picture", profile_picture);
 
-        // send data to server and get upload prosses to show to user
         try {
             const response = await axios.patch('/api/auth/editUser', formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+                headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
-                    if (progressEvent.total) {
-                        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                        setUploadProgress(percentCompleted);
-                    }
+                if (progressEvent.total) {
+                    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    setUploadProgress(percentCompleted);
+                }
                 }
             });
 
@@ -153,14 +125,14 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                 toast.error(resData.error);
             } else {
                 toast.success(resData.message);
-                router.push("/dashboard/profile"); // Redirect on success
+                router.push("/dashboard/profile");
             }
         } catch (err: any) {
             setLoading(false);
             setUploadProgress(null);
-            toast.error(ERROR.PROBLEM); // Show generic error
+            toast.error(ERROR.PROBLEM);
         }
-    };
+    }, [user._id, name, last_name, phone_number, isCheckedCoverImage, profile_picture, router]);
 
     return (
         <div className='px-5 py-5 md:px-7'>
@@ -201,13 +173,13 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                                     <button onClick={ResetProfilePicture} className="absolute mt-2 mr-2 top-0 right-0 bg-Error-50 hover:bg-Error-300 text-Error-300 hover:text-Error-50 rounded-full p-1"><RiDeleteBin2Line /></button>
                                 </div>
                             )}
-                            {UploadProgress !== null && (
+                            {uploadProgress !== null && (
                                 <div className="w-1/4 bg-gray-200 h-2 rounded mt-2">
                                     <div
                                         className="bg-blue-500 h-2 rounded transition-all duration-300"
-                                        style={{ width: `${UploadProgress}%` }}
+                                        style={{ width: `${uploadProgress}%` }}
                                     ></div>
-                                    <p className="text-xs text-gray-500 mt-1">{UploadProgress}% uploaded</p>
+                                    <p className="text-xs text-gray-500 mt-1">{uploadProgress}% uploaded</p>
                                 </div>
                             )}
                         </div>
@@ -269,42 +241,14 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
 
             {/* Crop image modal */}
             {showCropModal && profile_picture_Preview && (
-                <ImageModule onClose={handleCropeCancle} title="Crop your profile picture" show={showCropModal}>
-                    <div className="relative w-full h-96 bg-gray-800 rounded-xl overflow-hidden">
-                        <Cropper
-                            image={profile_picture_Preview}
-                            crop={crop}
-                            zoom={zoom}
-                            aspect={1}
-                            onCropChange={setCrop}
-                            onZoomChange={setZoom}
-                            onCropComplete={(croppedArea, croppedAreaPixels) => {
-                                setCroppedAreaPixels(croppedAreaPixels);
-                            }}
-                        />
-                    </div>
-                    {/* Buttons for crop confirm/cancel would go here */}
-                    <div className="flex justify-between mt-4 text-Body-RL-Small lg:text-Body-RL-Small">
-                        <div className='flex items-center gap-x-2'>
-                            <button onClick={()=>handleZoom(-0.25)} disabled={ zoom <= 1 ? true : false} className='bg-Greyscale-600 text-Greyscale-50 disabled:opacity-15 rounded-full hover:cursor-pointer w-6 h-6 hover:bg-Greyscale-500 hover:text-Greyscale-800'>-</button>
-                            { zoom ? <span>{zoom}x</span> : null }
-                            <button onClick={()=>handleZoom(0.25)}  className='bg-Greyscale-600 text-Greyscale-50 rounded-full hover:cursor-pointer w-6 h-6 hover:bg-Greyscale-500 hover:text-Greyscale-800'>+</button>
-                        </div>
-                       <div className='gap-3 flex items-center' >
-                        <button
-                                className="bg-red-500 text-white px-3 py-2 rounded"
-                                onClick={handleCropeCancle}
-                            >
-                                Cancel</button>
-                            <button
-                                className="bg-green-600 text-white px-3 py-2 rounded"
-                                onClick={handleCropSave}
-                            >
-                                Save
-                            </button>
-                       </div>
-                    </div>
-                </ImageModule>
+                <ImageModule 
+                    title="Crop your profile picture" 
+                    show={showCropModal} 
+                    setShow={setShowCropModal}
+                    image={profile_picture}
+                    setImage = {setProfile_picture}
+                    imagePriview={profile_picture_Preview}
+                    setImagePreview={setProfile_picture_Preview }/>
             )}
             <Toaster />
         </div>
