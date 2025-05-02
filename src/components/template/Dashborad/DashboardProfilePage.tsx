@@ -119,21 +119,22 @@ const DashboardProfilePage = ({ user }: { user: Agent_Interface | User_Interface
                             )}
                         </div>
                     }
-                    
-                    <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
-                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
-                            experience years: 
-                            {"experience_years" in user && user?.experience_years ? (
-                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.experience_years }</span>
-                            ) : (
-                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
-                            )}
-                        </p>
-                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
-                            Rating: 
-                            { "rating" in user && user?.rating && <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.rating?.rate}</span>}
-                        </p>
-                    </div>
+                    {
+                        isAgent && <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            experience years: 
+                                            {"experience_years" in user && user?.experience_years ? (
+                                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.experience_years }</span>
+                                            ) : (
+                                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                            )}
+                                        </p>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            Rating: 
+                                            { "rating" in user && user?.rating && <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.rating?.rate}</span>}
+                                        </p>
+                                    </div>
+                    }
                     {/* Dates */}
                     <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
                         <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
