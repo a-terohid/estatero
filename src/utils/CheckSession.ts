@@ -9,9 +9,11 @@ export const checkSession = async (): Promise<{ session: any; user: User_Interfa
   await connectDB();
 
   const session = await getServerSession(authOptions);
+  let user: User_Interface | Agent_Interface | null = null;
+
+  if(!session) return { session, user };
 
   const role = session?.user.role;
-  let user: User_Interface | Agent_Interface | null = null;
 
   if (role.includes("Agent")) {
     user = await Agent.findOne({ email: session?.user.email });
