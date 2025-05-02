@@ -102,6 +102,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         formData.append("name", name);
         formData.append("last_name", last_name);
         formData.append("phone_number", phone_number);
+        formData.append("role", user.role);
         formData.append("isCheckedCoverImage", String(isCheckedCoverImage));
 
         if (profile_picture) formData.append("profile_picture", profile_picture);

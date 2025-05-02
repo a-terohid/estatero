@@ -7,108 +7,155 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path, { join, basename } from "path";
 import { mkdir, writeFile, stat } from "fs/promises";
-import mime from "mime";
+import Agent from "@/models/agent";
+import sharp from "sharp"
 
+// PATCH request handler for updating user profile
 export const PATCH = async (req: Request) => {
-  try {
-    // Connect to the database
-    await connectDB();
+	try {
+		// Connect to the database
+		await connectDB();
 
-    // Parse form data
-    const formData = await req.formData();
-    const _id = formData.get("_id")?.toString().trim() || null;
-    const name = formData.get("name")?.toString().trim() || null;
-    const last_name = formData.get("last_name")?.toString().trim() || null;
-    const phone_number = formData.get("phone_number")?.toString().trim() || null;
-    const profile_picture = formData.get("profile_picture") as File || null;
-    const isCheckedCoverImage = formData.get("isCheckedCoverImage")?.toString().trim() || null;
+		// Parse form data from the request
+		const formData = await req.formData();
+		const dataRaw = formData.get("data")?.toString();
+		const profile_picture = formData.get("profile_picture") as File || null;
 
-    let profile_picture_Name: string | undefined;
+		let parsedData 
 
-    // Get user session
-    const session = await getServerSession(authOptions);
-    if (!session) return NextResponse.json({ error: ERROR.LOGIN }, { status: 401 });
+		// If data exists, parse it, else return error
+		if(dataRaw) { 
+			parsedData =  JSON.parse(dataRaw)
+		} else { 
+			return NextResponse.json({ error: ERROR.INVALID_DATA }, { status: 500 });
+		}
 
-    // Ensure the session user matches the submitted user ID
-    if (session.user.id !== _id) {
-      return NextResponse.json({ error: ERROR.UNAUTHORIZED }, { status: 403 });
-    }
+		// Destructure the parsed data
+		const {
+			_id, name, last_name, phone_number, role, address,
+			bio, short_title, license_number, experience_years,
+			achievement, languages, certifications, areas_served, social , isCheckedCoverImage
+		} = parsedData;
 
-    // Find user in database
-    const user = await User.findOne({ _id });
-    if (!user) return NextResponse.json({ error: ERROR.CANT_FIND_USER }, { status: 404 });
+		let profile_picture_Name: string | undefined;
 
-    // Generate safe directory path for storing profile picture
-    const safeTitle = user.email.toLowerCase();
-    const profile_picture_dir = `/store/users/${safeTitle}/profile_picture`;
-    const profile_picture_upload_dir = join(process.cwd(), "public", profile_picture_dir);
+		// Check if the role is Agent
+		const isAgentRole = role?.includes("Agent");
 
-    // Create upload directory if it doesn't exist
-    try {
-      await stat(profile_picture_upload_dir);
-    } catch (e: any) {
-      if (e.code === "ENOENT") {
-        await mkdir(profile_picture_upload_dir, { recursive: true });
-      } else {
-        console.error("Error creating directory:", e);
-        return NextResponse.json({ error: ERROR.SERVER_ERROR }, { status: 500 });
-      }
-    }
+		// Get the user session
+		const session = await getServerSession(authOptions);
+		if (!session) return NextResponse.json({ error: ERROR.LOGIN }, { status: 401 });
 
-    // Handle new profile picture upload if checkbox is checked
-    if (profile_picture && isCheckedCoverImage === "true") {
-      // Delete old profile picture
-      if (user.profile_picture) {
-        const oldFileName = basename(user.profile_picture); // Extract just the file name
-        const coverImagePath = join(profile_picture_upload_dir, oldFileName);
-        try {
-          if (fs.existsSync(coverImagePath)) {
-            fs.unlinkSync(coverImagePath);
-            console.log("Old profile picture deleted:", coverImagePath);
-          }
-        } catch (err) {
-          console.error("Error removing old profile picture:", err);
-        }
-      }
+		// Ensure the session user matches the submitted user ID
+		if (session.user.id !== _id) {
+			return NextResponse.json({ error: ERROR.UNAUTHORIZED }, { status: 403 });
+		}
 
-      // Save new profile picture
-      const mimeType = profile_picture.type;
-      const uint8Array = new Uint8Array(await profile_picture.arrayBuffer());
-      const extension = mime.getExtension(mimeType);
-      profile_picture_Name = `${_id}_${Date.now()}.${extension}`;
-      await writeFile(join(profile_picture_upload_dir, profile_picture_Name), uint8Array);
-    }
+		// Find the user in the database based on role
+		let user 
+		isAgentRole ? user = await Agent.findOne({ _id }) : user = await User.findOne({ _id });
 
-    // Update user fields
-    user.name = name;
-    user.last_name = last_name;
-    user.phone_number = phone_number;
-    user.updatedAt = new Date();
-    if (profile_picture_Name) user.profile_picture = `${profile_picture_dir}/${profile_picture_Name}`;
+		if (!user) return NextResponse.json({ error: ERROR.CANT_FIND_USER }, { status: 404 });
 
-    // Save updated user
-    await user.save();
+		// Define the directory for storing the profile picture
+		const safeTitle = user.email.toLowerCase();
+		const profile_picture_dir = `/store/users/${safeTitle}/profile_picture`;
+		const profile_picture_upload_dir = join(process.cwd(), "public", profile_picture_dir);
 
-    // Return success response with updated user info
-    return NextResponse.json(
-      {
-        message: MESSAGE.PROFILE_EDIT,
-        user: {
-          name: user.name,
-          last_name: user.last_name,
-          phone_number: user.phone_number,
-          profile_picture: user.profile_picture,
-        },
-      },
-      { status: 201 }
-    );
-  } catch (err) {
-    console.log(err);
+		// Create the directory if it doesn't exist
+		try {
+			await stat(profile_picture_upload_dir);
+		} catch (e: any) {
+			if (e.code === "ENOENT") {
+				await mkdir(profile_picture_upload_dir, { recursive: true });
+			} else {
+				console.error("Error creating directory:", e);
+				return NextResponse.json({ error: ERROR.SERVER_ERROR }, { status: 500 });
+			}
+		}
 
-    // Return a server error response in case of failure
-    return NextResponse.json(
-      { error: ERROR.SERVER_ERROR },
-      { status: 500 }
-    );
-  }
+		// Handle profile picture upload if checked
+		if (profile_picture && isCheckedCoverImage === "true") {
+			// Delete old profile picture if it exists
+			if (user.profile_picture) {
+				
+				const oldFileName = basename(user.profile_picture); // Extract file name from the path
+				const coverImagePath = join(profile_picture_upload_dir, oldFileName);
+
+				try {
+
+					if (fs.existsSync(coverImagePath)) {
+						fs.unlinkSync(coverImagePath);
+						console.log("Old profile picture deleted:", coverImagePath);
+					}
+
+				} catch (err) {
+					console.error("Error removing old profile picture:", err);
+				}
+			}
+
+			// Save new profile picture after resizing and compressing
+			const uint8Array = new Uint8Array(await profile_picture.arrayBuffer());
+			const extension = "jpg"; 
+
+			profile_picture_Name = `${_id}_${Date.now()}.${extension}`;
+
+			const processedImage = await sharp(uint8Array)
+				.resize(400, 400, { fit: "cover" })  // Resize the image to 400x400
+				.jpeg({ quality: 80 })  // Compress the image to 80% quality
+				.toBuffer();
+
+			// Write the processed image to the file system
+			await writeFile(
+				join(profile_picture_upload_dir, profile_picture_Name),
+				new Uint8Array(processedImage) 
+			);
+		}
+
+		// Update user fields
+		user.name = name;
+		user.last_name = last_name;
+		user.phone_number = phone_number;
+		user.updatedAt = new Date();
+		if (profile_picture_Name) user.profile_picture = `${profile_picture_dir}/${profile_picture_Name}`;
+
+		// If the user is an agent, update agent-specific fields
+		if(isAgentRole) { 
+			user.address = address
+			user.bio = bio
+			user.short_title = short_title; 
+			user.license_number = license_number; 
+			user.experience_years = experience_years;
+			user.achievement = achievement;  
+			user.languages = languages; 
+			user.certifications = certifications; 
+			user.areas_served = areas_served; 
+			user.social = social;
+		}
+
+		// Save the updated user to the database
+		await user.save();
+
+		// Return success response with updated user info
+		return NextResponse.json(
+			{
+				message: MESSAGE.PROFILE_EDIT,
+				user: {
+					name: user.name,
+					last_name: user.last_name,
+					phone_number: user.phone_number,
+					profile_picture: user.profile_picture,
+				},
+			},
+			{ status: 201 }
+		);
+	} catch (err) {
+		console.log(err);
+
+		// Return server error response in case of failure
+		return NextResponse.json(
+			{ error: ERROR.SERVER_ERROR },
+			{ status: 500 }
+		);
+	}
 };
