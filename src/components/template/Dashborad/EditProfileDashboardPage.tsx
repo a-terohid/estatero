@@ -27,7 +27,6 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         name: user.name || "",
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
-        profile_picture: ""
     }), [user]);
 
     const [dataError, setDataError] = useState({
@@ -98,13 +97,15 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
         setUploadProgress(0);
 
         const formData = new FormData();
-        formData.append("_id", user._id || "");
-        formData.append("name", name);
-        formData.append("last_name", last_name);
-        formData.append("phone_number", phone_number);
-        formData.append("role", user.role);
-        formData.append("isCheckedCoverImage", String(isCheckedCoverImage));
-
+        
+        const newdata = data;
+        Object.assign(newdata, { 
+            isCheckedCoverImage: String(isCheckedCoverImage) , 
+            role : user.role,
+            _id : user._id
+        });
+        
+        formData.append("data", JSON.stringify(newdata) || "");
         if (profile_picture) formData.append("profile_picture", profile_picture);
 
         try {
@@ -226,13 +227,13 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                 </div>
 
                 {/* Submit button */}
-                <div>
+                <div className='flex items-center justify-center mt-6'>
                     {loading ? (
                         <Loader />
                     ) : (
                         <button
                             onClick={handleEditProfile}
-                            className="text-primary-0 bg-primary-100 rounded-xl py-3 text-Body-MD-Small w-full mt-6 hover:bg-primary-50"
+                            className="text-primary-0 bg-primary-100 rounded-xl py-3 text-Body-MD-Small w-full hover:bg-primary-50"
                         >
                             Edit
                         </button>

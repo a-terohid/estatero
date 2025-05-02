@@ -38,23 +38,23 @@ export const PATCH = async (req: Request) => {
 		} = parsedData;
 
 		let profile_picture_Name: string | undefined;
-
+		
 		// Check if the role is Agent
 		const isAgentRole = role?.includes("Agent");
-
+		
 		// Get the user session
 		const session = await getServerSession(authOptions);
 		if (!session) return NextResponse.json({ error: ERROR.LOGIN }, { status: 401 });
-
-		// Ensure the session user matches the submitted user ID
+		
+		//Ensure the session user matches the submitted user ID
 		if (session.user.id !== _id) {
 			return NextResponse.json({ error: ERROR.UNAUTHORIZED }, { status: 403 });
 		}
 
 		// Find the user in the database based on role
 		let user 
-		isAgentRole ? user = await Agent.findOne({ _id }) : user = await User.findOne({ _id });
-
+		isAgentRole ? user = await Agent.findOne({ _id }) : user = await User.findOne({ _id });	
+		
 		if (!user) return NextResponse.json({ error: ERROR.CANT_FIND_USER }, { status: 404 });
 
 		// Define the directory for storing the profile picture
@@ -78,7 +78,7 @@ export const PATCH = async (req: Request) => {
 		if (profile_picture && isCheckedCoverImage === "true") {
 			// Delete old profile picture if it exists
 			if (user.profile_picture) {
-				
+
 				const oldFileName = basename(user.profile_picture); // Extract file name from the path
 				const coverImagePath = join(profile_picture_upload_dir, oldFileName);
 
