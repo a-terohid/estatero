@@ -1,5 +1,6 @@
 import Agent from "@/models/agent";
 import User from "@/models/user";
+import EditProfileAgentDashboardPage from "@/template/Dashborad/EditProfileAgentDashboardPage";
 import EditProfileDashboardPage from "@/template/Dashborad/EditProfileDashboardPage";
 import { ERROR } from "@/types/enums/MessageUnum";
 import { checkSession } from "@/utils/CheckSession";
@@ -70,6 +71,8 @@ const page = async ({ searchParams }: any) => {
     }
 
     // Return the Edit Profile Page if user data is valid
+    if (user.role?.includes("Agent")) return (<EditProfileAgentDashboardPage user={user} />);
+
     return (<EditProfileDashboardPage user={user} />);
 };
 

@@ -4,7 +4,7 @@ import { LogsPageSearchParams_interface } from "./StatesTypes";
 
 export interface inputComponent_input {
     changeHandler : Function;
-    value : string;
+    value : string | number;
     label : string;
     type : string;
     name : string;
@@ -65,4 +65,12 @@ export interface ImageModalProps_interface {
     setImage?: (file: File | null) => void;
     setImagePreview?: (previewUrl: string | null) => void;
     setShow?: (value: boolean) => void;
-  }
+}
+
+export interface ArrayFieldsProps_interface {
+    state: any;
+    setState: React.Dispatch<React.SetStateAction<any>>;
+    value: string[];
+    name: string;
+    lable: string;
+}

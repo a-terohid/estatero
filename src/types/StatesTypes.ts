@@ -65,6 +65,31 @@ export interface editProfileError_interface {
     phone_number_error : string;
 }
 
+export interface editProfileAgent_interface {
+    name : string;
+    last_name : string 
+    phone_number : string;
+    bio : string
+    short_title : string
+    license_number: string 
+    experience_years: Number | string
+    achievement: string[];
+    languages: string[];
+    certifications: string[];
+    areas_served: string[];
+}
+
+
+export interface editProfileAgentError_interface {
+    name_error: string,
+    last_name_error: string,
+    phone_number_error: string,
+    bio_error : string,
+    short_title_error : string,
+    license_number_error: string , 
+    experience_years_error: string
+}
+
 
 export interface LogsFilter_interfasce { 
     sort : 'sort' | 'esc' | "desc",
