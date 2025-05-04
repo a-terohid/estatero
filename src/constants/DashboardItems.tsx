@@ -59,7 +59,7 @@ export const DashboardItems : DashboardItem_interface[] = [
     { 
         name: "Agents", 
         href: "/dashboard/agents" , 
-        accessibility: [ UserRole.OWNER ,UserRole.ADMIN , UserRole.AGENTOWNER],
+        accessibility: [ UserRole.OWNER ,UserRole.ADMIN , UserRole.AGENTOWNER , UserRole.AGENTADMIN],
         icon : <FaBuildingUser />,
         children : []
     },
