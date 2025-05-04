@@ -37,7 +37,7 @@ const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_inte
 
   const validRoles = [UserRole.OWNER, UserRole.AGENTOWNER];
   if (!user || !validRoles.includes(user.role as UserRole)) {
-	redirect("/dashboard/profile");
+    redirect("/dashboard/profile");
   }
 
   const { page, sort, email, fullName } = searchParams;
