@@ -1,3 +1,4 @@
+import { DashboardItems } from '@/constants/DashboardItems';
 import Agent from '@/models/agent';
 import User from '@/models/user';
 import Admins_AgentDashboardpage from '@/template/Dashborad/Admins_AgentDashboardpage';
@@ -79,8 +80,8 @@ const Page = async ({ params }: { params: { userId: string } }) => {
     // If no logged-in user, redirect to profile page
     if( !user ) redirect("/dashboard/profile")
       
-    const validRoles = [UserRole.OWNER, UserRole.AGENTOWNER];
-    if (!user || !validRoles.includes(user.role as UserRole)) {
+    const validRoles = DashboardItems.find(item => item.name === 'Admins')?.accessibility;
+    if (!user || !validRoles?.includes(user.role as UserRole)) {
         redirect("/dashboard/profile");
     }
   

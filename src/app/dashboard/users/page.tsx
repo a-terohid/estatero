@@ -1,3 +1,4 @@
+import { DashboardItems } from "@/constants/DashboardItems";
 import User from "@/models/user";
 import UsersDashboardPage from "@/template/Dashborad/UsersDashboardPage";
 import { UserRole } from "@/types/enums/generalEnums";
@@ -55,7 +56,10 @@ const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_inte
   // Get the current session (logged-in user) and user
   const { session , user } = await checkSession();
   
-  if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
+  const validRoles = DashboardItems.find(item => item.name === 'Users')?.accessibility;
+  if (!user || !validRoles?.includes(user.role as UserRole)) {
+      redirect("/dashboard/profile");
+  }
 
   // Destructure query params
   const { page, sort, email, fullName } = searchParams;

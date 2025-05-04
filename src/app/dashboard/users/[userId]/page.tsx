@@ -1,3 +1,4 @@
+import { DashboardItems } from '@/constants/DashboardItems';
 import User from '@/models/user';
 import UserDetailDashboard from '@/template/Dashborad/UserDetailDashboard';
 import { UserRole } from '@/types/enums/generalEnums';
@@ -81,8 +82,10 @@ const Page = async ({ params }: { params: { userId: string } }) => {
     if( !user ) redirect("/dashboard/profile")
       
     // If the logged-in user is CLIENT or AGENT, redirect to profile page (they can't view other user details)
-    if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
-  
+    const validRoles = DashboardItems.find(item => item.name === 'Users')?.accessibility;
+    if (!user || !validRoles?.includes(user.role as UserRole)) {
+        redirect("/dashboard/profile");
+    }  
     // If the target user is not found, render an error message
     if (!Client) {
       return (

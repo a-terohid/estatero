@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import AdminsDashboardPage from '@/template/Dashborad/AdminsDashboardPage';
+import { DashboardItems } from '@/constants/DashboardItems';
 
 // SEO metadata
 export const metadata: Metadata = {
@@ -35,8 +36,8 @@ const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_inte
   await connectDB();
   const { session, user } = await checkSession();
 
-  const validRoles = [UserRole.OWNER, UserRole.AGENTOWNER];
-  if (!user || !validRoles.includes(user.role as UserRole)) {
+  const validRoles = DashboardItems.find(item => item.name === 'Admins')?.accessibility;
+  if (!user || !validRoles?.includes(user.role as UserRole)) {
     redirect("/dashboard/profile");
   }
 
