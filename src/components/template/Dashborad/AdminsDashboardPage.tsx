@@ -1,24 +1,25 @@
-import { UsersDashboradPage_interface } from "@/types/pagesProps";
-import PaginationButtons from "@/elements/PaginationButtons";
-import DashboardUserCard from "@/elements/DashboardUserCard";
-import UsersFilterSection from "@/elements/UsersFilterSection";
+import DashboardUserCard from '@/elements/DashboardUserCard';
+import PaginationButtons from '@/elements/PaginationButtons';
+import UsersFilterSection from '@/elements/UsersFilterSection';
+import { UsersDashboradPage_interface } from '@/types/pagesProps';
+import React from 'react';
 
-const UsersDashboardPage = ({ users, currentPage, totalPages }: UsersDashboradPage_interface ) => {
+const AdminsDashboardPage = ({ users, currentPage, totalPages }: UsersDashboradPage_interface ) => {
     return (
         <div className='px-5 py-5 md:px-7'>
             {/* Page title */}
-            <h1 className='text-Heading-4 mb-6'>Users:</h1>
+            <h1 className='text-Heading-4 mb-6'>Admins:</h1>
 
             <div>
                 {/* Filter section for users */}
-                <UsersFilterSection PATH="/dashboard/users" />
+                <UsersFilterSection PATH="/dashboard/admins" />
 
                 {/* User list section */}
                 <div className="flex flex-col gap-y-2 mt-4">
                     {users.length ? (
                         // Render each user with DashboardUserCard
                         users.map((user, index) => (
-                            <DashboardUserCard user={user} key={index} PATH="/dashboard/users" />
+                            <DashboardUserCard user={user} key={index} PATH="/dashboard/admins" />
                         ))
                     ) : (
                         // Message when no users are found
@@ -35,4 +36,4 @@ const UsersDashboardPage = ({ users, currentPage, totalPages }: UsersDashboradPa
     );
 };
 
-export default UsersDashboardPage;
+export default AdminsDashboardPage;

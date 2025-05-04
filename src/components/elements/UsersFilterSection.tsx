@@ -8,7 +8,7 @@ import React, { useRef, useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import INPUT from './INPUT';
 
-const UsersFilterSection = () => {
+const UsersFilterSection = ({PATH} : {PATH:string}) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const hasMounted = useRef(false); // Avoid running useEffect on first mount
@@ -86,7 +86,7 @@ const UsersFilterSection = () => {
                     {/* Apply filters button */}
                     <Link
                         href={{
-                            pathname: "/dashboard/users",
+                            pathname: PATH,
                             query: {
                                 sort: sort !== "sort" ? sort : undefined,
                                 email: email,
@@ -102,7 +102,7 @@ const UsersFilterSection = () => {
                     <button
                         onClick={() => {
                             setFilter({ sort: "sort", email: "", fullName: "" });
-                            router.push("/dashboard/users");
+                            router.push(PATH);
                         }}
                         className="bg-primary-100 text-white w-fit text-Body-RL-XSmall lg:text-Body-RL-Small px-3 py-2 rounded-lg cursor-pointer"
                     >

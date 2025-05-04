@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
 
-const DashboardUserCard = ({user} : {user:User_Interface}) => {
+const DashboardUserCard = ({user , PATH} : {user:User_Interface , PATH:string}) => {
 
     const { _id, email , name , last_name , phone_number } = user
 
@@ -25,7 +25,7 @@ const DashboardUserCard = ({user} : {user:User_Interface}) => {
                                 {last_name ? <p className='font-bold'> Last name: <span className='font-normal'>{last_name}</span></p> : null}
                             </div> }
                             {phone_number ?  <p className='font-bold'>Phone number: <span className='font-normal'>{phone_number}</span></p> : null }
-                            <Link href={`/dashboard/users/${_id}`} className='px-2 py-1 mt-2 bg-primary-100 text-Body-RL-XSmall hover:bg-primary-50 rounded-md w-fit text-Neutral'>View</Link>
+                            <Link href={`${PATH}/${_id}`} className='px-2 py-1 mt-2 bg-primary-100 text-Body-RL-XSmall hover:bg-primary-50 rounded-md w-fit text-Neutral'>View</Link>
                         </div>
                     </details>
             

@@ -53,9 +53,9 @@ const page = async ({ searchParams }: { searchParams: UsersPageSearchParams_inte
   await connectDB();
 
   // Get the current session (logged-in user) and user
-    const { session , user } = await checkSession();
+  const { session , user } = await checkSession();
   
-    if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
+  if ( user?.role === UserRole.CLIENT || user?.role === UserRole.AGENT ) redirect("/dashboard/profile")
 
   // Destructure query params
   const { page, sort, email, fullName } = searchParams;
