@@ -113,6 +113,18 @@ export const PATCH = async (req: Request) => {
             // Remove the original user entry
             await User.deleteOne({ email: clinet_Email });
 
+            // Revalidate the agents' page if the new role is an Agent
+            try {
+                await fetch(`/api/revalidate`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ path: "/agents" }),
+                });
+            } catch (err) {
+                console.log("Revalidation error:", err);
+            }
+              
+
             // Log the promotion
             await Log.create({
                 title: `New Agent with email ${clinet_Email} has been Promoted by ${existUser.email}`,

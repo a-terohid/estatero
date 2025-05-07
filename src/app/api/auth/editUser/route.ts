@@ -136,6 +136,19 @@ export const PATCH = async (req: Request) => {
 		// Save the updated user to the database
 		await user.save();
 
+		// Revalidate the agents' page if the new role is an Agent
+		if(isAgentRole){
+			try {
+				await fetch(`/api/revalidate`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ path: "/agents" }),
+				});
+			} catch (err) {
+				console.log("Revalidation error:", err);
+			}
+		}
+
 		// Return success response with updated user info
 		return NextResponse.json(
 			{
