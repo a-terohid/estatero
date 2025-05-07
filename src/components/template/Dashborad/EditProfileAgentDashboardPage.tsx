@@ -28,6 +28,7 @@ const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
         name: user.name || "",
         last_name: user.last_name || "",
         phone_number: user.phone_number || "",
+        address : user.address || "",
         bio : user.bio || "",
         short_title : user.short_title || "",
         license_number : user.license_number  || "",
@@ -45,7 +46,7 @@ const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
     })
  
         // Destructuring state
-    const { name, last_name, phone_number , bio , short_title , license_number , experience_years , languages , achievement , certifications , areas_served} = data;
+    const { name, last_name, phone_number , bio , short_title , license_number , experience_years , languages , achievement , certifications , areas_served , address} = data;
     const { instagram  , linkedin } = social
 
     // State for managing profile picture file and its preview
@@ -257,6 +258,15 @@ const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
                         textarea={false}
                     />
                     <INPUT
+                        label="Adrees"
+                        type="text"
+                        name="address"
+                        value={address}
+                        placeholder="Enter your adress"
+                        changeHandler={changeHandler}
+                        textarea={false}
+                    />
+                    <INPUT
                         label="bio"
                         type="text"
                         name="bio"
@@ -274,7 +284,7 @@ const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
                             calendarPosition="bottom-right"
                             format="YYYY"
                             placeholder="Select year"
-                            className="custom-datepicker"
+                            inputClass="date-picker-input"
                             />
                     </div>
                     <div className="mt-3 flex flex-col gap-y-5">

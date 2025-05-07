@@ -69,6 +69,7 @@ export interface editProfileAgent_interface {
     name : string;
     last_name : string 
     phone_number : string;
+    address : string;
     bio : string
     short_title : string
     license_number: string 
