@@ -1,4 +1,5 @@
 import { User_Interface } from '@/types/modelTypes';
+import { mask } from '@/utils/mask';
 import Link from 'next/link';
 import React from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
@@ -24,7 +25,7 @@ const DashboardUserCard = ({user , PATH} : {user:User_Interface , PATH:string}) 
                                 {name ? <p className='font-bold'>Name: <span className='font-normal'>{name}</span></p> : null}
                                 {last_name ? <p className='font-bold'> Last name: <span className='font-normal'>{last_name}</span></p> : null}
                             </div> }
-                            {phone_number ?  <p className='font-bold'>Phone number: <span className='font-normal'>{phone_number}</span></p> : null }
+                            {phone_number ?  <p className='font-bold'>Phone number: <span className='font-normal'>{mask(phone_number , "(***) ***-****")}</span></p> : null }
                             <Link href={`${PATH}/${_id}`} className='px-2 py-1 mt-2 bg-primary-100 text-Body-RL-XSmall hover:bg-primary-50 rounded-md w-fit text-Neutral'>View</Link>
                         </div>
                     </details>

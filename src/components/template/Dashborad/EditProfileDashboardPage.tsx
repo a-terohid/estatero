@@ -14,6 +14,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { getCroppedImg } from '@/utils/cropImage';
 import axios from 'axios';
 import { ERROR } from '@/types/enums/MessageUnum';
+import { mask } from '@/utils/mask';
 
 // Component for editing user profile in the dashboard
 const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
@@ -218,7 +219,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
                         label="Phone number"
                         type="text"
                         name="phone_number"
-                        value={phone_number}
+                        value={mask(phone_number , "(***) ***-****")}
                         placeholder="Enter your phone number here"
                         changeHandler={changeHandler}
                         textarea={false}

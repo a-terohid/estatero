@@ -101,7 +101,7 @@ const DashboardProfilePage = ({ user }: { user: Agent_Interface | User_Interface
                         <p className='text-Body-SM-Medium'>
                             Phone number: 
                             {phone_number ? (
-                                <span className='text-Body-MD-Medium ml-1'>{mask(phone_number, "****-***-****")}</span>
+                                <span className='text-Body-MD-Medium ml-1'>{mask(phone_number , "(***) ***-****")}</span>
                             ) : (
                                 <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
                             )}
@@ -113,12 +113,90 @@ const DashboardProfilePage = ({ user }: { user: Agent_Interface | User_Interface
                         isAgent && <div className=' pb-5 mb-5 border-b  border-Greyscale-400'>
                             <p className='text-Body-SM-Medium mb-2'>Bio:</p>
                             {"bio" in user && user?.bio ? (
-                                <span className='text-Body-RL-Small ml-1 block text-justify'>{user?.bio }</span>
+                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1 block'>{user?.bio }</span>
                             ) : (
-                                <span className='text-Body-RL-Small italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                <span className='text-Body-RL-XSmall  italic text-Greyscale-400 ml-1'>This field is empty</span>
                             )}
                         </div>
                     }
+                    {
+                        isAgent && <div className='flex flex-col  gap-y-3 pb-5 mb-5 border-b  border-Greyscale-400'>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            Short title: 
+                                            {"short_title" in user && user?.short_title ? (
+                                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.short_title }</span>
+                                            ) : (
+                                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                            )}
+                                        </p>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            Adress: 
+                                            {"address" in user && user?.address ? (
+                                                <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.address }</span>
+                                            ) : (
+                                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                            )}
+                                        </p>
+                                    </div>
+                    }
+                                        <div className=' pb-5 mb-5 border-b  flex flex-col gap-y-6 border-Greyscale-400'>
+                        {
+                            isAgent && <div>
+                                <p className='text-Body-SM-XSmall md:text-Body-MD-Small mb-2'>Achievement:</p>
+                                {"achievement" in user && user?.achievement ? (
+                                    <ul className='flex flex-col gap-y-1 list-disc text-Body-RL-XSmall md:text-Body-RL-Small md:ml-7 ml-5'>
+                                        {
+                                            user?.achievement.map((ac , index) => <li key={index}>{ac}</li>)
+                                        }
+                                    </ul>
+                                ) : (
+                                    <span className='text-Body-RL-XSmall  italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                )}
+                            </div>
+                        }
+                        {
+                            isAgent && <div>
+                                <p className='text-Body-SM-XSmall md:text-Body-MD-Small mb-2'>Areas Served:</p>
+                                {"areas_served" in user && user?.areas_served ? (
+                                    <ul className='flex flex-col gap-y-1 list-disc text-Body-RL-XSmall md:text-Body-RL-Small md:ml-7 ml-5'>
+                                        {
+                                            user?.areas_served.map((ac , index) => <li key={index}>{ac}</li>)
+                                        }
+                                    </ul>
+                                ) : (
+                                    <span className='text-Body-RL-XSmall  italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                )}
+                            </div>
+                        }
+                        {
+                            isAgent && <div>
+                                <p className='text-Body-SM-XSmall md:text-Body-MD-Small mb-2'>Languages:</p>
+                                {"languages" in user && user?.languages ? (
+                                    <ul className='flex flex-col gap-y-1 list-disc text-Body-RL-XSmall md:text-Body-RL-Small md:ml-7 ml-5'>
+                                        {
+                                            user?.languages.map((ac , index) => <li key={index}>{ac}</li>)
+                                        }
+                                    </ul>
+                                ) : (
+                                    <span className='text-Body-RL-XSmall  italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                )}
+                            </div>
+                        }
+                        {
+                            isAgent && <div>
+                                <p className='text-Body-SM-XSmall md:text-Body-MD-Small mb-2'>Certifications:</p>
+                                {"certifications" in user && user?.certifications ? (
+                                    <ul className='flex flex-col gap-y-1 list-disc text-Body-RL-XSmall md:text-Body-RL-Small md:ml-7 ml-5'>
+                                        {
+                                            user?.certifications.map((ac , index) => <li key={index}>{ac}</li>)
+                                        }
+                                    </ul>
+                                ) : (
+                                    <span className='text-Body-RL-XSmall  italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                )}
+                            </div>
+                        }
+                    </div>
                     {
                         isAgent && <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
                                         <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
@@ -132,6 +210,26 @@ const DashboardProfilePage = ({ user }: { user: Agent_Interface | User_Interface
                                         <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
                                             Rating: 
                                             { "rating" in user && user?.rating && <span className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>{user?.rating?.rate}</span>}
+                                        </p>
+                                    </div>
+                    }
+                    {
+                        isAgent && <div className='flex justify-between md:justify-start md:gap-x-5 pb-5 mb-5 border-b  border-Greyscale-400'>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            Instagram: 
+                                            {"social" in user && user?.social?.instagram ? (
+                                                <Link href={user?.social?.instagram } className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>link</Link>
+                                            ) : (
+                                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                            )}
+                                        </p>
+                                        <p className='text-Body-MD-XSmall md:text-Body-MD-Small'>
+                                            Linkedin: 
+                                            {"social" in user && user?.social?.linkedin ? (
+                                                <Link href={user?.social?.linkedin } className='text-Body-RL-XSmall md:text-Body-RL-Small ml-1'>link</Link>
+                                            ) : (
+                                                <span className='text-Body-RL-XSmall italic text-Greyscale-400 ml-1'>This field is empty</span>
+                                            )}
                                         </p>
                                     </div>
                     }

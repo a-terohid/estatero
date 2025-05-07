@@ -16,6 +16,7 @@ import { editProfileAgent_interface } from '@/types/StatesTypes';
 import DatePicker from 'react-multi-date-picker';
 
 import ArrayFileds from '@/elements/ArrayFileds';
+import { mask } from '@/utils/mask';
 
 // Component for editing user profile in the dashboard
 const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
@@ -234,7 +235,7 @@ const EditProfileAgentDashboardPage = ({ user }: { user: Agent_Interface }) => {
                         label="Phone number"
                         type="text"
                         name="phone_number"
-                        value={phone_number}
+                        value={mask(phone_number , "(***) ***-****")}
                         placeholder="Enter your phone number here"
                         changeHandler={changeHandler}
                         textarea={false}
