@@ -2,6 +2,7 @@ import { GetStaticProps, Metadata } from "next";
 import connectDB from "@/utils/connectDB";
 import Agent from "@/models/agent";
 import { Agent_Interface } from "@/types/modelTypes";
+import Agentpage from "@/template/agnet/Agentpage";
 
 export const metadata: Metadata = {
     title: "Agents | Estatero",
@@ -49,13 +50,11 @@ async function fetchAgents(): Promise<Agent_Interface[]> {
 }
 
 const page = async () => {
-    const agents = await fetchAgents();    
+    const agents = await fetchAgents(); 
     
-    return (
-        <div>
-            agnets
-        </div>
-    );
+    
+    
+    return (<Agentpage agents={agents} />);
 };
 
 export default page;
