@@ -142,7 +142,7 @@ export const PATCH = async (req: Request) => {
 				await fetch(`/api/revalidate`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ path: "/agents" }),
+				body: JSON.stringify({ path: `/agents/${user._id}` }),
 				});
 			} catch (err) {
 				console.log("Revalidation error:", err);

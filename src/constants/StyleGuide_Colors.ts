@@ -20,6 +20,7 @@ export const styleGuide_colors = {
         0   : "#F8F9FB",
         25  : "#F6F8FA",
         50  : "#ECEFF3",
+        75  : "#9FA0A1",
         100 : "#DFE1E6",
         200 : "#C1C7CF",
         300 : "#A4ABB8",

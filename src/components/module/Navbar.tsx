@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
 import React, { useEffect, useState } from 'react';
-import { navItems } from '@/constants/NavbarItems';
+import { navItems, shouldShow } from '@/constants/NavbarItems';
 import { MdArrowDropDown } from "react-icons/md";
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -15,20 +15,34 @@ import { DashboardItem_interface } from '@/types/generalTypes';
 import { UserRole } from '@/types/enums/generalEnums';
 import RenderDashboardNavbarItem from '../elements/RenderDashboardNavbarItem';
 
-const Navbar = ({role}: {role : UserRole}) => {
+const Navbar = ({role }: {role : UserRole }) => {
     
     //Get user session
     const { status } = useSession();
 
-     // State to manage the menu open/close state
-     const [isOpen, setIsOpen] = useState(false);
-     const pathname = usePathname(); // Get the current route path
-     const [ PcPageMenue , setPcPageMenue] = useState(false)
-     const [isTop, setIsTop] = useState(true);
+    // State to manage the menu open/close state
+    const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname(); // Get the current route path
+    const [ PcPageMenue , setPcPageMenue] = useState(false)
+    const [isTop, setIsTop] = useState(true);
 
-     useEffect(() => {
+     
+
+    const newpath = pathname.split("/")
+    let show 
+
+    if(newpath[2]){
+        shouldShow.includes(newpath[1]) ? show = true : show = false
+    }
+
+
+    const showNavbarBackground = isOpen || show || !isTop
+     
+
+    useEffect(() => {
     setIsOpen(false);
        const handleScroll = () => {
+       
          if (window.scrollY > 200) {
            setIsTop(false);
          } else {
@@ -48,7 +62,7 @@ const Navbar = ({role}: {role : UserRole}) => {
 
     return (
         <div>
-            <div className={`${isOpen || !isTop ? "bg-primary-200" : "bg-primary-200/0"} z-30 fixed w-screen h-fit`}>
+            <div className={`${showNavbarBackground ? "bg-primary-200" : "bg-primary-200/0"} z-30 fixed w-screen h-fit`}>
                 <div className=' container py-4 lg:py-6 flex justify-between items-center text-Greyscale-100'>
                     <LogoCP />
                     <div>

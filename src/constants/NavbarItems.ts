@@ -1,3 +1,5 @@
+export const shouldShow = ["agents"]
+
 export const navItems = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/aboutUs" },
