@@ -100,3 +100,16 @@ export interface Agent_Testimonials_reply_interface {
     createdAt: Date;
     updatedAt?: Date;
 }
+
+
+/**
+ * Interface representing a message exchanged between two users
+ */
+export interface Message_Interface {
+    _id?: string;           // Optional unique identifier for the message
+    sender_id: string;      // ID of the user sending the message
+    receiver_id: string;    // ID of the user receiving the message
+    message: string;        // Content of the message
+    is_read: boolean;       // Indicates whether the message has been read
+    createdAt: Date;        // Timestamp of when the message was created
+}
