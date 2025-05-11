@@ -14,6 +14,7 @@ import Message from "@/models/message";
 import { LogsActions } from "@/types/enums/generalEnums";
 import { ERROR, MESSAGE } from "@/types/enums/MessageUnum";
 import { Message_Interface } from "@/types/modelTypes";
+import connectDB from "@/utils/connectDB";
 import sendEmail from "@/utils/sendEmail";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -21,8 +22,11 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
 
     try {
+
+        await connectDB()
+
         // Extract data from the request body
-        const { message , receiver_id , sender_id } = await req.json();
+        const { message , receiver_id } = await req.json();
 
         // Validate the message
         if (!message) return NextResponse.json({ error: ERROR.INVALID_DATA }, { status: 500 });
@@ -31,6 +35,9 @@ export async function POST(req: Request) {
         const session = await getServerSession(authOptions);
         if (!session) return NextResponse.json({ error: ERROR.LOGIN }, { status: 401 });
 
+        console.log(session.user);
+        
+
         // Check if the agent exists
         const agent = await Agent.findById(receiver_id);
         if (!agent) return NextResponse.json({ error: ERROR.NO_AGENT }, { status: 401 });
@@ -38,17 +45,17 @@ export async function POST(req: Request) {
         // Construct the new message object
         const newMessage : Message_Interface = {
             receiver_id,
-            sender_id,
+            sender_id : session.user.id,
             message,
             is_read : false,
             createdAt: new Date(),
         };
 
         // Save the message to the database
-        const MESSAGE = await Message.create(newMessage);
+        const msg = await Message.create(newMessage);
 
         // Construct the message URL for the dashboard
-        const MessageUrl = `${process.env.NEXTAUTH_URL}/dashboard/my-messages/${MESSAGE._id}`;
+        const MessageUrl = `${process.env.NEXTAUTH_URL}/dashboard/my-messages/${msg._id}`;
 
         // Construct the email content
         const Emailmessage = `New message by user ${session.user?.email} has been sent to your dashboard, \n` +
@@ -62,17 +69,14 @@ export async function POST(req: Request) {
         await Log.create({
             title: `New message by user ${session.user?.email} has been sent to ${agent.email} agent`,
             action: LogsActions.NEW_MESSAGE,
-            user_id: sender_id,
+            user_id: session.user.id,
             createdAt: new Date(),
         });
 
         // Return the success response
         return NextResponse.json(
-            {
-                message: MESSAGE.NEW_MESSAGE,
-                data: newMessage,
-            },
-            { status: 201 }
+            { message: MESSAGE.NEW_MESSAGE},
+            { status: 200 }
         );
 
     } catch (error) {

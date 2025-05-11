@@ -74,3 +74,11 @@ export interface ArrayFieldsProps_interface {
     name: string;
     lable: string;
 }
+
+
+export interface agentsSendMessageFromProps_interface { 
+    full_name : string , 
+    phone : string | null , 
+    imgSRC: string  | null, 
+    agent_id: string 
+}

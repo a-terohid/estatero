@@ -27,6 +27,6 @@ const LogSchema = new Schema<Message_Interface>({
  * Creates a Mongoose model for message.
  */
 
-const Message = models?.LoMessageg || model("Message", LogSchema);
+const Message = models?.Message || model("Message", LogSchema);
 
 export default Message;
