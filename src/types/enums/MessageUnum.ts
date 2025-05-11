@@ -24,7 +24,8 @@ export enum ERROR {
     INVALID_TOKEN = "Invalid token. Please try again.",
     OTP_REQUIRED = "OTP Code is required!",
     UNAUTHORIZED = "You dont have permission to edit this user.",
-    ALREADY_PROMOTED = "This user alredy promoted to this level"
+    ALREADY_PROMOTED = "This user alredy promoted to this level",
+    NO_AGENT = "There is error in finding agent!"
 }
 
 export enum MESSAGE {
@@ -36,5 +37,6 @@ export enum MESSAGE {
     PROFILE_EDIT = "Your profile edited successfully.",
     NEW_ADMIN = 'new Admin promoted successfully',
     NEW_AGENT = 'new Admin promoted successfully',
+    NEW_MESSAGE = "New message have been sent successfully "
 }
 
