@@ -71,7 +71,7 @@ const Navbar = ({role }: {role : UserRole }) => {
                                 navItems.map(it =><li key={it.href}>
                                     <Link onMouseEnter={it?.children ? () => setPcPageMenue(true) :undefined} className='p-1 flex items-center gap-x-1' href={it.href} >{it.name}{it?.children ? <MdArrowDropDown /> :null }</Link>
                                     {
-                                        PcPageMenue && it?.children ? <div onMouseLeave={ () => setPcPageMenue(false) } className={`z-40 absolute ${isOpen || !isTop ? "bg-primary-200" : "bg-primary-200/0"} px-4 py-5  rounded-b-lg`}>
+                                        PcPageMenue && it?.children ? <div onMouseLeave={ () => setPcPageMenue(false) } className={`z-40 absolute ${showNavbarBackground ? "bg-primary-200" : "bg-primary-200/0"} px-4 py-5  rounded-b-lg`}>
                                             <ul className='flex flex-col gap-y-3'>
                                                 {
                                                     it?.children.map( ch => <li className='hover:cursor-pointer' key={ch.href}><Link href={ch.href}>{ch.name}</Link></li>)
