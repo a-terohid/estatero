@@ -8,6 +8,9 @@ import { RiFootprintFill } from "react-icons/ri";
 import { FaUserFriends } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { FaBuildingUser } from "react-icons/fa6";
+import { TbMessage } from "react-icons/tb";
+import { LuMessagesSquare } from "react-icons/lu";
+
 
 
 
@@ -48,6 +51,20 @@ export const DashboardItems : DashboardItem_interface[] = [
                 children : []
             },
         ]
+    },
+    { 
+        name: "My messages", 
+        href: "/dashboard/my_messages" , 
+        accessibility: [ UserRole.AGENT, UserRole.AGENTADMIN , UserRole.AGENTOWNER],
+        icon : <TbMessage />,
+        children : []
+    },
+    { 
+        name: "All messages", 
+        href: "/dashboard/all_messages" , 
+        accessibility: [ UserRole.OWNER , UserRole.AGENTOWNER],
+        icon : <LuMessagesSquare />,
+        children : []
     },
     { 
         name: "Users", 

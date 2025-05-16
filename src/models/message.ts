@@ -17,6 +17,11 @@ const LogSchema = new Schema<Message_Interface>({
         type: String, 
         required: true, 
     },
+    is_read : {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     createdAt: {
         type: Date,
         required: true, 

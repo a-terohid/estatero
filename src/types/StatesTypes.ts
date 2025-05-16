@@ -119,3 +119,11 @@ export interface UsersPageSearchParams_interface {
     email ?: string
     fullName ?: string
 }
+
+export interface MyMessagesPageSearchParams_interface {
+    page?: string, 
+    sort ?: string,
+    email ?: string
+    startDate ?:string, 
+    endDate ?:string
+}
