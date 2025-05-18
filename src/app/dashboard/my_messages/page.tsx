@@ -58,7 +58,7 @@ const page = async ({ searchParams }: { searchParams: MyMessagesPageSearchParams
     if (!user || !validRoles?.includes(user.role as UserRole)) redirect("/dashboard/profile");
 
     // Destructure query params with defaults
-    const { page = "1", sort = "desc", email, startDate, endDate } = searchParams;
+    const { page = "1", sort = "desc", email, startDate, endDate , is_read } = searchParams;
     const sortValue = sort === "asc" ? 1 : -1;
 
     // Date filter
@@ -71,7 +71,7 @@ const page = async ({ searchParams }: { searchParams: MyMessagesPageSearchParams
         }
     } : {};
 
-    // Filter object
+  // Filter object
     const combinedFilter: any = {
         receiver_id: user._id,
         ...dateFilter,
@@ -81,6 +81,14 @@ const page = async ({ searchParams }: { searchParams: MyMessagesPageSearchParams
     if (email) {
         combinedFilter.email = { $regex: email, $options: "i" };
     }
+
+    // is_read filter
+     if (is_read === "true") {
+        combinedFilter.is_read = true;
+    } else if (is_read === "false") {
+        combinedFilter.is_read = false;
+    }
+
 
     const messagesPerPage = 15;
     const currentPage = Math.max(parseInt(page), 1);

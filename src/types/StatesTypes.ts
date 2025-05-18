@@ -126,4 +126,14 @@ export interface MyMessagesPageSearchParams_interface {
     email ?: string
     startDate ?:string, 
     endDate ?:string
+    status ?: string
+    is_read ?: string
+}
+
+
+export interface MyMessagesFilter_interfasce { 
+    sort : 'sort' | 'esc' | "desc",
+    email : string
+    fullName : string
+    is_read: string
 }
