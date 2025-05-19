@@ -20,7 +20,7 @@ const findSender = async (senderId : string)  => {
 
 
 // Component to render a message card with sender information and message content
-const MessageCard = async ({msg} : {msg : Message_Interface}) => {
+const MessageCard = async ({msg , my} : {msg : Message_Interface , my:boolean}) => {
 
     const { _id , sender_id , message , is_read } = msg;
 
@@ -53,7 +53,7 @@ const MessageCard = async ({msg} : {msg : Message_Interface}) => {
                 {/* Expandable content with message details and 'Mark as Read' action */}
                 <div className='scale-up-ver-top mt-3 flex flex-col gap-y-1 ml-2'>
                     <p className=''>{message}</p>
-                    { !is_read &&  <ReadMessage _id={_id || ""} /> }
+                    { my && !is_read &&  <ReadMessage _id={_id || ""} /> }
                 </div>
             </details>
         </div>
