@@ -113,3 +113,11 @@ export interface Message_Interface {
     is_read: boolean;       // Indicates whether the message has been read
     createdAt: Date;        // Timestamp of when the message was created
 }
+
+
+
+export interface FAQ_Interface {
+    question: string
+    answer : string
+    _id ?: string
+}
