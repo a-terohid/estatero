@@ -27,6 +27,7 @@ export enum ERROR {
     ALREADY_PROMOTED = "This user alredy promoted to this level",
     NO_AGENT = "There is error in finding agent!",
     NO_MESSAGE = "There is error in finding message!",
+    CANT_FIND_FAQ = "This question cannot be found!",
     INVALID_MESSAGE = "This message is not related to you!"
 }
 
