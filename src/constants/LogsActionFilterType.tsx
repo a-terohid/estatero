@@ -41,4 +41,9 @@ export const LogsActionFilters = [
     value: "new message",
     filter: { action: LogsActions.NEW_MESSAGE},
   },
+  {
+    name: "new FAQ",
+    value: "new FAQ",
+    filter: { action: LogsActions.NEW_FAQ},
+  },
 ];

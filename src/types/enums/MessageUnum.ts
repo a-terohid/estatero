@@ -41,6 +41,9 @@ export enum MESSAGE {
     NEW_AGENT = 'new Admin promoted successfully',
     NEW_MESSAGE = "New message have been sent successfully ",
     READ_MESSAGE = " message have been read successfully ",
-    READ_ALL_MESSAGE = "All message have been read successfully "
+    READ_ALL_MESSAGE = "All message have been read successfully ",
+    FAQ_DELETE = "Question deleted successfully!",
+    FAQ_EDIT = "Question edtited successfully!",
+    NEW_FAQ = "New F&Q added successfully!",
 }
 
