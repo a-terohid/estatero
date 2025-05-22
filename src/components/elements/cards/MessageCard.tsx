@@ -2,9 +2,10 @@ import Agent from '@/models/agent';
 import User from '@/models/user';
 import { Message_Interface } from '@/types/modelTypes';
 import connectDB from '@/utils/connectDB';
-import ImageWithFallback from './ImageWithFallback';
 import { MdArrowDropDown } from 'react-icons/md';
-import ReadMessage from './ReadMessage';
+import ReadMessage from '../buttons/ReadMessage';
+import ImageWithFallback from '../ImageWithFallback';
+
 
 
 // Function to find the sender of a message based on sender ID

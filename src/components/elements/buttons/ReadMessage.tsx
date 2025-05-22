@@ -1,13 +1,15 @@
 "use client"
 
-import toast from "react-hot-toast";
-import Loader from "./Loader";
 import { ERROR } from "@/types/enums/MessageUnum";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { GoRead } from "react-icons/go";
+import Loader from "../Loader";
 
-const ReadAllMessages = () => {
-  const [loading, setLoading] = useState(false);
+
+const ReadMessage = ({_id}: {_id:string}) => {
+
+    const [loading, setLoading] = useState(false);
 
 
     const readHandler = async (e: React.FormEvent) => {
@@ -16,7 +18,7 @@ const ReadAllMessages = () => {
 
         try {
             // Sending the request to the server
-            const res = await fetch(`/api/message/readAll`, {
+            const res = await fetch(`/api/message/${_id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
             });
@@ -39,15 +41,14 @@ const ReadAllMessages = () => {
     };
 
     return (
-        <div className=" w-full flex justify-end">
+        <div className=" w-full flex items-center justify-center mt-3">
         {
 
-            loading ? <Loader w={22} /> : <p onClick={readHandler} className="flex items-center px-2 py-1 rounded-md bg-Success-50 gap-x-2 md:text-Body-MD-Small hover:text-Success-25 hover:bg-Success-200"><GoRead/> Read All</p>
+            loading ? <Loader w={22} /> : <p onClick={readHandler} className="flex items-center px-2 py-1 rounded-md bg-Success-50 gap-x-2 md:text-Body-MD-Small hover:text-Success-25 hover:bg-Success-200"><GoRead/> Read it</p>
                                 
         } 
         </div>
     );
 };
 
-
-export default ReadAllMessages;
+export default ReadMessage;

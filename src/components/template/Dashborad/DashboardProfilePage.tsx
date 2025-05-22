@@ -5,7 +5,7 @@ import { MdLockReset } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import React from 'react';
 import ImageWithFallback from '@/elements/ImageWithFallback';
-import LogoutButton from '@/elements/LogoutButton';
+import LogoutButton from '@/elements/buttons/LogoutButton';
 import { mask } from '@/utils/mask';
 
 // DashboardProfilePage displays user's profile information such as email, name, role, etc.

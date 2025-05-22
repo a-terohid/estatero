@@ -1,9 +1,9 @@
 import { Agent_Interface } from '@/types/modelTypes';
 import React from 'react';
-import ImageWithFallback from './ImageWithFallback';
 import { BiPhoneCall } from "react-icons/bi";
 import Link from 'next/link';
 import { MdOutlineMail } from "react-icons/md";
+import ImageWithFallback from '../ImageWithFallback';
 
 /**
  * AgentsCard Component

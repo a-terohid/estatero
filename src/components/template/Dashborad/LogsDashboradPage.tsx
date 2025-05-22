@@ -1,6 +1,7 @@
-import LogFilterSection from "@/elements/LogFilterSection";
-import Logs_Card from "@/elements/Logs_Card";
-import PaginationButtons from "@/elements/PaginationButtons";
+
+import PaginationButtons from "@/elements/buttons/PaginationButtons";
+import Logs_Card from "@/elements/cards/Logs_Card";
+import LogFilterSection from "@/elements/filter/LogFilterSection";
 import { LogDashboradPage_interface } from "@/types/pagesProps";
 
 // Logs Dashboard Page Component

@@ -1,7 +1,7 @@
-import MessageCard from '@/elements/MessageCard';
-import MyMessageFilterSection from '@/elements/MyMessageFilterSection';
-import PaginationButtons from '@/elements/PaginationButtons';
-import ReadAllMessages from '@/elements/ReadAllMessages';
+import PaginationButtons from '@/elements/buttons/PaginationButtons';
+import ReadAllMessages from '@/elements/buttons/ReadAllMessages';
+import MessageCard from '@/elements/cards/MessageCard';
+import MyMessageFilterSection from '@/elements/filter/MyMessageFilterSection';
 import { Message_Interface } from '@/types/modelTypes';
 import { MymessagesPage_interface } from '@/types/pagesProps';
 import React from 'react';

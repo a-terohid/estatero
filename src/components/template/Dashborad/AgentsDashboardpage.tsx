@@ -1,8 +1,8 @@
-import DashboardUserCard from '@/elements/DashboardUserCard';
-import PaginationButtons from '@/elements/PaginationButtons';
-import UsersFilterSection from '@/elements/UsersFilterSection';
+import DashboardUserCard from '@/elements/cards/DashboardUserCard';
+import PaginationButtons from '@/elements/buttons/PaginationButtons';
 import { UsersDashboradPage_interface } from '@/types/pagesProps';
 import React from 'react';
+import UsersFilterSection from '@/elements/filter/UsersFilterSection';
 
 const AgentsDashboardpage = ({ users, currentPage, totalPages }: UsersDashboradPage_interface ) => {
     return (

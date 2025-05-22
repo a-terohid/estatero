@@ -1,6 +1,7 @@
-import MessageCard from '@/elements/MessageCard';
-import MyMessageFilterSection from '@/elements/MyMessageFilterSection';
-import PaginationButtons from '@/elements/PaginationButtons';
+
+import PaginationButtons from '@/elements/buttons/PaginationButtons';
+import MessageCard from '@/elements/cards/MessageCard';
+import MyMessageFilterSection from '@/elements/filter/MyMessageFilterSection';
 import { MymessagesPage_interface } from '@/types/pagesProps';
 import React from 'react';
 

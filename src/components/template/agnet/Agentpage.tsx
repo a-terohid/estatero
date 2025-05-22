@@ -1,4 +1,5 @@
-import AgentsCard from '@/elements/AgentsCard';
+
+import AgentsCard from '@/elements/cards/AgentsCard';
 import { Agent_Interface } from '@/types/modelTypes';
 import React from 'react';
 
