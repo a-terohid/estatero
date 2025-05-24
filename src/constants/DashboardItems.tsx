@@ -7,12 +7,9 @@ import { MdLockReset } from "react-icons/md";
 import { RiFootprintFill } from "react-icons/ri";
 import { FaUserFriends } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
-import { FaBuildingUser } from "react-icons/fa6";
+import { FaBuildingUser, FaFileCircleQuestion, FaRegCircleQuestion } from "react-icons/fa6";
 import { TbMessage } from "react-icons/tb";
 import { LuMessagesSquare } from "react-icons/lu";
-
-
-
 
 
 export const DashboardItems : DashboardItem_interface[] = [
@@ -29,13 +26,6 @@ export const DashboardItems : DashboardItem_interface[] = [
         accessibility: [UserRole.ALL],
         icon : <IoMdPerson/>,
         children : [
-            // { 
-            //     name: "Profile", 
-            //     href: "/dashboard/profile" , 
-            //     accessibility: [UserRole.ALL],
-            //     icon : <IoMdPerson/>,
-            //     children : []
-            // },
             { 
                 name: "Edit Profile", 
                 href: "/dashboard/profile/edit" , 
@@ -86,6 +76,21 @@ export const DashboardItems : DashboardItem_interface[] = [
         accessibility: [ UserRole.OWNER , UserRole.AGENTOWNER],
         icon : <RiAdminFill />,
         children : []
+    },
+    { 
+        name: "FAQs", 
+        href: "/dashboard/FAQs" , 
+        accessibility: [UserRole.OWNER ,UserRole.AGENTOWNER ],
+        icon : <FaRegCircleQuestion />,
+        children : [
+            { 
+                name: "Add FAQ", 
+                href: "/dashboard/FAQs/add" , 
+                accessibility: [UserRole.OWNER ,UserRole.AGENTOWNER ],
+                icon : <FaFileCircleQuestion />,
+                children : []
+            },
+        ]
     },
     { 
         name: "Logs", 
