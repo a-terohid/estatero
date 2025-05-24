@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Add FAQ | Dashboard",
     description: "Create new FAQs for the help center and improve user experience.",
-    url: "https://yourdomain.com/dashboard/faqs/add",
+    url: "https://estatero.vercel.app/dashboard/FAQs/add",
     type: "website",
     images: [
       {

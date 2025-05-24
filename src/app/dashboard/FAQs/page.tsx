@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FAQs | Dashboard",
     description: "Explore and manage all FAQs in your dashboard.",
-    url: "https://yourdomain.com/dashboard/faqs", // Replace with actual domain
+    url: "https://estatero.vercel.app/dashboard/FAQs", // Replace with actual domain
     type: "website",
     images: [
       {
