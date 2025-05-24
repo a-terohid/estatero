@@ -32,7 +32,7 @@ const EditFAQPage = ({ FAQ }: { FAQ: FAQ_Interface }) => {
 
     try {
       // Send PATCH request to update FAQ
-      const res = await fetch("/api/FAQ/edit", {
+      const res = await fetch(`/api/FAQ/edit/${FAQ._id}`, {
         method: "PATCH",
         body: JSON.stringify({ ...data, _id: FAQ._id }), // Include ID for identification
         headers: { "Content-Type": "application/json" },
