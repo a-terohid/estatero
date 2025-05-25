@@ -44,6 +44,7 @@ export enum MESSAGE {
     NEW_MESSAGE = "New message have been sent successfully ",
     NEW_FORM = "New message have been sent successfully ",
     READ_MESSAGE = " message have been read successfully ",
+    READ_FORM = "form message have been read successfully ",
     READ_ALL_MESSAGE = "All message have been read successfully ",
     READ_ALL_Form = "All from message have been read successfully ",
     FAQ_DELETE = "Question deleted successfully!",
