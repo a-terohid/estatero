@@ -26,7 +26,8 @@ export enum ERROR {
     UNAUTHORIZED = "You dont have permission to edit this user.",
     ALREADY_PROMOTED = "This user alredy promoted to this level",
     NO_AGENT = "There is error in finding agent!",
-    NO_MESSAGE = "There is error in finding message!",
+    NO_MESSAGE = "There is error in finding messages!",
+    NO_FORM = "There is error in finding form messages!",
     CANT_FIND_FAQ = "This question cannot be found!",
     INVALID_MESSAGE = "This message is not related to you!"
 }
@@ -44,6 +45,7 @@ export enum MESSAGE {
     NEW_FORM = "New message have been sent successfully ",
     READ_MESSAGE = " message have been read successfully ",
     READ_ALL_MESSAGE = "All message have been read successfully ",
+    READ_ALL_Form = "All from message have been read successfully ",
     FAQ_DELETE = "Question deleted successfully!",
     FAQ_EDIT = "Question edtited successfully!",
     NEW_FAQ = "New F&Q added successfully!",
