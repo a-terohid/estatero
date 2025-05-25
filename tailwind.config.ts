@@ -28,6 +28,7 @@ const config = {
         'ForgotPassword-texture': "url('/img/ForgotPasswordBG.png')",
         'dashboardBG-texture': "url('/img/dashboardBG.png')",
         'agentPage-texture': "url('/img/AgentBanner.png')",
+        'FAQPage-texture': "url('/img/FAQBanner.png')",
       },
       colors: styleGuide_colors
     },
