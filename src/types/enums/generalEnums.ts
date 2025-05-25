@@ -15,6 +15,7 @@ export enum LogsActions  {
     NEW_ADMIN = 'new Admin Promoted',
     NEW_AGENT = 'new Agent Promoted',
     NEW_MESSAGE = 'new Message Sended',
+    NEW_FORM = 'new Form Message Sended',
     NEW_FAQ = 'new FAQ added',
     EDIT_FAQ = 'a FAQ edited',
     DELETE_FAQ = 'a FAQ deleted',

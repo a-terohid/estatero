@@ -42,6 +42,11 @@ export const LogsActionFilters = [
     filter: { action: LogsActions.NEW_MESSAGE},
   },
   {
+    name: "new from message",
+    value: "new form message",
+    filter: { action: LogsActions.NEW_FORM},
+  },
+  {
     name: "FAQ",
     value: "FAQ",
     filter: { action: { $in: [LogsActions.NEW_FAQ, LogsActions.EDIT_FAQ , LogsActions.DELETE_FAQ] } },
@@ -61,4 +66,5 @@ export const LogsActionFilters = [
     value: "delete FAQ",
     filter: { action: LogsActions.DELETE_FAQ},
   },
+
 ];

@@ -121,3 +121,16 @@ export interface FAQ_Interface {
     answer : string
     _id ?: string
 }
+
+
+export interface Form_Interface {
+    _id?: string;           // Optional unique identifier for the message
+    full_name : string;
+    email : string;
+    location: string
+    subject ?: string, 
+    message: string;        // Content of the message
+    is_read: boolean;       // Indicates whether the message has been read
+    createdAt: Date;        // Timestamp of when the message was created
+}
+
