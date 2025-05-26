@@ -34,7 +34,7 @@ const formSchema = new Schema<Form_Interface>({
         type: Date,
         required: true, 
     }
-}, { collection: "messages", timestamps: true }); 
+}, { collection: "Form", timestamps: true }); 
 
 /**
  * Creates a Mongoose model for message.
