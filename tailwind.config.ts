@@ -29,6 +29,7 @@ const config = {
         'dashboardBG-texture': "url('/img/dashboardBG.png')",
         'agentPage-texture': "url('/img/AgentBanner.png')",
         'FAQPage-texture': "url('/img/FAQBanner.png')",
+        'ContactPage-texture': "url('/img/ContactBanner.png')",
       },
       colors: styleGuide_colors
     },
