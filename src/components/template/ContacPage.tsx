@@ -19,7 +19,7 @@ const ContacPage = () => {
 
                     {/* Short description under the title */}
                     <p className="text-Body-RL-Medium md:text-Body-RL-Large md:w-1/2 text-Greyscale-100">
-                        Need assistance? Contact us today for personalized support with your real estate needs. Whether you're buying, selling, or renting, 
+                        Need assistance? Contact us today for personalized support with your real estate needs. Whether you re buying, selling, or renting, 
                     </p>
                 </div>
             </div>
@@ -31,7 +31,7 @@ const ContacPage = () => {
                     <div className='lg:w-1/2'>
                         <h3 className='text-Heading-4 md:text-Heading-2 lg:text-Heading-1'>Contact Our Real Estate Experts</h3>
                         <p className='text-Body-RL-Medium md:text-Body-RL-Large mt-4'>
-                            If you're looking for your dream home, need help selling your property, or simply have questions about the market, our team is here to assist you. 
+                            If you re looking for your dream home, need help selling your property, or simply have questions about the market, our team is here to assist you. 
                         </p>
 
                         {/* List of benefits/services */}
