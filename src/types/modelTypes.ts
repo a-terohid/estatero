@@ -1,4 +1,4 @@
-import { LogsActions, UserRole } from "./enums/generalEnums";
+import { LogsActions, property_Categories, property_interior_details_features, property_other_features, property_outdoor_details_features, property_Status, property_TAGS, Property_Types, property_utilities_central_features, UserRole } from "./enums/generalEnums";
 
 /**
  * Interface representing a system log entry
@@ -133,4 +133,56 @@ export interface Form_Interface {
     is_read: boolean;       // Indicates whether the message has been read
     createdAt: Date;        // Timestamp of when the message was created
 }
+
+export interface Property_location_interface {
+        country : string
+        state : string
+        city : string,
+        zipcode : string
+        street : string
+        unparsedAddress : string
+        coordinates : {
+            Latitude : string
+            Longitude : string
+        }
+    }
+
+export interface Property_Interface {
+    _id ?: string
+    title : string
+    description : string
+    price : number
+    property_type : Property_Types
+    property_Category: property_Categories
+    area : number
+    property_size_unit: "sqm" | "sqft" 
+    bedrooms : number
+    bathrooms : number
+    parking_spaces : number
+    year_built : string
+    Agents_id : string[]
+    status : property_Status
+    Location : Property_location_interface
+    tags : property_TAGS,
+    thumbnail : string,
+    images : string[]
+    floor_plan : string
+    published : boolean
+    createdAt: Date;
+    updatedAt?: Date;
+    PublishedBY : {
+        _id: string,
+        email : string
+    }
+    Rejected : boolean
+    RejectNUM: number
+    facts_features : {
+        F_description : string,
+        outdoor_details : property_outdoor_details_features[],
+        interior_details : property_interior_details_features[]
+        utilities_central : property_utilities_central_features[]
+        other : property_other_features[]
+    }
+}
+
 
