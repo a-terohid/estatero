@@ -48,7 +48,7 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                                     <li key={item.href}>
                                         {/* render using RenderDashboardMenuItem */}
                                         {
-                                             <RenderDashboardMenuItem item={item} />  
+                                             <RenderDashboardMenuItem item={item} role={role} />  
                                             
                                         }
                                     </li> : null)  /* Only show items that the user has access to */

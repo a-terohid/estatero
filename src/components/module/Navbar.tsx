@@ -58,7 +58,9 @@ const Navbar = ({role }: {role : UserRole }) => {
  
  
      // Toggle menu handler
-     const handler = () => setIsOpen(!isOpen);
+    const handler = () => setIsOpen(!isOpen);
+
+    
 
     return (
         <div>
@@ -133,15 +135,13 @@ const Navbar = ({role }: {role : UserRole }) => {
                                          status == "authenticated"  ? <div>
                                             <ul>
                                             {
+
+                                                
                                                 DashboardItems.map( (item: DashboardItem_interface) => 
                                                     item.accessibility.includes(UserRole.ALL) || item.accessibility.includes(role as UserRole) ? 
                                                     <li key={item.href}>
                                                         {/* If the menu item has children, render using RenderDashboardMenuItem */}
-                                                        {
-                                                            item?.children.length ?  <RenderDashboardNavbarItem item={item} />  
-                                                            :
-                                                            <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.icon}{item.name}</Link>  /* Simple link for items without children */
-                                                        }
+                                                             <RenderDashboardNavbarItem item={item} role={role} />  
                                                     </li> : null)  /* Only show items that the user has access to */
                                             }
                                             </ul>

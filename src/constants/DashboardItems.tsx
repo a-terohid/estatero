@@ -3,7 +3,7 @@ import { DashboardItem_interface } from "@/types/generalTypes";
 import { IoMdPerson } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { MdLockReset } from "react-icons/md";
+import { MdAddHomeWork, MdHomeWork, MdLockReset } from "react-icons/md";
 import { RiFootprintFill } from "react-icons/ri";
 import { FaUserFriends } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
@@ -48,6 +48,21 @@ export const DashboardItems : DashboardItem_interface[] = [
         accessibility: [ UserRole.AGENT, UserRole.AGENTADMIN , UserRole.AGENTOWNER],
         icon : <TbMessage />,
         children : []
+    },
+    { 
+        name: "Properties", 
+        href: "/dashboard/properties" , 
+        accessibility: [UserRole.OWNER ,UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.ADMIN, UserRole.AGENT ],
+        icon : <MdHomeWork />,
+        children : [
+            { 
+                name: "Add property", 
+                href: "/dashboard/Properties/add" , 
+                accessibility: [UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.AGENT ],
+                icon : <MdAddHomeWork />,
+                children : []
+            },
+        ]
     },
     { 
         name: "All messages", 

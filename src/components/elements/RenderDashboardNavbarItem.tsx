@@ -1,13 +1,21 @@
+import { UserRole } from '@/types/enums/generalEnums';
 import { DashboardItem_interface } from '@/types/generalTypes';
 import Link from 'next/link';
 import React from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
 
-const RenderDashboardNavbarItem = ({item} : {item: DashboardItem_interface}) => {
+const RenderDashboardNavbarItem = ({item , role} : {item: DashboardItem_interface , role:string}) => {
+
+      let numOfValidChild = 0
+        for( const ch of item?.children ) {
+            if(ch.accessibility.includes(UserRole.ALL) || ch.accessibility.includes(role as UserRole) ) numOfValidChild++
+        }   
+    
+        let validChild = numOfValidChild === 0 ? false : true
     return (
         <div className=''>
-            {/* Details tag used for collapsible menu */}
-            <details className="group">
+           {
+                (item?.children.length && validChild )  ? <details className="group">
                 {/* Summary section, clickable to toggle the dropdown */}
                 <summary className="flex items-center justify-between cursor-pointer">
                     {/* Link to the main menu item */}
@@ -30,7 +38,8 @@ const RenderDashboardNavbarItem = ({item} : {item: DashboardItem_interface}) => 
                         }
                     </ul>
                 </div>
-            </details>
+            </details> : <Link className='p-1 flex items-center gap-x-1' href={item.href}>{item.icon}{item.name}</Link> 
+           }
         </div>
     );
 };
