@@ -29,7 +29,8 @@ export enum ERROR {
     NO_MESSAGE = "There is error in finding messages!",
     NO_FORM = "There is error in finding form messages!",
     CANT_FIND_FAQ = "This question cannot be found!",
-    INVALID_MESSAGE = "This message is not related to you!"
+    INVALID_MESSAGE = "This message is not related to you!",
+    INVALID_FORMAT = "Invalid file format" 
 }
 
 export enum MESSAGE {
@@ -42,6 +43,7 @@ export enum MESSAGE {
     NEW_ADMIN = 'new Admin promoted successfully',
     NEW_AGENT = 'new Admin promoted successfully',
     NEW_MESSAGE = "New message have been sent successfully ",
+    NEW_PROPERTY = "New property added successfully ",
     NEW_FORM = "New message have been sent successfully ",
     READ_MESSAGE = " message have been read successfully ",
     READ_FORM = "form message have been read successfully ",

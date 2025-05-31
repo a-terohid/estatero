@@ -166,7 +166,8 @@ export interface Property_Interface {
     tags : property_TAGS,
     thumbnail : string,
     images : string[]
-    floor_plan : string
+    images_dir : string
+    floor_plan ?: string
     published : boolean
     createdAt: Date;
     updatedAt?: Date;

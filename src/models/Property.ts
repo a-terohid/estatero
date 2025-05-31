@@ -63,18 +63,19 @@ const PropertySchema = new Schema<Property_Interface>(
       enum: Object.values(property_TAGS),
       required: true,
     },
-    thumbnail: { type: String, required: true },
-    images: [{ type: String, required: true }],
-    floor_plan: { type: String, required: true },
-    published: { type: Boolean, required: true },
+    thumbnail: { type: String, required: false },
+    images: [{ type: String, required: false }],
+    images_dir: { type: String, required: false },
+    floor_plan: { type: String, required: false },
+    published: { type: Boolean, required: true , default : false },
 
     PublishedBY: {
-      _id: { type: String, required: true },
-      email: { type: String, required: true },
+      _id: { type: String, required: true , default : '' },
+      email: { type: String, required: true , default: "" },
     },
 
-    Rejected: { type: Boolean, required: true },
-    RejectNUM: { type: Number, required: true },
+    Rejected: { type: Boolean, required: true , default : false },
+    RejectNUM: { type: Number, required: true , default : 0 },
 
     facts_features: {
       F_description: { type: String, required: true },
