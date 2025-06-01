@@ -1,7 +1,7 @@
 import React from 'react';
 import INPUT from '../INPUT';
 
-const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
+const LocationForm = ({data , locationHandler , CordinatesHandler , DATA_Error}:any) => {
 
     const {country , state , city , zipcode , street , unparsedAddress , coordinates} = data.Location
     const {  Latitude , Longitude } = coordinates
@@ -16,6 +16,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter country here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.country || ''}
                 />
                 <INPUT
                     label="State:"
@@ -25,6 +26,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter state here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.state || ''}
                 />
                 <INPUT
                     label="City:"
@@ -34,6 +36,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter city here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.city || ''}
                 />
                 <INPUT
                     label="Zipcode:"
@@ -43,6 +46,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter zipcode here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.zipcode || ''}
                 />
                 <INPUT
                     label="Street:"
@@ -52,6 +56,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter street here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.street || ''}
                 />
                 <INPUT
                     label="UnparsedAddress:"
@@ -61,6 +66,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter unparsedAddress here"
                     changeHandler={locationHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.unparsedAddress || ''}
                 />
                 <INPUT
                     label="Latitude:"
@@ -70,6 +76,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter Latitude here"
                     changeHandler={CordinatesHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.coordinates?.Latitude || ''}
                 />
                 <INPUT
                     label="Longitude:"
@@ -79,6 +86,7 @@ const LocationForm = ({data , locationHandler , CordinatesHandler}:any) => {
                     placeholder="Enter Longitude here"
                     changeHandler={CordinatesHandler}
                     textarea={false}
+                    error={DATA_Error?.Location?.coordinates?.Longitude || ''}
                 />
         </div>
     );

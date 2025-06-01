@@ -5,7 +5,7 @@ import DatePicker from 'react-multi-date-picker';
 import { property_Categories, property_Status, Property_Types } from '@/types/enums/generalEnums';
 import { TiArrowSortedDown } from 'react-icons/ti';
 
-const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
+const Basicform = ({data , changeHandler , DATA_Error}:{data:any , changeHandler:any , DATA_Error:any}) => {
 
     const { title , description , price , property_type ,property_Category , area , property_size_unit ,bedrooms , bathrooms, parking_spaces ,year_built , status  } = data
 
@@ -23,6 +23,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter title here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.title || ''}
                 />
                 <INPUT
                     label="Description:"
@@ -32,6 +33,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter description here"
                     changeHandler={changeHandler}
                     textarea={true}
+                    error={DATA_Error?.description || ''}
                 />
                 <div className='w-full '>
                     <label className="block mb-2 text-Body-MD-Small">Property Type:</label>
@@ -40,7 +42,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             name="property_type" 
                             value={property_type} 
                             onChange={changeHandler} 
-                            className="appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall">
+                            className={`appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border ${DATA_Error?.property_type ? 'border-Error-100' : 'border-Greyscale-100'} rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall`}>
                                 <option value="" disabled>Select a property type</option>
                                 { propertyTypesOptions.map((type) => (
                                     <option key={type} value={type}>{type}</option>
@@ -50,6 +52,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             <TiArrowSortedDown />
                         </div>
                     </div>
+                    { DATA_Error?.property_type ? <span className='text-Body-RL-XSmall ml-4 text-Error-100'>{DATA_Error.property_type}</span> : null}
                 </div>
                 <div className='w-full '>
                     <label className="block mb-2 text-Body-MD-Small">Property category:</label>
@@ -58,7 +61,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             name="property_Category" 
                             value={property_Category} 
                             onChange={changeHandler} 
-                            className="appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall">
+                            className={`appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border ${DATA_Error?.property_Category ? 'border-Error-100' : 'border-Greyscale-100'} rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall`}>
                                 <option value="" disabled>Select a property category</option>
                                 { propertyCategoryOptions.map((type) => (
                                     <option key={type} value={type}>{type}</option>
@@ -68,6 +71,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             <TiArrowSortedDown />
                         </div>
                     </div>
+                    { DATA_Error?.property_Category ? <span className='text-Body-RL-XSmall ml-4 text-Error-100'>{DATA_Error.property_Category}</span> : null}
                 </div>
                 <div className='w-full '>
                     <label className="block mb-2 text-Body-MD-Small">Status:</label>
@@ -76,7 +80,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             name="status" 
                             value={status} 
                             onChange={changeHandler} 
-                            className="appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall">
+                            className={`appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border ${DATA_Error.status ? 'border-Error-100' : 'border-Greyscale-100'} rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall`}>
                                 <option value="" disabled>Select a status</option>
                                 { statusOptions.map((type) => (
                                     <option key={type} value={type}>{type}</option>
@@ -86,6 +90,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             <TiArrowSortedDown />
                         </div>
                     </div>
+                     { DATA_Error?.status ? <span className='text-Body-RL-XSmall ml-4 text-Error-100'>{DATA_Error.status}</span> : null}
                 </div>
                 <INPUT
                     label="Price:"
@@ -95,6 +100,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter price here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.price || ''}
                 />
                 <INPUT
                     label="Area:"
@@ -104,6 +110,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter area here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.area || ''}
                 />
                 <div className='w-full '>
                     <label className="block mb-2 text-Body-MD-Small">property size unit:</label>
@@ -112,7 +119,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                             name="property_size_unit" 
                             value={property_size_unit} 
                             onChange={changeHandler} 
-                            className="appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall">
+                            className={`appearance-none w-full lg:text-Body-RL-Small p-3 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall`}>
                                 <option value="" disabled>Select size unit</option>
                                 <option value="sqm" >sqm</option>
                                 <option value="sqft" >sqft</option>
@@ -131,6 +138,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter bedrooms here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.bedrooms || ''}
                 />
                 <INPUT
                     label="Bathrooms:"
@@ -140,6 +148,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter bathrooms here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.bathrooms || ''}
                 />
                 <INPUT
                     label="Parking spaces:"
@@ -149,6 +158,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter parking spaces here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.parking_spaces || ''}
                 />
                 <INPUT
                     label="Year built:"
@@ -158,6 +168,7 @@ const Basicform = ({data , changeHandler}:{data:any , changeHandler:any}) => {
                     placeholder="Enter Year built here"
                     changeHandler={changeHandler}
                     textarea={false}
+                    error={DATA_Error?.year_built || ''}
                 />
         </div>
     );

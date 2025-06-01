@@ -8,9 +8,11 @@ import TagForm from "@/elements/addPropertyFormTabs/TagForm";
 import Loader from "@/elements/Loader";
 
 import { ERROR } from "@/types/enums/MessageUnum";
+import { propertyFormValidation } from "@/utils/propertyFormValidation";
+import { propertyFormValidationResponse } from "@/utils/propertyFormValidationResponse";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const AddPropretyPage = () => {
@@ -52,6 +54,37 @@ const AddPropretyPage = () => {
             other: [],
         }
     });
+
+     const [DATA_Error , setDataError] = useState({
+        title: "", description: "", price: 0,
+        property_type: "", property_Category: "", area: '',
+        bedrooms: '', bathrooms: '', parking_spaces: '', year_built: "",
+        status: "",
+        Location: {
+            country: "", state: "", city: "", zipcode: "", street: "", unparsedAddress: "",
+            coordinates: { Latitude: "", Longitude: "" }
+        },
+        tags: [],
+        facts_features: {
+            F_description: '',
+            outdoor_details: [],
+            interior_details: [],
+            utilities_central: [],
+            other: [],
+        }
+    });
+
+    useEffect(() => {
+        console.log(hasMounted);
+        
+            if (!hasMounted.current) {
+                hasMounted.current = true;
+                return
+            }
+    
+            setDataError(propertyFormValidation(data, DATA_Error));
+    
+    }, [data]);
 
     // Switch form tab
     const switchTab = (tab: typeof activeTab) => setActiveTab(tab);
@@ -178,6 +211,14 @@ const AddPropretyPage = () => {
         setLoading(true);
         setUploadProgress(0);
 
+        const { isValid , response } = propertyFormValidationResponse(data)
+
+        if( !isValid ){
+            toast.error(response);
+            setLoading(false);
+            return
+        }
+
         const formData = new FormData();
         formData.append("data", JSON.stringify(data));
 
@@ -232,10 +273,10 @@ const AddPropretyPage = () => {
 
             {/* Active tab content */}
             <div>
-                {activeTab === "basic" && <Basicform data={data} changeHandler={changeHandler} />}
-                {activeTab === "location" && <LocationForm data={data} locationHandler={handleLocationChange} CordinatesHandler={handleCoordinatesChange} />}
-                {activeTab === "features" && <Facts_featuresForms data={data} toggleFeatureCheckbox={toggleFeatureCheckbox} addFeatureItem={handleFeaturesTextChange} />}
-                {activeTab === "tag" && <TagForm data={data} handler={handleTagChange} />}
+                {activeTab === "basic" && <Basicform data={data} DATA_Error={DATA_Error} changeHandler={changeHandler} />}
+                {activeTab === "location" && <LocationForm data={data} DATA_Error={DATA_Error} locationHandler={handleLocationChange} CordinatesHandler={handleCoordinatesChange} />}
+                {activeTab === "features" && <Facts_featuresForms data={data} DATA_Error={DATA_Error} toggleFeatureCheckbox={toggleFeatureCheckbox} addFeatureItem={handleFeaturesTextChange} />}
+                {activeTab === "tag" && <TagForm data={data} DATA_Error={DATA_Error} handler={handleTagChange} />}
                 {activeTab === "media" && <MediaForm prop={{
                     thumbnail,
                     thumbnail_Preview,

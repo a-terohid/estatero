@@ -2,7 +2,7 @@ import React from 'react';
 import INPUT from '../INPUT';
 import { property_interior_details_features, property_other_features, property_outdoor_details_features, property_utilities_central_features } from '@/types/enums/generalEnums';
 
-const Facts_featuresForms = ({data , addFeatureItem , toggleFeatureCheckbox}:any) => {
+const Facts_featuresForms = ({data , addFeatureItem , toggleFeatureCheckbox , DATA_Error}:any) => {
 
     const {F_description , outdoor_details, interior_details, utilities_central, other}  =  data.facts_features
 
@@ -21,6 +21,7 @@ const Facts_featuresForms = ({data , addFeatureItem , toggleFeatureCheckbox}:any
                     placeholder="Enter description here"
                     changeHandler={addFeatureItem}
                     textarea={true}
+                    error={DATA_Error?.facts_features.F_description || ''}
                 />
                <div>
                     <h3 className=" mb-2 text-Body-MD-Small">Outdoor Features:</h3>

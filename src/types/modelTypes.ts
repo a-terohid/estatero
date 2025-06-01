@@ -163,7 +163,7 @@ export interface Property_Interface {
     Agents_id : string[]
     status : property_Status
     Location : Property_location_interface
-    tags : property_TAGS,
+    tags ?: property_TAGS,
     thumbnail : string,
     images : string[]
     images_dir : string
@@ -171,7 +171,7 @@ export interface Property_Interface {
     published : boolean
     createdAt: Date;
     updatedAt?: Date;
-    PublishedBY : {
+    PublishedBY ?: {
         _id: string,
         email : string
     }

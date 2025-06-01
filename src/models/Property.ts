@@ -61,7 +61,7 @@ const PropertySchema = new Schema<Property_Interface>(
     tags: [{
       type: String,
       enum: Object.values(property_TAGS),
-      required: true,
+      required: false,
     }],
     thumbnail: { type: String, required: false },
     images: [{ type: String, required: false }],
