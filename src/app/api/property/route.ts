@@ -42,14 +42,14 @@ export async function POST(req: Request) {
 
         // Destructure fields from the parsed property object
         const {
-            title, description, price, property_type, are, property_size_unit,
+            title, description, price, property_type,property_Category, area, property_size_unit,
             bedrooms, bathrooms, parking_spaces, year_built, status,
             Location, tags, facts_features
         } = parsedData;
 
         // Check that all required fields exist
         const requiredFields = [
-            title, description, price, property_type, are, property_size_unit,
+            title, description, price, property_type, property_Category, area, property_size_unit,
             bedrooms, bathrooms, parking_spaces, year_built, status, Location
         ];
 
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
 
         // Create new property document in MongoDB
         const newProperty = await Property.create({
-            title, description, price, property_type, are, property_size_unit,
+            title, description, price, property_type, property_Category, area, property_size_unit,
             bedrooms, bathrooms, parking_spaces, year_built,
             Agents_id: [session.user.id], // Link to the current agent
             status, Location, tags, facts_features,
@@ -113,6 +113,7 @@ export async function POST(req: Request) {
 
         // Add property to agent's listed properties
         agnet.properties_listed = [...agnet.properties_listed, newProperty._id];
+        await agnet.save();
 
         // Log the action for auditing
         await Log.create({

@@ -57,7 +57,7 @@ export const DashboardItems : DashboardItem_interface[] = [
         children : [
             { 
                 name: "Add property", 
-                href: "/dashboard/Properties/add" , 
+                href: "/dashboard/properties/add" , 
                 accessibility: [UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.AGENT ],
                 icon : <MdAddHomeWork />,
                 children : []

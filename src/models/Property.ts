@@ -58,11 +58,11 @@ const PropertySchema = new Schema<Property_Interface>(
       },
     },
 
-    tags: {
+    tags: [{
       type: String,
       enum: Object.values(property_TAGS),
       required: true,
-    },
+    }],
     thumbnail: { type: String, required: false },
     images: [{ type: String, required: false }],
     images_dir: { type: String, required: false },
@@ -70,12 +70,12 @@ const PropertySchema = new Schema<Property_Interface>(
     published: { type: Boolean, required: true , default : false },
 
     PublishedBY: {
-      _id: { type: String, required: true , default : '' },
-      email: { type: String, required: true , default: "" },
+      _id: { type: String, required: false , default : '' },
+      email: { type: String, required: false , default: "" },
     },
 
-    Rejected: { type: Boolean, required: true , default : false },
-    RejectNUM: { type: Number, required: true , default : 0 },
+    Rejected: { type: Boolean, required: false , default : false },
+    RejectNUM: { type: Number, required: false , default : 0 },
 
     facts_features: {
       F_description: { type: String, required: true },
