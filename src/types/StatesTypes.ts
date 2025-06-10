@@ -137,3 +137,16 @@ export interface MyMessagesFilter_interfasce {
     fullName : string
     is_read: string
 }
+
+
+export interface PropertiesDashboardFilter_interfasce { 
+    sort : 'sort' | 'esc' | "desc",
+    id : string
+    agent : string
+    status : string
+    location : string
+    published : string,
+    property_type : string
+    property_Category : string
+    text_search : string
+}
