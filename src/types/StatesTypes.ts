@@ -150,3 +150,17 @@ export interface PropertiesDashboardFilter_interfasce {
     property_Category : string
     text_search : string
 }
+
+
+export interface PropertiesDashboardSearchParams_interface {
+    page?: string, 
+    sort ?: string,
+    id ?: string
+    agent ?: string
+    status ?: string
+    location ?: string
+    published ?: string,
+    property_type ?: string
+    property_Category ?: string
+    text_search ?: string
+}

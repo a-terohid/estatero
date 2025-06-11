@@ -1,7 +1,8 @@
 import PropertiesDashboradSection from '@/elements/filter/PropertiesDashboradSection';
+import { DashboardProppertiesPage_interface } from '@/types/pagesProps';
 import React from 'react';
 
-const DashboardProperties = ({agents}:any) => {
+const DashboardProperties = ({Properties , currentPage, totalPages , agents , totalproperties } : DashboardProppertiesPage_interface) => {
     return (
         <div className='px-5 py-5 md:px-7'>
             {/* Page title */}
