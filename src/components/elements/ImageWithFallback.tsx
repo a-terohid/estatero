@@ -6,10 +6,18 @@ type Props = {
   src: string;
   alt: string;
   style?: string;
+  type ?: 'profile' | 'thumbnail'
 };
 
-const ImageWithFallback = ({ src, alt, style }: Props) => {
-  const fallbackSrc = "/img/ProfilePicurePlaceHolder2.png";
+const ImageWithFallback = ({ src, alt, style , type }: Props) => {
+  let fallbackSrc;
+
+  if( type == 'thumbnail' ){
+    fallbackSrc = "/img/placeholder_image.webp"
+  } else {
+    fallbackSrc = "/img/ProfilePicurePlaceHolder2.png"
+  }
+  
   const [imgSrc, setImgSrc] = useState(src?.trim() || fallbackSrc);
 
   // If src is empty or only spaces, show fallback from the beginning
@@ -21,9 +29,8 @@ const ImageWithFallback = ({ src, alt, style }: Props) => {
     }
   }, [src]);
 
-  const handleError = () => {
-    setImgSrc(fallbackSrc);
-  };
+  const handleError = () =>  setImgSrc(fallbackSrc);
+
 
   return (
     <img
