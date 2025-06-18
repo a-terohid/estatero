@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import Property from "@/models/Property";
 import connectDB from "@/utils/connectDB";
 import { Property_Interface } from "@/types/modelTypes";
+import PropertyDashboardDetails from "@/template/Dashborad/PropertyDashboardDetails";
+import Agent from "@/models/agent";
 
-export async function generateMetadata(
-  { params: { propertyId } }: { params: { propertyId: string } }
-): Promise<Metadata> {
+export async function generateMetadata({ params: { propertyId } }: { params: { propertyId: string } }): Promise<Metadata> {
   // Connect to MongoDB
   await connectDB();
 
@@ -62,12 +62,23 @@ export async function generateMetadata(
   };
 }
 
-const page = () => {
-    return (
-        <div>
-            properties details
-        </div>
-    );
+const page = async ({ params: { propertyId } }: { params: { propertyId: string } }) => {
+
+    // Connect to MongoDB
+    await connectDB();
+
+    // Find the property by ID from the database
+    const property  = await Property.findById(propertyId);
+
+    // Get all agents from the database
+    const agents = await Agent.find();
+    const agent= agents.filter((ag) => property.Agents_id.includes(ag._id || ''))
+
+    if(!property) return(<div>
+        <h1>Property Not Found</h1>
+    </div>)
+
+    return ( <PropertyDashboardDetails property={property} agent={agent} />);
 };
 
 export default page;

@@ -3,6 +3,7 @@ import "./globals.css";
 import HomeLayout from "@/layout/HomeLayout";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { checkSession } from "@/utils/CheckSession";
+import 'leaflet/dist/leaflet.css';
 
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
