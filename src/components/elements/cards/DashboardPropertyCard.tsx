@@ -2,8 +2,10 @@ import { Agent_Interface, Property_Interface } from '@/types/modelTypes';
 import React from 'react';
 import ImageWithFallback from '../ImageWithFallback';
 import Link from 'next/link';
+import { formatPriceWithSlash } from '@/utils/price';
+import PublishProprety from '../buttons/PublishProprety';
 
-const DashboardPropertyCard = ({property , agent}:{property: Property_Interface , agent:any}) => {
+const DashboardPropertyCard = ({property , agent , userIsAdmin}:{property: Property_Interface , agent:any , userIsAdmin: boolean}) => {
 
     const { thumbnail , description , title , _id , published , Location , price } = property
     const { unparsedAddress } = Location
@@ -23,13 +25,14 @@ const DashboardPropertyCard = ({property , agent}:{property: Property_Interface 
                         }
                     </span></li>
                     <li><span className='text-Body-SM-XSmall md:text-Body-SM-Small'>UnparsedAddress:</span> <span>{unparsedAddress}</span></li>
-                    <li><span className='text-Body-SM-XSmall md:text-Body-SM-Small'>Price:</span> <span>{price}$</span></li>
+                    <li><span className='text-Body-SM-XSmall md:text-Body-SM-Small'>Price:</span> <span>{formatPriceWithSlash(price)} $</span></li>
                     <li><span className='text-Body-SM-XSmall md:text-Body-SM-Small'>Published:</span> <span>{published ? "True" : "False"}</span></li>
                 </ul>
                 
             </div>
-            <div className='flex justify-end mx-auto'>
-                <Link className="bg-primary-100 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/properties/${_id}`}>Review</Link>
+            <div className='flex justify-end mx-auto gap-x-2'>
+                {userIsAdmin && <PublishProprety id={_id} />}
+                <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/properties/${_id}`}>Review</Link>
             </div>
         </div>
     );

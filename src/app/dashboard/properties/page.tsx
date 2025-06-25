@@ -63,6 +63,8 @@ const page = async ({ searchParams }: { searchParams: PropertiesDashboardSearchP
   const validRoles = DashboardItems.find(item => item.name === "Properties")?.accessibility;
   if (!user || !validRoles?.includes(user.role as UserRole)) redirect("/dashboard/profile");
 
+  const userIsAdmin = user.role.includes("Admin") || user.role.includes("Owner");
+
   // Destructure and provide default values to search parameters
   const { page = "1", sort = "desc", id, agent, status, location, published, property_Category, property_type, text_search } = searchParams;
   const sortValue = sort === "asc" ? 1 : -1;
@@ -143,12 +145,13 @@ const page = async ({ searchParams }: { searchParams: PropertiesDashboardSearchP
   const Properties = await Property.find(combinedFilter)
     .skip((clampedPage - 1) * PropertiesPerPage)
     .limit(PropertiesPerPage)
-    .sort({ updatedAt: sortValue });
+    .sort({ createdAt : sortValue });
 
   // Render the DashboardProperties component with data
   return (
     <DashboardProperties 
       agents={agents} 
+      userIsAdmin = {userIsAdmin}
       Properties={Properties}
       totalproperties={totalproperties}
       totalPages={totalPages}

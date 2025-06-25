@@ -1,3 +1,4 @@
+import PublishProprety from '@/elements/buttons/PublishProprety';
 import MyMap from '@/module/Map';
 import Slider from '@/module/Slider';
 import { Agent_Interface, Property_Interface } from '@/types/modelTypes';
@@ -5,9 +6,9 @@ import { formatPriceWithSlash } from '@/utils/price';
 import Link from 'next/link';
 import React from 'react';
 
-const PropertyDashboardDetails = ({property , agent}: {property: Property_Interface , agent: Agent_Interface[]}) => {
+const PropertyDashboardDetails = ({property , agent , userIsAdmin}: {property: Property_Interface , agent: Agent_Interface[] , userIsAdmin: boolean}) => {
 
-    const { title , images , description , price , property_Category , property_type , area , property_size_unit ,
+    const { _id , title , images , description , price , property_Category , property_type , area , property_size_unit ,
         bedrooms , bathrooms , parking_spaces , year_built , status , Location , tags , 
         facts_features , PublishedBY , published ,createdAt , updatedAt
     } = property
@@ -204,6 +205,9 @@ const PropertyDashboardDetails = ({property , agent}: {property: Property_Interf
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div className='mt-8 py-4 border-t border-primary-100 flex items-center justify-center'>
+                {userIsAdmin && <PublishProprety id={_id} />}
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import connectDB from "@/utils/connectDB";
 import { Property_Interface } from "@/types/modelTypes";
 import PropertyDashboardDetails from "@/template/Dashborad/PropertyDashboardDetails";
 import Agent from "@/models/agent";
+import { checkSession } from "@/utils/CheckSession";
 
 export async function generateMetadata({ params: { propertyId } }: { params: { propertyId: string } }): Promise<Metadata> {
   // Connect to MongoDB
@@ -67,8 +68,14 @@ const page = async ({ params: { propertyId } }: { params: { propertyId: string }
     // Connect to MongoDB
     await connectDB();
 
+    const { session, user } = await checkSession();
+
     // Find the property by ID from the database
     const property  = await Property.findById(propertyId);
+
+    if (!user) return
+
+    const userIsAdmin = user?.role.includes("Admin") || user?.role.includes("Owner");
 
     // Get all agents from the database
     const agents = await Agent.find();
@@ -78,7 +85,7 @@ const page = async ({ params: { propertyId } }: { params: { propertyId: string }
         <h1>Property Not Found</h1>
     </div>)
 
-    return ( <PropertyDashboardDetails property={property} agent={agent} />);
+    return ( <PropertyDashboardDetails property={property} agent={agent} userIsAdmin={userIsAdmin} />);
 };
 
 export default page;

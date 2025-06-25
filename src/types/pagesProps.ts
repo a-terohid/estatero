@@ -68,6 +68,7 @@ export interface DashboardProppertiesPage_interface {
     totalPages : number
     agents : Agent_Interface[],
     totalproperties : number
+    userIsAdmin : boolean
 }
 
 

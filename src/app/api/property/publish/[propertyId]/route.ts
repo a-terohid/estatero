@@ -24,6 +24,9 @@ export async function PATCH(req: Request, context: Params) {
     // Parse JSON body to get the "publish" value
     const { publish } = await req.json();
 
+    console.log("publish" , publish);
+    
+
 
     // Validate user session
     const session = await getServerSession(authOptions);
@@ -39,13 +42,13 @@ export async function PATCH(req: Request, context: Params) {
       );
     }
 
-    // Check user role permissions (must be Agent or Owner)
-    if (!existUser.role.includes("Agent") && !existUser.role.includes("Owner")) {
-      return NextResponse.json(
-        { error: ERROR.ACCESS_DENIED },
-        { status: 422 }
-      );
-    }
+    // Check user role permissions (must be Admin or Owner)
+    if (!existUser.role.includes("Admin") && !existUser.role.includes("Owner")) {
+    return NextResponse.json(
+      { error: ERROR.ACCESS_DENIED },
+      { status: 422 }
+    );
+}
 
     // Find the property by ID
     const PROPERTY = await Property.findOne({ _id: property_id });
@@ -57,7 +60,7 @@ export async function PATCH(req: Request, context: Params) {
     }
 
     // Validate "publish" flag
-    if (!publish) return NextResponse.json({ error: ERROR.INVALID_DATA }, { status: 400 });
+    if (publish === undefined) return NextResponse.json({ error: ERROR.INVALID_DATA }, { status: 400 });
 
     // === Handle Publishing ===
     if (publish) {
