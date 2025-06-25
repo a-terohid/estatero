@@ -12,6 +12,16 @@ export const LogsActionFilters = [
     filter: { action: LogsActions.NEW_PROPERTIES},
   },
   {
+    name: "property published",
+    value: "property published",
+    filter: { action: LogsActions.PROPERTY_PUBLISHED},
+  },
+  {
+    name: 'property rejected',
+    value: 'property rejected',
+    filter: { action: LogsActions.PROPERTY_REJECTED},
+  },
+  {
     name: "new user registered",
     value: "register",
     filter: { action: { $in: [LogsActions.NEW_REGISTER, LogsActions.NEW_REGISTER_GOOGLE] } },
