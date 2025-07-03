@@ -12,6 +12,11 @@ export const LogsActionFilters = [
     filter: { action: LogsActions.NEW_PROPERTIES},
   },
   {
+    name: "property Edited",
+    value: "property published",
+    filter: { action: LogsActions.PROPERTY_EDITED},
+  },
+  {
     name: "property published",
     value: "property published",
     filter: { action: LogsActions.PROPERTY_PUBLISHED},
