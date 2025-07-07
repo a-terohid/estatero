@@ -22,6 +22,11 @@ export const LogsActionFilters = [
     filter: { action: LogsActions.PROPERTY_PUBLISHED},
   },
   {
+    name: "property deleted",
+    value: "property deleted",
+    filter: { action: LogsActions.PROPERTY_DELETED},
+  },
+  {
     name: 'property rejected',
     value: 'property rejected',
     filter: { action: LogsActions.PROPERTY_REJECTED},

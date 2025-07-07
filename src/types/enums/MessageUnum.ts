@@ -46,6 +46,7 @@ export enum MESSAGE {
     NEW_MESSAGE = "New message have been sent successfully ",
     NEW_PROPERTY = "New property added successfully ",
     PROPERTY_EDITED = "property Edited successfully ",
+    PROPERTY_DELETED = 'property deleted successfully',
     PROPERTY_PUBLISHED = "property Published successfully ",
     PROPERTY_REJECTED = "property Rejected successfully ",
     NEW_FORM = "New message have been sent successfully ",
