@@ -33,6 +33,7 @@ const DashboardPropertyCard = ({property , agent , userIsAdmin}:{property: Prope
             <div className='flex justify-end mx-auto gap-x-2'>
                 {userIsAdmin && <PublishProprety id={_id} />}
                 <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/properties/${_id}`}>Review</Link>
+                <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/properties/edit/${_id}`}>Edit</Link>
             </div>
         </div>
     );

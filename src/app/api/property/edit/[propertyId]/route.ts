@@ -29,6 +29,7 @@ export async function PATCH(req: Request, context: Params) {
     const thumbnail = formData.get("thumbnail") as File || null;
     const floor_plan = formData.get("floor_plan") as File || null;
     const images = formData.getAll("images") as File[] || [];
+    const new_agnet = formData.get("new_agnet") as string || null;
     const isCheckedCoverImage = formData.get("isCheckedCoverImage") as string || null;
     const isCheckedFloorPlan = formData.get("isCheckedFloorPlan") as string || null;
     const deletedImages = formData.getAll("deletedImages") as string[] || [];
@@ -59,7 +60,7 @@ export async function PATCH(req: Request, context: Params) {
     const {
       title, description, price, property_type, property_Category, area,
       property_size_unit, bedrooms, bathrooms, parking_spaces, year_built,
-      status, Location, tags, facts_features, new_agnet
+      status, Location, tags, facts_features
     } = parsedData;
 
     // Check for missing required fields
@@ -171,6 +172,7 @@ export async function PATCH(req: Request, context: Params) {
     PROPERTY.images_dir = images_dir;
 
     // Save updated property
+    PROPERTY.published = false
     await PROPERTY.save();
 
     // Log update event

@@ -206,8 +206,9 @@ const PropertyDashboardDetails = ({property , agent , userIsAdmin}: {property: P
                     </div>
                 </div>
             </div>
-            <div className='mt-8 py-4 border-t border-primary-100 flex items-center justify-center'>
+            <div className='mt-8 py-4 border-t border-primary-100 flex items-center gap-x-2 justify-center'>
                 {userIsAdmin && <PublishProprety id={_id} />}
+                <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/properties/edit/${_id}`}>Edit</Link>
             </div>
         </div>
     );
