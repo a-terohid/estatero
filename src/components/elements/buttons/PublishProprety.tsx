@@ -7,7 +7,7 @@ import { ERROR } from "@/types/enums/MessageUnum";
 
 const PublishProprety = ({id}: {id:any}) => {
 
-     const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     const PublishHandler = async (e: React.FormEvent) => {
