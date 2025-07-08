@@ -164,3 +164,22 @@ export interface PropertiesDashboardSearchParams_interface {
     property_Category ?: string
     text_search ?: string
 }
+
+export interface PropertiesSearchParams_interface {
+    page?: string, 
+    sort ?: string,
+    status ?: string
+    location ?: string
+    property_type ?: string
+    property_Category ?: string
+    minPrice ?: string
+    maxPrice ?: string
+    minArea ?: number
+    maxArea ?: number
+    property_size_unit?: "sqm" | "sqft" 
+    bedrooms ?: number
+    bathrooms ?: number
+    parking_spaces ?: number
+    year_built ?: string
+    tags ?: string
+}
