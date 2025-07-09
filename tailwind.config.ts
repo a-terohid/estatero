@@ -30,6 +30,7 @@ const config = {
         'agentPage-texture': "url('/img/AgentBanner.png')",
         'FAQPage-texture': "url('/img/FAQBanner.png')",
         'ContactPage-texture': "url('/img/ContactBanner.png')",
+        'Properties-texture': "url('/img/PropertiesBanner.png')",
       },
       colors: styleGuide_colors
     },

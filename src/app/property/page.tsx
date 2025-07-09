@@ -1,4 +1,5 @@
 import Property from "@/models/Property";
+import PropetiesPage from "@/template/property/PropetiesPage";
 import { PropertiesDashboardSearchParams_interface, PropertiesSearchParams_interface } from "@/types/StatesTypes";
 import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
@@ -124,12 +125,13 @@ const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_int
     .limit(PropertiesPerPage)
     .sort({ createdAt: sortValue });
 
-    
-    return (
-        <div>
-            
-        </div>
-    );
+
+    return (<PropetiesPage
+                Properties={Properties}
+                totalproperties={totalproperties}
+                totalPages={totalPages}
+                currentPage={currentPage} 
+            /> );
 };
 
 export default page;

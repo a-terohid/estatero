@@ -71,6 +71,13 @@ export interface DashboardProppertiesPage_interface {
     userIsAdmin : boolean
 }
 
+export interface ProppertiesPage_interface { 
+    Properties: Property_Interface[]
+    currentPage : number, 
+    totalPages : number
+    totalproperties : number
+}
+
 
 
 
