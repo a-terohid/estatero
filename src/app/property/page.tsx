@@ -71,7 +71,9 @@ const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_int
   } = searchParams;
 
   const sortValue = sort === "asc" ? 1 : -1;
-  const combinedFilter: any = {};
+  const combinedFilter: any = {
+    published : true,
+  };
 
   // Location filtering with regex
   if (location) {

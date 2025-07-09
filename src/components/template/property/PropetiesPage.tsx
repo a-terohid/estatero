@@ -1,9 +1,15 @@
+import PaginationButtons from '@/elements/buttons/PaginationButtons';
 import PropertyCard from '@/elements/cards/PropertyCard';
 import { Property_Interface } from '@/types/modelTypes';
 import { ProppertiesPage_interface } from '@/types/pagesProps';
 import React from 'react';
 
 const PropetiesPage = ({Properties , currentPage, totalPages , totalproperties } : ProppertiesPage_interface) => {
+
+    let showPageHandler = false
+
+    if( totalPages > 1) showPageHandler = true
+
     return (
         <div>
             {/* Hero section with background image and introductory text */}
@@ -24,6 +30,11 @@ const PropetiesPage = ({Properties , currentPage, totalPages , totalproperties }
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                     {
                         Properties.length && Properties.map( (property : Property_Interface) => <PropertyCard key={property._id} property={property} /> )
+                    }
+                </div>
+                <div className='mt-12'>
+                    {
+                        showPageHandler && <PaginationButtons currentPage={currentPage} totalPages={totalPages} />
                     }
                 </div>
             </div>
