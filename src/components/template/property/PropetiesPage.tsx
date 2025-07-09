@@ -20,7 +20,7 @@ const PropetiesPage = ({Properties , currentPage, totalPages , totalproperties }
 
                     {/* Short description under the title */}
                     <p className="text-Body-RL-Medium md:text-Body-RL-Large md:w-1/2 text-Greyscale-100">
-                        Be the first to see what's just hit the market. Fresh opportunities await as we bring you the latest properties                    </p>
+                        Be the first to see what`s just hit the market. Fresh opportunities await as we bring you the latest properties                    </p>
                 </div>
             </div>
             <div className=' my-8 md:my-16 lg:my-24 container'>
