@@ -11,7 +11,7 @@ import slugify from 'slugify';
 
 const PropertyCard = ({property}: {property:Property_Interface}) => {
 
-    const { thumbnail , description , title , Location , bedrooms , bathrooms , area , property_size_unit ,price ,property_type , _id } = property
+    const { thumbnail , description , title , Location , bedrooms , bathrooms , area , property_size_unit ,price ,property_type , _id , tags } = property
 
     const isRental : boolean = property_type.includes("Lease")
 
@@ -23,7 +23,12 @@ const PropertyCard = ({property}: {property:Property_Interface}) => {
                 <Link href={`/property/${slug}`} className='hover:grayscale-[0.5]'>
                     <ImageWithFallback src={thumbnail || ""} alt={description} type='thumbnail' style='w-full !rounded-2xl' />
                 </Link>
-                <p className='py-1 px-2 rounded-full bg-primary-50 top-2 left-2 w-fit absolute text-Body-RL-XSmall hover:bg-primary-25 '>{property_type}</p>
+                <div className='top-2 left-2 absolute flex flex-col gap-y-1'>
+                    <p className='py-1 px-2 rounded-full bg-primary-50 w-fit  text-Body-RL-XSmall hover:bg-primary-25 '>{property_type}</p>
+                    {
+                        tags?.length ? tags.map( (tag:string , index : number) =>  <p key={index} className='py-1 px-2 rounded-full bg-primary-50 w-fit  text-Body-RL-XSmall hover:bg-primary-25 '>{tag}</p> ) : null
+                    }
+                </div>
             </div>
             <div className='pt-4 px-2'>
                 <h3 className='text-Heading-6 md:text-Heading-5' >{title}</h3>
