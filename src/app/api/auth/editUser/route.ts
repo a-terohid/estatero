@@ -9,6 +9,7 @@ import path, { join, basename } from "path";
 import { mkdir, writeFile, stat } from "fs/promises";
 import Agent from "@/models/agent";
 import sharp from "sharp"
+import { revalidatePath } from "next/cache";
 
 // PATCH request handler for updating user profile
 export const PATCH = async (req: Request) => {
@@ -138,15 +139,17 @@ export const PATCH = async (req: Request) => {
 
 		// Revalidate the agents' page if the new role is an Agent
 		if(isAgentRole){
-			try {
-				await fetch(`/api/revalidate`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ path: `/agents/${user._id}` }),
-				});
-			} catch (err) {
-				console.log("Revalidation error:", err);
-			}
+			// try {
+			// 	await fetch(`/api/revalidate`, {
+			// 	method: "POST",
+			// 	headers: { "Content-Type": "application/json" },
+			// 	body: JSON.stringify({ path: `/agents/${user._id}` }),
+			// 	});
+			// } catch (err) {
+			// 	console.log("Revalidation error:", err);
+			// }
+			revalidatePath(`/agents/${user._id}`);
+			
 		}
 
 		// Return success response with updated user info

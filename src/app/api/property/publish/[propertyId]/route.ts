@@ -11,6 +11,8 @@ import { NextResponse } from "next/server";
 import { LogsActions } from '@/types/enums/generalEnums';
 import Log from "@/models/log";
 import sendEmail from "@/utils/sendEmail";
+import slugify from "slugify";
+import { revalidatePath } from "next/cache";
 
 export async function PATCH(req: Request, context: Params) {
   try {
@@ -78,6 +80,10 @@ export async function PATCH(req: Request, context: Params) {
         user_id: session.user.id,
         createdAt: new Date(),
       });
+
+      const slug = slugify(`${PROPERTY._id}-${PROPERTY.title}-${PROPERTY.Location.unparsedAddress}-${PROPERTY.bedrooms}bedrooms-${PROPERTY.bathrooms}bathrooms-${PROPERTY.property_type}-${PROPERTY.area}${PROPERTY.property_size_unit}`,{ lower: true, strict: true })
+          
+      revalidatePath(`/property/${slug}`);
 
       // Return success response
       return NextResponse.json(

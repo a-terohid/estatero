@@ -14,6 +14,8 @@ import { join } from "path";
 import sendEmail from "@/utils/sendEmail";
 import { ensureDirExists, processAndSaveImageForProperties } from "@/utils/files";
 import fs from "fs";
+import slugify from "slugify";
+import { revalidatePath } from "next/cache";
 
 export async function PATCH(req: Request, context: Params) {
   try {
@@ -182,6 +184,10 @@ export async function PATCH(req: Request, context: Params) {
       user_id: session.user.id,
       createdAt: new Date(),
     });
+
+    const slug = slugify(`${PROPERTY._id}-${title}-${Location.unparsedAddress}-${bedrooms}bedrooms-${bathrooms}bathrooms-${property_type}-${area}${property_size_unit}`,{ lower: true, strict: true })
+    
+    revalidatePath(`/property/${slug}`);
 
     // Return success response
     return NextResponse.json({ message: MESSAGE.PROPERTY_EDITED }, { status: 200 });
