@@ -1,4 +1,4 @@
-export const shouldShow = ["agents"]
+export const shouldShow = ["agents" , 'property']
 
 export const navItems = [
     { name: "Home", href: "/" },
