@@ -1,6 +1,6 @@
 import Property from "@/models/Property";
 import PropetiesPage from "@/template/property/PropetiesPage";
-import { PropertiesDashboardSearchParams_interface, PropertiesSearchParams_interface } from "@/types/StatesTypes";
+import { PropertiesSearchParams_interface } from "@/types/StatesTypes";
 import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Buy Property",
     "Apartments",
     "Houses",
-    "Investment Properties"
+    "Investment Properties",
   ],
   robots: "index, follow",
   openGraph: {
@@ -44,12 +44,14 @@ export const metadata: Metadata = {
   },
 };
 
+// Helper function
+const isPositiveNumber = (val: string | number | undefined) => {
+  const num = Number(val);
+  return !isNaN(num) && num > 0;
+};
+
 const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_interface }) => {
-
-    await connectDB();
-
-    // Destructure and provide default values to search parameters
-   
+  await connectDB();
 
   const {
     page = "1",
@@ -71,13 +73,14 @@ const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_int
   } = searchParams;
 
   const sortValue = sort === "asc" ? 1 : -1;
+
   const combinedFilter: any = {
-    published : true,
+    published: true,
   };
 
-  // Location filtering with regex
-  if (location) {
-    const locationRegex = { $regex: location, $options: "i" };
+  // Location filtering
+  if (location?.trim()) {
+    const locationRegex = { $regex: location.trim(), $options: "i" };
     combinedFilter.$or = [
       { "Location.unparsedAddress": locationRegex },
       { "Location.country": locationRegex },
@@ -86,36 +89,38 @@ const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_int
     ];
   }
 
-  // Simple equality filters
-  if (property_Category) combinedFilter.property_Category = property_Category;
-  if (property_type) combinedFilter.property_type = property_type;
-  if (status) combinedFilter.status = status;
-  if (property_size_unit) combinedFilter.property_size_unit = property_size_unit;
-  if (year_built) combinedFilter.year_built = year_built;
-  if (bedrooms) combinedFilter.bedrooms = Number(bedrooms);
-  if (bathrooms) combinedFilter.bathrooms = Number(bathrooms);
-  if (parking_spaces) combinedFilter.parking_spaces = Number(parking_spaces);
+  // Text filters
+  if (property_Category?.trim()) combinedFilter.property_Category = property_Category.trim();
+  if (property_type?.trim()) combinedFilter.property_type = property_type.trim();
+  if (status?.trim()) combinedFilter.status = status.trim();
+  if (property_size_unit?.trim()) combinedFilter.property_size_unit = property_size_unit.trim();
+  if (year_built?.trim()) combinedFilter.year_built = year_built.trim();
 
-  // Price filter as range
-  if (minPrice || maxPrice) {
+  // Number filters (only if > 0)
+  if (isPositiveNumber(bedrooms)) combinedFilter.bedrooms = Number(bedrooms);
+  if (isPositiveNumber(bathrooms)) combinedFilter.bathrooms = Number(bathrooms);
+  if (isPositiveNumber(parking_spaces)) combinedFilter.parking_spaces = Number(parking_spaces);
+
+  // Price filter
+  if (isPositiveNumber(minPrice) || isPositiveNumber(maxPrice)) {
     combinedFilter.price = {};
-    if (minPrice) combinedFilter.price.$gte = Number(minPrice);
-    if (maxPrice) combinedFilter.price.$lte = Number(maxPrice);
+    if (isPositiveNumber(minPrice)) combinedFilter.price.$gte = Number(minPrice);
+    if (isPositiveNumber(maxPrice)) combinedFilter.price.$lte = Number(maxPrice);
   }
 
-  // Area filter as range
-  if (minArea || maxArea) {
+  // Area filter
+  if (isPositiveNumber(minArea) || isPositiveNumber(maxArea)) {
     combinedFilter.area = {};
-    if (minArea) combinedFilter.area.$gte = Number(minArea);
-    if (maxArea) combinedFilter.area.$lte = Number(maxArea);
+    if (isPositiveNumber(minArea)) combinedFilter.area.$gte = Number(minArea);
+    if (isPositiveNumber(maxArea)) combinedFilter.area.$lte = Number(maxArea);
   }
 
-  // Tags filter (if you want to match at least one tag)
-  if (tags) {
+  // Tags filter
+  if (tags && tags.length > 0) {
     combinedFilter.tags = { $in: Array.isArray(tags) ? tags : [tags] };
   }
 
-  // Pagination logic
+  // Pagination
   const PropertiesPerPage = 15;
   const currentPage = Math.max(parseInt(page), 1);
   const totalproperties = await Property.countDocuments(combinedFilter);
@@ -127,13 +132,14 @@ const page = async ({ searchParams }: { searchParams: PropertiesSearchParams_int
     .limit(PropertiesPerPage)
     .sort({ createdAt: sortValue });
 
-
-    return (<PropetiesPage
-                Properties={Properties}
-                totalproperties={totalproperties}
-                totalPages={totalPages}
-                currentPage={currentPage} 
-            /> );
+  return (
+    <PropetiesPage
+      Properties={Properties}
+      totalproperties={totalproperties}
+      totalPages={totalPages}
+      currentPage={currentPage}
+    />
+  );
 };
 
 export default page;

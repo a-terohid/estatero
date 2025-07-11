@@ -151,6 +151,23 @@ export interface PropertiesDashboardFilter_interfasce {
     text_search : string
 }
 
+export interface PropertiesFilter_interfasce { 
+    status : string
+    location : string
+    property_type : string
+    property_Category : string
+    minPrice : string
+    maxPrice : string
+    minArea : string
+    maxArea : string
+    property_size_unit: string
+    bedrooms : string
+    bathrooms : string
+    parking_spaces : string
+    year_built : string
+    tags : string
+}
+
 
 export interface PropertiesDashboardSearchParams_interface {
     page?: string, 
