@@ -6,6 +6,7 @@ import { LuSquare } from "react-icons/lu";
 import { PiBathtub } from "react-icons/pi";
 import { formatPriceWithSlash } from '@/utils/price';
 import Link from 'next/link';
+import slugify from 'slugify';
 
 
 const PropertyCard = ({property}: {property:Property_Interface}) => {
@@ -14,10 +15,12 @@ const PropertyCard = ({property}: {property:Property_Interface}) => {
 
     const isRental : boolean = property_type.includes("Lease")
 
+    const slug = slugify(`${_id}-${title}-${Location.unparsedAddress}-${bedrooms}bedrooms-${bathrooms}bathrooms-${property_type}-${area}${property_size_unit}`,{ lower: true, strict: true })
+
     return (
         <div className='p-2 border border-Greyscale-100 rounded-2xl '>
             <div className=' relative'>
-                <Link href={`/property/${_id}-${title}-${Location.unparsedAddress}-${bedrooms}bedrooms-${bathrooms}bathrooms-${property_type}-${area}${property_size_unit}`} className='hover:grayscale-[0.5]'>
+                <Link href={`/property/${slug}`} className='hover:grayscale-[0.5]'>
                     <ImageWithFallback src={thumbnail || ""} alt={description} type='thumbnail' style='w-full !rounded-2xl' />
                 </Link>
                 <p className='py-1 px-2 rounded-full bg-primary-50 top-2 left-2 w-fit absolute text-Body-RL-XSmall hover:bg-primary-25 '>{property_type}</p>
