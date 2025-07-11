@@ -64,7 +64,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="sort"
                         value={sort}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="sort">Sort</option>
                         <option value="desc">Newest</option>
@@ -93,7 +93,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="agent"
                         value={agent}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="agents">Agents</option>
                         {
@@ -110,7 +110,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="status"
                         value={status}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="status">Status</option>
                         {
@@ -138,7 +138,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="agent"
                         value={agent}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="published">Published</option>
                         <option value="true">Yes</option>
@@ -153,7 +153,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="property_type"
                         value={property_type}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="property_type">Property Type</option>
                         {
@@ -169,7 +169,7 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
                         name="property_Category"
                         value={property_Category}
                         onChange={changeHandler}
-                        className="appearance-none w-fit lg:text-Body-RL-Small px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
+                        className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
                         <option value="property_Category">Property Category</option>
                         {
