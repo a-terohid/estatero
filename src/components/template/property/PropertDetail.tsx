@@ -60,7 +60,7 @@ const PropertDetail = ({property , agents}:{property: Property_Interface , agent
                             <span className='text-lg'><LuSquare /></span>
                             <span>{formatPriceWithSlash(area)} {property_size_unit}</span>
                         </li> }
-                        { parking_spaces && <li className=' flex gap-x-1 w-fit items-center py-1 px-2 bg-Greyscale-75  rounded-md border border-Greyscale-75 '>
+                        { <li className=' flex gap-x-1 w-fit items-center py-1 px-2 bg-Greyscale-75  rounded-md border border-Greyscale-75 '>
                             <span className='text-lg'><PiGarage /></span>
                             <span>{parking_spaces} Garage</span>
                         </li> }
