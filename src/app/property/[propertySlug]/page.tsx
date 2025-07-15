@@ -1,9 +1,11 @@
 import Property from "@/models/Property";
-import { Property_Interface } from "@/types/modelTypes";
+import { Agent_Interface, Property_Interface } from "@/types/modelTypes";
 import connectDB from "@/utils/connectDB";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import slugify from "slugify";
+import PropertDetail from "@/template/property/PropertDetail";
+import Agent from "@/models/agent";
 
 // Fetch function
 async function fetchPropertyById(propertyId: string): Promise<Property_Interface | null> {
@@ -80,23 +82,12 @@ const page = async ({ params }: { params: { propertySlug: string } }) => {
 
   const property = await fetchPropertyById(mongoId);
 
+  const agents: Agent_Interface[] = await Agent.find({ _id: { $in: property?.Agents_id } });
+
+
   if (!property) return notFound();
 
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">{property.title}</h1>
-      <p className="text-gray-600">{property.Location?.unparsedAddress}</p>
-      <div className="mt-4">
-        <strong>Price:</strong> ${property.price?.toLocaleString()}
-      </div>
-      <div>
-        <strong>Bedrooms:</strong> {property.bedrooms} | <strong>Bathrooms:</strong> {property.bathrooms}
-      </div>
-      <div>
-        <strong>Area:</strong> {property.area} {property.property_size_unit}
-      </div>
-    </div>
-  );
+  return (<PropertDetail property={property} agents={agents} />);
 };
 
 export default page;
