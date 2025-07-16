@@ -3,15 +3,18 @@
 import ImageWithFallback from "@/elements/ImageWithFallback";
 import { useEffect, useRef, useState } from "react";
 import Slider from "./Slider";
+import LikeListings from "@/elements/buttons/LikeListings";
 
 interface Props {
   images: string[];
   thumbnail: string;
   tags?: string[];
   description: string;
+  id ?: string
+  isliked ?: boolean
 }
 
-const PropertyGallery = ({ images, thumbnail, tags, description }: Props) => {
+const PropertyGallery = ({ images, thumbnail, tags, description , id , isliked }: Props) => {
   const [show, setShow] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -56,6 +59,9 @@ const PropertyGallery = ({ images, thumbnail, tags, description }: Props) => {
                   </p>
                 ))
               : null}
+          </div>
+          <div className="top-2 right-2 absolute">
+            <LikeListings id={id} isliked={isliked} />
           </div>
         </div>
 

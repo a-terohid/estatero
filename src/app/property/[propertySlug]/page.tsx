@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import slugify from "slugify";
 import PropertDetail from "@/template/property/PropertDetail";
 import Agent from "@/models/agent";
+import { checkSession } from "@/utils/CheckSession";
 
 // Fetch function
 async function fetchPropertyById(propertyId: string): Promise<Property_Interface | null> {
@@ -84,10 +85,18 @@ const page = async ({ params }: { params: { propertySlug: string } }) => {
 
   const agents: Agent_Interface[] = await Agent.find({ _id: { $in: property?.Agents_id } });
 
+  const { session , user } = await checkSession();
+
+  let isliked : boolean = false
+
+  if(user && user.liked_listings?.length){
+    isliked = user.liked_listings.includes(mongoId)
+  }
+
 
   if (!property) return notFound();
 
-  return (<PropertDetail property={property} agents={agents} />);
+  return (<PropertDetail property={property} agents={agents} isliked={isliked} />);
 };
 
 export default page;

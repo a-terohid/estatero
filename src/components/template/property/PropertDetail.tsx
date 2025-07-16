@@ -15,7 +15,7 @@ import { LuBed, LuMapPin, LuSquare } from 'react-icons/lu';
 import { MdOutlineMail, MdOutlineSell } from 'react-icons/md';
 import { PiBathtub, PiGarage } from 'react-icons/pi';
 
-const PropertDetail = ({property , agents}:{property: Property_Interface , agents : Agent_Interface[]}) => {
+const PropertDetail = ({property , agents , isliked}:{property: Property_Interface , agents : Agent_Interface[] , isliked: boolean}) => {
 
     const { _id , title , images , description , price , property_Category , property_type , area , property_size_unit ,
         bedrooms , bathrooms , parking_spaces , year_built , status , Location , tags , 
@@ -30,7 +30,7 @@ const PropertDetail = ({property , agents}:{property: Property_Interface , agent
 
     return (
         <div className='container py-20 md:py-32'>
-            <PropertyGallery images={images} thumbnail={thumbnail} tags={tags} description={description} />
+            <PropertyGallery images={images} thumbnail={thumbnail} tags={tags} description={description} id={_id} isliked={isliked} />
             <div className='mt-8 flex flex-col md:flex-row md:justify-between items-center'>
                 <div className='w-fit'>
                     <h2 className='text-Heading-5 md:text-Heading-3 lg:text-Heading-1 mb-3'>{title}</h2>
