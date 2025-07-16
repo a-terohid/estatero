@@ -37,8 +37,7 @@ const UserSchema = new Schema<User_Interface>({
     },
     liked_listings : {
         type : [],
-        required: false,
-        default : ""
+        default: [],
     },
     role : {
         type : String,

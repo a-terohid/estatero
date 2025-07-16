@@ -11,7 +11,7 @@ export enum ERROR {
     PROBLEM = "There is a Problem!",
     NO_USER = "There is no user!",
     ACCESS_DENIED = "access denied!",
-    LOGIN = "please login first",
+    LOGIN = "Please login first!",
     REQUIRED_FIELD = "This field must be filled.",
     REQUIRED_NAME = "Name is required for sign-up.",
     REQUIRED_LINCENSE_NUMBER = "lincense number is required for create agent.",

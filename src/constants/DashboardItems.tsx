@@ -10,6 +10,7 @@ import { RiAdminFill } from "react-icons/ri";
 import { FaBuildingUser, FaFileCircleQuestion, FaRegCircleQuestion } from "react-icons/fa6";
 import { TbMessage } from "react-icons/tb";
 import { LuMessagesSquare } from "react-icons/lu";
+import { BsFillHouseHeartFill } from "react-icons/bs";
 
 
 export const DashboardItems : DashboardItem_interface[] = [
@@ -63,6 +64,13 @@ export const DashboardItems : DashboardItem_interface[] = [
                 children : []
             },
         ]
+    },
+    { 
+        name: "Liked Properties", 
+        href: "/dashboard/liked_properties" , 
+        accessibility: [ UserRole.ALL],
+        icon : <BsFillHouseHeartFill />,
+        children : []
     },
     { 
         name: "All messages", 
