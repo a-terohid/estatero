@@ -45,6 +45,7 @@ export enum MESSAGE {
     NEW_AGENT = 'new Admin promoted successfully',
     NEW_MESSAGE = "New message have been sent successfully ",
     NEW_PROPERTY = "New property added successfully ",
+    NEW_BLOG = "Blog created successfully",
     PROPERTY_EDITED = "property Edited successfully ",
     PROPERTY_DELETED = 'property deleted successfully',
     PROPERTY_PUBLISHED = "property Published successfully ",

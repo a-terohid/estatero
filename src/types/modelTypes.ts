@@ -187,3 +187,19 @@ export interface Property_Interface {
 }
 
 
+export interface Blog_Interface { 
+    _id ?: string
+    title : string
+    description : string 
+    autor_id : string
+    thumbnails : string
+    images : string[]
+    published : boolean
+    createdAt: Date;
+    updatedAt?: Date;
+    PublishedBY : {
+        userId : string,
+        email : string
+    }
+    testimonials : string[]
+}
