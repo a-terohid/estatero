@@ -3,7 +3,7 @@
 import TiptapEditor from '@/module/TiptapEditor';
 import React, { useState } from 'react';
 
-const page = () => {
+const Page = () => {
 
     const [post, setPost] = useState("");
     const [images, setImages] = useState<File[]>([]);
@@ -25,4 +25,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

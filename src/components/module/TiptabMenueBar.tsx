@@ -11,9 +11,9 @@ import { useRef } from "react";
 
 
 export default function TiptabMenueBar({ editor , setImages }: { editor: Editor | null , setImages: React.Dispatch<React.SetStateAction<File[]>>; }) {
-  if (!editor) return null;
-
     const fileInputRef = useRef<HTMLInputElement>(null);
+    if (!editor) return null;
+
 
 
   const Options = [
@@ -110,7 +110,7 @@ export default function TiptabMenueBar({ editor , setImages }: { editor: Editor 
         <button
         onClick={triggerFileInput}
         className="p-2 rounded-md border text-sm bg-white text-gray-800 hover:bg-gray-100"
-        title="آپلود تصویر"
+        title="Upload image"
       >
         <CiImageOn className="size-4" />
       </button>
