@@ -17,7 +17,7 @@ const BlogSchema = new Schema<Blog_Interface>(
     },
     thumbnails: {
       type: String,
-      required: true,
+      required: false,
     },
     images: {
       type: [String],

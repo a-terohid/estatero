@@ -41,10 +41,10 @@ export async function POST(req: Request) {
     const newBlog = await Blog.create({
       title,
       description, // Stored as rich text HTML string
-      autor_id: user._id,
+      autor_id: user.id,
       thumbnails: "",
       images: [],
-      published: true,
+      published: false,
       PublishedBY: {
         userId: user.id,
         email: user.email,

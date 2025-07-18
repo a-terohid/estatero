@@ -93,7 +93,7 @@ export default function TiptabMenueBar({ editor , setImages }: { editor: Editor 
   };
 
   return (
-    <div className="border rounded-md p-1 mb-1 bg-slate-50 flex gap-1 flex-wrap">
+    <div className="border rounded-md p-1 mb-1 bg-Neutral flex gap-1 flex-wrap">
       {Options.map((option, index) => (
         <button
           key={index}

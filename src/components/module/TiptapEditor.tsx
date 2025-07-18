@@ -43,7 +43,7 @@ const TiptapEditor = ({ content, onChange , setImages }: RichTextEditorProps) =>
     content: content,
     editorProps: {
       attributes: {
-        class: "min-h-[156px]  border rounded-md bg-slate-50 py-2 px-3",
+        class: "min-h-[156px]  border rounded-md bg-Neutral py-2 px-3 focus:border-Greyscale-900 focus:outline-none",
       },
     },
     immediatelyRender: false,
@@ -55,7 +55,7 @@ const TiptapEditor = ({ content, onChange , setImages }: RichTextEditorProps) =>
   return (
     <div className="tiptap">
         <TiptabMenueBar editor={editor} setImages={setImages}/>
-        <div className="max-h-[450px] overflow-y-auto border rounded-md bg-slate-50">
+        <div className="max-h-[450px] overflow-y-auto border rounded-md bg-Neutral">
             <EditorContent editor={editor} />
         </div>
     </div>
