@@ -2,7 +2,7 @@ import { UserRole } from "@/types/enums/generalEnums";
 import { DashboardItem_interface } from "@/types/generalTypes";
 import { IoMdPerson } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuBookCopy, LuBookPlus, LuLayoutDashboard } from "react-icons/lu";
 import { MdAddHomeWork, MdHomeWork, MdLockReset } from "react-icons/md";
 import { RiFootprintFill } from "react-icons/ri";
 import { FaUserFriends } from "react-icons/fa";
@@ -71,6 +71,21 @@ export const DashboardItems : DashboardItem_interface[] = [
         accessibility: [ UserRole.ALL],
         icon : <BsFillHouseHeartFill />,
         children : []
+    },
+    { 
+        name: "Blogs", 
+        href: "/dashboard/blogs" , 
+        accessibility: [UserRole.OWNER ,UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.ADMIN, UserRole.AGENT ],
+        icon : <LuBookCopy />,
+        children : [
+            { 
+                name: "Add blog", 
+                href: "/dashboard/blogs/add" , 
+                accessibility: [UserRole.OWNER ,UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.ADMIN, UserRole.AGENT ],
+                icon : <LuBookPlus />,
+                children : []
+            },
+        ]
     },
     { 
         name: "All messages", 
