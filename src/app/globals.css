@@ -43,3 +43,20 @@
     }
   }
   
+@layer base {
+  .tiptap h1 {
+    @apply text-2xl ;
+  }
+
+  .tiptap h2 {
+    @apply text-xl ;
+  }
+
+  .tiptap h3 {
+    @apply text-lg ;
+  }
+
+  .tiptap img {
+    @apply w-1/2 mx-auto;
+  }
+}
