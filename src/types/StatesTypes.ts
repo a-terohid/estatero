@@ -200,3 +200,14 @@ export interface PropertiesSearchParams_interface {
     year_built ?: string
     tags ?: string
 }
+
+
+export interface BlogsSearchParams_interface {
+    page?: string, 
+    sort ?: string,
+    title ?: string
+    startDate ?:string, 
+    endDate ?:string
+    published ?: string
+    autor_id ?: string
+}
