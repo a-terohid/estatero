@@ -1,5 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import Blog from "@/models/Blog";
+import Log from "@/models/log";
+import { LogsActions } from "@/types/enums/generalEnums";
 import { ERROR, MESSAGE } from "@/types/enums/MessageUnum";
 import connectDB from "@/utils/connectDB";
 import { ensureDirExists, processAndSaveImageForProperties } from "@/utils/files";
@@ -88,6 +90,13 @@ export async function POST(req: Request) {
     newBlog.images = imagesNames;
 
     await newBlog.save(); // Save updated blog with image paths
+
+    await Log.create({
+            title: `New Blog with id ${newBlog._id} by user ${session.user?.email} added`,
+            action: LogsActions.NEW_BLOG,
+            user_id: session.user.id,
+            createdAt: new Date(),
+    });
 
     // Return success response
     return NextResponse.json({ message: MESSAGE.NEW_BLOG, blog: newBlog }, { status: 200 });
