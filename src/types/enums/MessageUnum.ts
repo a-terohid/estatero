@@ -49,6 +49,7 @@ export enum MESSAGE {
     NEW_BLOG = "Blog created successfully",
     PROPERTY_EDITED = "property Edited successfully ",
     PROPERTY_DELETED = 'property deleted successfully',
+    BLOG_DELETED = 'blog deleted successfully',
     PROPERTY_PUBLISHED = "property Published successfully ",
     BLOG_PUBLISHED = "blog Published successfully ",
     PROPERTY_REJECTED = "property Rejected successfully ",
