@@ -55,7 +55,7 @@ export async function PATCH(req: Request, context: Params) {
     const BLOG = await Blog.findOne({ _id: blog_id });
     if (!BLOG) {
       return NextResponse.json(
-        { error: ERROR.CANT_FIND_PROPERTY },
+        { error: ERROR.CANT_FIND_BLog},
         { status: 404 }
       );
     }

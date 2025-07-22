@@ -13,10 +13,10 @@ import path from "path";
 import { rm } from 'fs/promises';
 import Blog from "@/models/Blog";
 
-export async function PATCH(req: Request, { params }: { params: { Blogid: string } }) {
+export async function PATCH(req: Request, { params }: { params: { BlogId: string } }) {
   try {
     await connectDB();
-    const blog_id = params.Blogid;
+    const blog_id = params.BlogId;
 
     const session = await getServerSession(authOptions);
     if (!session)
@@ -24,7 +24,7 @@ export async function PATCH(req: Request, { params }: { params: { Blogid: string
 
     const BLOG = await Blog.findOne({ _id: blog_id });
     if (!BLOG)
-      return NextResponse.json({ error: ERROR.CANT_FIND_PROPERTY }, { status: 404 });
+      return NextResponse.json({ error: ERROR.CANT_FIND_BLog }, { status: 404 });
 
     const fullPath = path.resolve('public/store/blogs/', blog_id);
 
