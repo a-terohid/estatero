@@ -1,10 +1,11 @@
+import PublishBlog from '@/elements/buttons/PublishBlog';
 import { Agent_Interface, Blog_Interface, User_Interface } from '@/types/modelTypes';
 import { replaceDescriptionImageSrc } from '@/utils/BlogDescriptionImageHandler';
 import React from 'react';
 
-const BlogdetailsDashboard = ({blog , author}:{blog:Blog_Interface , author : User_Interface | Agent_Interface | null}) => {
+const BlogdetailsDashboard = ({blog , author , userIsAdmin}:{blog:Blog_Interface , author : User_Interface | Agent_Interface | null , userIsAdmin: boolean}) => {
 
-    const { title , createdAt , description, images , published } = blog
+    const { title , createdAt , description, images , published , _id } = blog
 
     const finalDescription = replaceDescriptionImageSrc(description , images)
 
@@ -34,6 +35,9 @@ const BlogdetailsDashboard = ({blog , author}:{blog:Blog_Interface , author : Us
                     "
                     dangerouslySetInnerHTML={{ __html: finalDescription }}
                 />
+            </div>
+            <div className='mt-8 py-4 border-t border-primary-100 flex items-center gap-x-2 justify-center'>
+                {userIsAdmin && <PublishBlog id={_id} />}
             </div>
         </div>
     );

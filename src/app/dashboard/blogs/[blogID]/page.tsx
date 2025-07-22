@@ -66,6 +66,9 @@ const page = async ({ params: { blogID } }: { params: { blogID: string } }) => {
 
     const { session, user } = await checkSession();
 
+    const userIsAdmin = user?.role.includes("Admin") || user?.role.includes("Owner") || false;
+
+
     // Find the property by ID from the database
     const blog = await Blog.findById(blogID);
 
@@ -79,7 +82,7 @@ const page = async ({ params: { blogID } }: { params: { blogID: string } }) => {
     </div>)
 
 
-    return ( <BlogdetailsDashboard blog={blog} author={author} /> );
+    return ( <BlogdetailsDashboard blog={blog} author={author} userIsAdmin={userIsAdmin}  /> );
 };
 
 export default page;

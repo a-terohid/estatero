@@ -1,5 +1,5 @@
 import { UserRole } from "./enums/generalEnums";
-import { Agent_Interface, FAQ_Interface, LOG_Interface, Message_Interface, Property_Interface, User_Interface } from "./modelTypes";
+import { Agent_Interface, Blog_Interface, FAQ_Interface, LOG_Interface, Message_Interface, Property_Interface, User_Interface } from "./modelTypes";
 import { LogsPageSearchParams_interface } from "./StatesTypes";
 
 export interface inputComponent_input {
@@ -68,6 +68,15 @@ export interface DashboardProppertiesPage_interface {
     totalPages : number
     agents : Agent_Interface[],
     totalproperties : number
+    userIsAdmin : boolean
+}
+
+export interface DashboardBlogsPage_interface { 
+    blogs: Blog_Interface[] ,
+    authors: any
+    currentPage : number, 
+    totalPages : number
+    totalBlogs : number
     userIsAdmin : boolean
 }
 

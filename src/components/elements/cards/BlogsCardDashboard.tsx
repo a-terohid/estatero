@@ -2,8 +2,9 @@ import { Agent_Interface, Blog_Interface, User_Interface } from '@/types/modelTy
 import React from 'react';
 import ImageWithFallback from '../ImageWithFallback';
 import Link from 'next/link';
+import PublishBlog from '../buttons/PublishBlog';
 
-const BlogsCardDashboard = ({ blog , author }: {blog: Blog_Interface , author: User_Interface | Agent_Interface}) => {
+const BlogsCardDashboard = ({ blog , author , userIsAdmin }: {blog: Blog_Interface , author: User_Interface | Agent_Interface, userIsAdmin: boolean}) => {
 
     const { published , thumbnails , description , title , _id , createdAt} = blog
 
@@ -21,9 +22,8 @@ const BlogsCardDashboard = ({ blog , author }: {blog: Blog_Interface , author: U
                 
             </div>
             <div className='flex justify-end mx-auto gap-x-2'>
-                {/* {userIsAdmin && <PublishProprety id={_id} />} */}
+                {userIsAdmin && <PublishBlog id={_id} />}
                 <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/blogs/${_id}`}>Review</Link>
-                <Link className="bg-primary-100 hover:bg-primary-50 text-white w-fit text-Body-RL-XSmall px-2 py-1 rounded-md cursor-pointer" href={`/dashboard/blogs/edit/${_id}`}>Edit</Link>
             </div>
         </div>
     );

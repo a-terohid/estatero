@@ -61,6 +61,8 @@ const page = async ({ searchParams }: { searchParams: BlogsSearchParams_interfac
     const validRoles = DashboardItems.find(item => item.name === "Blogs")?.accessibility;
     if (!user || !validRoles?.includes(user.role as UserRole)) redirect("/dashboard/profile");
 
+    const userIsAdmin = user.role.includes("Admin") || user.role.includes("Owner");
+
     // Destructure and provide default values to search parameters
     const { page = "1", sort = "desc", title , startDate , endDate , published , autor_id } = searchParams;
     const sortValue = sort === "asc" ? 1 : -1;
@@ -131,7 +133,13 @@ const page = async ({ searchParams }: { searchParams: BlogsSearchParams_interfac
 
     const authors = [...userAuthors, ...agentAuthors];
 
-    return (<BlogsDashboardpage blogs={blogs} authors={authors} /> );
+    return (<BlogsDashboardpage 
+                blogs={blogs} 
+                authors={authors} 
+                userIsAdmin={userIsAdmin}
+                totalBlogs={totalBlogs}
+                totalPages={totalPages}
+                currentPage={currentPage}  /> );
 };
 
 export default page;
