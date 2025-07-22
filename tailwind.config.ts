@@ -21,6 +21,25 @@ const config = {
   darkMode: 'class',
   theme: {
     extend: {
+      // typography: (theme : any) => ({
+      //   DEFAULT: {
+      //     css: {
+      //       img: {
+      //         marginLeft: "auto",
+      //         marginRight: "auto",
+      //         borderRadius: theme("borderRadius.xl"),
+      //       },
+      //       ul: {
+      //         listStyleType: "disc",
+      //         paddingLeft: "1.5rem",
+      //       },
+      //       ol: {
+      //         listStyleType: "decimal",
+      //         paddingLeft: "1.5rem",
+      //       },
+      //     },
+      //   },
+      // }),
       backgroundImage: {
         'footer-texture': "url('/img/FooterBG.png')",
         'homepageHero-texture': "url('/img/HomePageHeroBG.png')",
@@ -48,6 +67,7 @@ const config = {
     plugin(({ addUtilities }) => {
       addUtilities(StyleGuid_Text);
     }),
+    require("@tailwindcss/typography"),
   ],
 }
 export default config;
