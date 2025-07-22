@@ -149,7 +149,7 @@ const BlogsDahsboardFilterSection = ({ PATH , authors }: { PATH: string  , autho
             >
                 <option value="Autor">Autor</option>
                 {
-                    authors?.map( (au:any) => <option value={au._id}>{au.name} {au.last_name}</option> )
+                    authors?.map( (au:any) => <option key={au._id} value={au._id}>{au.name} {au.last_name}</option> )
                 }
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-Greyscale-300">
