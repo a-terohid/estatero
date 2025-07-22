@@ -135,8 +135,8 @@ const PropertiesDashboradSection = ({PATH , agents} : {PATH:string , agents :any
 
                  <div className="relative inline-block">
                     <select
-                        name="agent"
-                        value={agent}
+                        name="published"
+                        value={published}
                         onChange={changeHandler}
                         className="appearance-none w-fit lg:text-Body-RL-Small bg-Neutral px-3 py-2 pr-8 border border-Greyscale-100 rounded-lg focus:text-Greyscale-900 focus:border-Greyscale-900 focus:outline-none text-Body-RL-XSmall"
                     >
