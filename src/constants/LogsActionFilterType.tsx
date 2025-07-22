@@ -36,6 +36,16 @@ export const LogsActionFilters = [
     value: "new blog",
     filter: { action: LogsActions.NEW_BLOG},
   },
+   {
+    name: "blog published",
+    value: "blog published",
+    filter: { action: LogsActions.BLOG_PUBLISHED},
+  },
+  {
+    name: 'blog rejected',
+    value: 'blog rejected',
+    filter: { action: LogsActions.BLOG_REJECTED},
+  },
   {
     name: "new user registered",
     value: "register",
