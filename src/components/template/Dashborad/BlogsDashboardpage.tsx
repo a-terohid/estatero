@@ -5,7 +5,7 @@ import { Blog_Interface} from '@/types/modelTypes';
 import { DashboardBlogsPage_interface } from '@/types/pagesProps';
 import React from 'react';
 
-const BlogsDashboardpage = ({ blogs , authors , currentPage, totalPages , totalBlogs , userIsAdmin }: DashboardBlogsPage_interface ) => {
+const BlogsDashboardpage = ({ blogs , authors , currentPage, totalPages , totalBlogs , userIsAdmin = false }: DashboardBlogsPage_interface ) => {
     return (
         <div className='px-5 py-5 md:px-7'>
             {/* Page title */}

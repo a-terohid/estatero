@@ -50,6 +50,7 @@ const config = {
         'FAQPage-texture': "url('/img/FAQBanner.png')",
         'ContactPage-texture': "url('/img/ContactBanner.png')",
         'Properties-texture': "url('/img/PropertiesBanner.png')",
+        'Blogs-texture': "url('/img/blogsBanner.png')",
       },
       colors: styleGuide_colors
     },

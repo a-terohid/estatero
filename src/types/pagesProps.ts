@@ -77,7 +77,7 @@ export interface DashboardBlogsPage_interface {
     currentPage : number, 
     totalPages : number
     totalBlogs : number
-    userIsAdmin : boolean
+    userIsAdmin ?: boolean
 }
 
 export interface ProppertiesPage_interface { 
