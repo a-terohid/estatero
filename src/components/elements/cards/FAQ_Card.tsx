@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { IoTrashBinOutline } from 'react-icons/io5';
-import { LuClipboardEdit } from 'react-icons/lu';
+import { LuClipboardPen } from "react-icons/lu";
 import { MdArrowDropDown } from 'react-icons/md';
 
 // Component to display a single FAQ item with toggle, edit, and delete functionalities
@@ -71,7 +71,7 @@ const FAQ_Card = ({ FAQ }: { FAQ: FAQ_Interface }) => {
                             href={`/dashboard/FAQs/edit/${_id}`}
                             className="flex items-center justify-between gap-x-3 bg-Warning-50 hover:bg-Warning-100 hover:text-plus-green-4 rounded-lg px-2 py-1"
                         >
-                            Edit <LuClipboardEdit className="text-lg" />
+                            Edit <LuClipboardPen className="text-lg" />
                         </Link>
                     </div>
                 </div>

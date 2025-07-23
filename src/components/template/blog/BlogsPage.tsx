@@ -15,7 +15,7 @@ const BlogsPage = ({ blogs , authors , currentPage, totalPages , totalBlogs  }: 
                     
                     {/* Page Description */}
                     <p className="text-Body-RL-Medium md:text-Body-RL-Large md:w-1/2 text-Greyscale-100">
-                        Discover insights, tips, and trends in the real estate world through our blog. Whether you're buying, selling, or investing, find expert advice and market updates to guide your journey in making the best property decisions
+                        Discover insights, tips, and trends in the real estate world through our blog. Whether youre buying, selling, or investing, find expert advice and market updates to guide your journey in making the best property decisions
                     </p>
                 </div>
             </div>
