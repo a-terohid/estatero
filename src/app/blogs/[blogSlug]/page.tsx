@@ -89,13 +89,30 @@ const page = async ({ params }: { params: { blogSlug: string } }) => {
   const mongoId = params.blogSlug.split("-")[0];
   const BLOG = await fetchBlogById(mongoId);
 
+  const blogs = await Blog.find()
+  const otherBLog = blogs.filter(block => block.id !== mongoId);
+  const shuffled = otherBLog.sort(() => 0.5 - Math.random());
+
   if (!BLOG) redirect("/blogs")
 
   const autor =
     (await User.findOne({ _id: BLOG.autor_id })) ||
     (await Agent.findOne({ _id: BLOG.autor_id }));
 
-  return ( <BlogDetailspage blog={BLOG} author={autor} />);
+  const otherBlogsWithAuthors = await Promise.all(
+    shuffled.slice(0, 3).map(async (blog) => {
+      const author =
+        (await User.findOne({ _id: blog.autor_id })) ||
+        (await Agent.findOne({ _id: blog.autor_id }));
+
+      return {
+        blog,
+        author,
+      };
+    })
+  );
+
+  return ( <BlogDetailspage blog={BLOG} author={autor} otherBlogs={otherBlogsWithAuthors} />);
 };
 
 export default page;
