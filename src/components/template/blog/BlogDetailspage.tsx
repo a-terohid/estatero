@@ -23,7 +23,6 @@ const BlogDetailspage = ({blog , author , otherBlogs }:{blog:Blog_Interface , au
                     alt={description}
                     fill
                     priority
-                    quality={70}
                     className="object-cover object-center"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
