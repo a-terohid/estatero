@@ -42,7 +42,7 @@ const AddBlogDashboardPage = () => {
 
         setDataError(BlogFormValidation({title , description}, DATA_Error));
         
-    }, [title , description]);
+    }, [title , description , DATA_Error]);
     
     // Reset thumbnail
     const ResetThumbnail = useCallback(() => {

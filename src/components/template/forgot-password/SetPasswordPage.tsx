@@ -45,7 +45,7 @@ const SetPasswordPage = ({email}: {email : string}) => {
             }
 
             setDataError(SetPasswordFormsValidation(data, data_error));
-        }, [ data ])
+        }, [ data , data_error ])
 
         const handleSetPasswords = async (event: any) => {
             event.preventDefault(); // Prevent default form submission behavior

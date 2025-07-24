@@ -61,7 +61,7 @@ const LoginPage = () => {
 
         setDataError(LoginFormsValidation(DATA, DATA_Error));
 
-    }, [DATA]);
+    }, [DATA , DATA_Error]);
     
     // Handle input changes
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

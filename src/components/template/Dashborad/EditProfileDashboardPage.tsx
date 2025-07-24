@@ -61,7 +61,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
             return;
         }
         setDataError(editProfileFormsValidation(data, dataError));
-    }, [data]);
+    }, [data , dataError]);
 
     // Handler for input changes (name, last name, phone number)
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,7 +135,7 @@ const EditProfileDashboardPage = ({ user }: { user: User_Interface }) => {
             setUploadProgress(null);
             toast.error(ERROR.PROBLEM);
         }
-    }, [user._id, name, last_name, phone_number, isCheckedCoverImage, profile_picture, router]);
+    }, [user._id, name, last_name, phone_number, isCheckedCoverImage, profile_picture, router , data]);
 
     return (
         <div className='px-5 py-5 md:px-7'>

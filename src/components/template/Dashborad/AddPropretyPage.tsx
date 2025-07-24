@@ -84,7 +84,7 @@ const AddPropretyPage = () => {
     
             setDataError(propertyFormValidation(data, DATA_Error));
     
-    }, [data]);
+    }, [data , DATA_Error]);
 
     // Switch form tab
     const switchTab = (tab: typeof activeTab) => setActiveTab(tab);

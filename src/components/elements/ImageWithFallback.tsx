@@ -27,7 +27,7 @@ const ImageWithFallback = ({ src, alt, style , type }: Props) => {
     } else {
       setImgSrc(src);
     }
-  }, [src]);
+  }, [src , fallbackSrc]);
 
   const handleError = () =>  setImgSrc(fallbackSrc);
 

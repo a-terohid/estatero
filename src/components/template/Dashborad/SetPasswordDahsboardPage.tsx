@@ -49,7 +49,7 @@ const SetPasswordDahsboardPage = ({ userEmail, token, expire }: resetDate_interf
             return
         }
         setDataError(SetPasswordFormsValidation(data, data_error));
-    }, [data]);
+    }, [data , data_error]);
 
     // Save OTP when input is completed
     const handleSubmit = (pin: string) => setOtp(pin);

@@ -31,7 +31,7 @@ const ResetPasswordPage = ({ email, token, expire, error }: resetpassword_props)
         if (error) {
             toast.error(error);
         }
-    }, []);
+    }, [error]);
 
     // Function to handle password reset process
     const handleForgotPasswords = async (event: any) => {
