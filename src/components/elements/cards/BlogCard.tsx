@@ -16,7 +16,7 @@ const BlogCard = ({ blog , author  }: {blog: Blog_Interface , author: User_Inter
             {/* Link to the agent's detailed page */}
             <Link href={`/blogs/${slug}`} className='hover:grayscale-[0.5]'>
                 {/* Profile image with fallback handling */}
-                <ImageWithFallback src={thumbnails || ""} alt={description} style={"rounded-b-2xl"} />
+                <ImageWithFallback src={thumbnails || ""} alt={description} type={'thumbnail'} style={"rounded-b-2xl"} />
             </Link>
             <div className='pt-4 px-2 mb-2'>
                 <p className='text-Body-RL-Small md:text-Body-RL-Medium mb-1'>{createdAt.toLocaleDateString()}</p>

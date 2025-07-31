@@ -6,31 +6,34 @@ type Props = {
   src: string;
   alt: string;
   style?: string;
-  type ?: 'profile' | 'thumbnail'
+  type?: 'profile' | 'thumbnail';
 };
 
-const ImageWithFallback = ({ src, alt, style , type }: Props) => {
-  let fallbackSrc;
+const ImageWithFallback = ({ src, alt, style, type }: Props) => {  
+  const fallbackSrc =
+    type === "thumbnail"
+      ? "/img/placeholder_image.webp"
+      : "/img/ProfilePicurePlaceHolder2.png";
 
-  if( type == 'thumbnail' ){
-    fallbackSrc = "/img/placeholder_image.webp"
-  } else {
-    fallbackSrc = "/img/ProfilePicurePlaceHolder2.png"
-  }
-  
-  const [imgSrc, setImgSrc] = useState(src?.trim() || fallbackSrc);
+  const [imgSrc, setImgSrc] = useState(() => {
+    const clean = src?.trim();
+    return clean ? clean : fallbackSrc;
+  });
 
-  // If src is empty or only spaces, show fallback from the beginning
   useEffect(() => {
-    if (!src || src.trim() === "") {
+    const clean = src?.trim();
+    if (!clean || clean === "" || clean === "undefined") {
       setImgSrc(fallbackSrc);
     } else {
-      setImgSrc(src);
+      setImgSrc(clean);
     }
-  }, [src , fallbackSrc]);
+  }, [src]);
 
-  const handleError = () =>  setImgSrc(fallbackSrc);
-
+  const handleError = () => {
+    if (imgSrc !== fallbackSrc) {
+      setImgSrc(fallbackSrc);
+    }
+  };
 
   return (
     <img
