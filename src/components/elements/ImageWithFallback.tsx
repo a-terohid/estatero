@@ -6,26 +6,23 @@ type Props = {
   src: string;
   alt: string;
   style?: string;
-  type?: 'profile' | 'thumbnail';
+  type?: "profile" | "thumbnail";
 };
 
-const ImageWithFallback = ({ src, alt, style, type }: Props) => {  
+const ImageWithFallback = ({ src, alt, style, type }: Props) => {
   const fallbackSrc =
     type === "thumbnail"
       ? "/img/placeholder_image.webp"
       : "/img/ProfilePicurePlaceHolder2.png";
 
-  const [imgSrc, setImgSrc] = useState(() => {
-    const clean = src?.trim();
-    return clean ? clean : fallbackSrc;
-  });
+  const [imgSrc, setImgSrc] = useState<string>(fallbackSrc);
 
   useEffect(() => {
     const clean = src?.trim();
-    if (!clean || clean === "" || clean === "undefined") {
-      setImgSrc(fallbackSrc);
-    } else {
+    if (clean && clean !== "" && clean !== "undefined") {
       setImgSrc(clean);
+    } else {
+      setImgSrc(fallbackSrc);
     }
   }, [src]);
 
