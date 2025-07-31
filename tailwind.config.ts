@@ -51,6 +51,7 @@ const config = {
         'ContactPage-texture': "url('/img/ContactBanner.png')",
         'Properties-texture': "url('/img/PropertiesBanner.png')",
         'Blogs-texture': "url('/img/blogsBanner.png')",
+        'aboutus-texture': "url('/img/AboutUsBanner.png')",
       },
       colors: styleGuide_colors
     },
