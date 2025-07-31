@@ -74,7 +74,7 @@ export async function POST(req: Request) {
 
     // Process and save the thumbnail image if it exists
     if (thumbnail && thumbnail.type.startsWith("image/")) {
-      thumbnailName = await processAndSaveImageForProperties(thumbnail, thumbnailUploadPath, blogId);
+      thumbnailName = await processAndSaveImageForProperties(thumbnail, thumbnailUploadPath, blogId, 600, 400);
     }
 
     // Process and save all additional images
