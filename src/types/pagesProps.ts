@@ -31,7 +31,7 @@ export interface resetpassword_props {
 
 export interface DashboardLoyout_prop {
     children : React.ReactNode
-    email: string,
+    fullName: string,
     role : UserRole
 }
 

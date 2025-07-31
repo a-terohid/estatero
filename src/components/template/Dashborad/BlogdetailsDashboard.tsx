@@ -38,7 +38,7 @@ const BlogdetailsDashboard = ({blog , author , userIsAdmin}:{blog:Blog_Interface
                 />
             </div>
             <div className='mt-8 py-4 border-t border-primary-100 flex items-center gap-x-2 justify-center'>
-                {userIsAdmin && <PublishBlog id={_id} />}
+                { !published && userIsAdmin && <PublishBlog id={_id} />}
                 {userIsAdmin && <DeleteBlog id={_id} />}
             </div>
         </div>

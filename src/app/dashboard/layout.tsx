@@ -19,7 +19,7 @@ const layout =  async ({ children }: {children: React.ReactNode}) => {
         </div> )
     }
 
-    return ( <DashboardLoyout role={user.role} email={user.email}>{ children }</DashboardLoyout> );
+    return ( <DashboardLoyout role={user.role} fullName={`${user.name} ${user.last_name}`}>{ children }</DashboardLoyout> );
 };
 
 export default layout;

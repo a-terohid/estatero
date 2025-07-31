@@ -8,7 +8,7 @@ import RenderDashboardMenuItem from "@/elements/RenderDashboardMenuItem";
 import { roleStyles } from "@/constants/roleStyle";
 
 
-const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => {
+const DashboardLoyout = ({ children , role , fullName } : DashboardLoyout_prop) => {
 
     
     return (
@@ -32,7 +32,7 @@ const DashboardLoyout = ({ children , role , email } : DashboardLoyout_prop) => 
                     {/* User info display */}
                     <div className='flex flex-col items-center border-b-2 pb-3'>
                         <BsPersonCircle className=" text-4xl mb-2 " /> {/* User icon */}
-                        <p className=' mb-3'>{ email }</p> {/* Display user email */}
+                        <p className=' mb-3'>{ fullName }</p> {/* Display user full name */}
                         { role in roleStyles &&  // Check if the user role exists in the role styles
                             <p className={`px-3 py-[2px] text-Body-RL-Small rounded-md ${roleStyles[role].labelClass} `}>
                                 {role} {/* Display the user role */}
