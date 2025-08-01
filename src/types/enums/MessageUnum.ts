@@ -6,6 +6,7 @@ export enum ERROR {
     CANT_FIND_HANDLER = "This admin cannot be found!",
     CANT_FIND_PROPERTY = "This property cannot be found!",
     CANT_FIND_BLog = "This blog cannot be found!",
+    CANT_FIND_TESTIMONIALS = "This Testimonials cannot be found!",
     INVALID_DATA = "please enter a valid data!",
     INVALID_EMAIL = "please enter a valid email!",
     WRONG_PASSWORD = "Email or password is incorrect!",
@@ -38,6 +39,7 @@ export enum ERROR {
 export enum MESSAGE {
     NEW_USER = "User cteated successfully!",
     NEW_BLOG_TESTIMONIALS = "Testimonial added successfully!",
+    NEW_BLOG_TESTIMONIALS_REPLY = "Testimonial reply added successfully!",
     USER_DELETE = "User deleted successfully!",
     PASSWORD_RESET_EMAIL = "Password reset email sent successfully.",
     PASSWORD_RESET = "Password reset successfully.",

@@ -15,6 +15,7 @@ export enum LogsActions  {
     NEW_PROPERTIES = 'new properties added',
     NEW_BLOG = 'new blog added',
     NEW_BLOG_TESTIMONIALS = 'new Testimonial for blog added',
+    NEW_BLOG_TESTIMONIALS_REPLY = 'new Testimonial reply for blog added',
     PROPERTY_EDITED = 'property edited',
     PROPERTY_DELETED = 'property deleted',
     BLOG_DELETED = 'blog deleted',
