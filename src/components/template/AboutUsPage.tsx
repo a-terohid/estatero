@@ -18,7 +18,7 @@ const AboutUsPage = () => {
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-0'>
                     <div className='flex flex-col gap-y-4 lg:justify-between'>
                         <h4 className='text-Heading-4 md:text-Heading-3 lg:text-Heading-2'>Your Investment, Our Priority</h4>
-                        <p className='text-Body-RL-Small md:text-Body-RL-Medium '>Real estate decisions represent life's most significant investments. From first-time homebuyers to seasoned investors, our experienced agents provide personalized guidance throughout your journey.</p>
+                        <p className='text-Body-RL-Small md:text-Body-RL-Medium '>Real estate decisions represent lifes most significant investments. From first-time homebuyers to seasoned investors, our experienced agents provide personalized guidance throughout your journey.</p>
                     </div>
                     <img src='/img/AboutUsSectionOneImage.jpg'  alt='Estatero - Your Investment, Our Priority' className='lg:ml-10 rounded-md'/>
                 </div>
