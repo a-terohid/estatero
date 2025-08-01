@@ -30,6 +30,8 @@
     "react-leaflet": "^4.2.1",
     "react-loader-spinner": "^6.1.6",
     "react-multi-date-picker": "^4.5.2",
+    "react-rating": "^2.0.5",
+    "react-star-ratings": "^2.3.0",
     "resend": "^4.0.0",
     "sharp": "^0.34.1",
     "slate": "^0.112.0",

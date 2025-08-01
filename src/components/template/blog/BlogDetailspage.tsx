@@ -1,3 +1,4 @@
+import BlogTestimonialsForm from '@/elements/BlogTestimonialsForm';
 import BlogCard from '@/elements/cards/BlogCard';
 import ImageWithFallback from '@/elements/ImageWithFallback';
 import { Agent_Interface, Blog_Interface, User_Interface } from '@/types/modelTypes';
@@ -60,7 +61,7 @@ const BlogDetailspage = ({blog , author , otherBlogs }:{blog:Blog_Interface , au
                 </div>
                 <div className='lg:col-span-3'>
                     <div>
-                        <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Autor</h4>
+                        <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Author</h4>
                         <div className='flex gap-x-4 items-center p-2 border border-Greyscale-100 w-full rounded-3xl'>
                             {/* Display sender profile picture with fallback */}
                             <ImageWithFallback src={profile_picture || ""} alt={email} style={"rounded-b-2xl w-20"} />
@@ -80,7 +81,11 @@ const BlogDetailspage = ({blog , author , otherBlogs }:{blog:Blog_Interface , au
                             } )
                             
                         }</div>
-                    </div>        
+                    </div>  
+                    <div className='mt-7'>
+                        <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Add Comment</h4>
+                        <BlogTestimonialsForm blogid={_id || ''} />
+                    </div>      
                 </div>
             </div>
         </div>
