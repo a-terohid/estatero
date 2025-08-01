@@ -64,16 +64,18 @@ const BlogTestimonialsForm = ({blogid} : {blogid:string}) => {
 
   return (
     <div className="p-4 border border-Greyscale-100 w-full rounded-3xl">
-        <p className="text-Body-MD-Small mb-2">Rate:</p>
-        <div className="mb-3 ml-4">
-            <Rating
-            initialRating={Data.rate}
-            onChange={(rate:any) => setData({ ...Data, rate })}
-            fractions={2}
-            fullSymbol={<FaStar className="text-yellow-400 text-2xl" />}
-            emptySymbol={<FaRegStar className="text-gray-300 text-2xl" />}
-            placeholderSymbol={<FaStarHalfStroke className="text-yellow-300 text-2xl" />}
-        />
+        <div className="flex items-center">
+            <p className="text-Body-MD-Small mb-2">Rate:</p>
+            <div className=" ml-2">
+                <Rating
+                initialRating={Data.rate}
+                onChange={(rate:any) => setData({ ...Data, rate })}
+                fractions={2}
+                fullSymbol={<FaStar className="text-yellow-400 text-2xl" />}
+                emptySymbol={<FaRegStar className="text-gray-300 text-2xl" />}
+                placeholderSymbol={<FaStarHalfStroke className="text-yellow-300 text-2xl" />}
+            />
+        </div>
         </div>
         <INPUT
             label="Message:"
