@@ -52,6 +52,11 @@ export const LogsActionFilters = [
     filter: { action: LogsActions.BLOG_REJECTED},
   },
   {
+    name: 'blog Testimonials added',
+    value: 'blog Testimonials added',
+    filter: { action: LogsActions.NEW_BLOG_TESTIMONIALS},
+  },
+  {
     name: "new user registered",
     value: "register",
     filter: { action: { $in: [LogsActions.NEW_REGISTER, LogsActions.NEW_REGISTER_GOOGLE] } },

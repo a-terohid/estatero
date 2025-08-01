@@ -14,6 +14,7 @@ export enum LogsActions  {
     NEW_REGISTER_GOOGLE = 'new google user registered',
     NEW_PROPERTIES = 'new properties added',
     NEW_BLOG = 'new blog added',
+    NEW_BLOG_TESTIMONIALS = 'new Testimonial for blog added',
     PROPERTY_EDITED = 'property edited',
     PROPERTY_DELETED = 'property deleted',
     BLOG_DELETED = 'blog deleted',
