@@ -1,5 +1,6 @@
 import BlogTestimonialsForm from '@/elements/BlogTestimonialsForm';
 import BlogCard from '@/elements/cards/BlogCard';
+import BlogTestimonialsCard from '@/elements/cards/BlogTestimonialsCard';
 import ImageWithFallback from '@/elements/ImageWithFallback';
 import ShowRating from '@/elements/ShowRating';
 import { Agent_Interface, Blog_Interface, User_Interface } from '@/types/modelTypes';
@@ -7,7 +8,7 @@ import { replaceDescriptionImageSrc } from '@/utils/BlogDescriptionImageHandler'
 import Image from 'next/image';
 import React from 'react';
 
-const BlogDetailspage = ({blog , author , otherBlogs , Testimonials }:{blog:Blog_Interface , author : User_Interface | Agent_Interface  , otherBlogs : any , Testimonials:any}) => {
+const BlogDetailspage = ({blog , author , otherBlogs , Testimonials , userIsAdmin }:{blog:Blog_Interface , author : User_Interface | Agent_Interface  , otherBlogs : any , Testimonials:any , userIsAdmin : boolean}) => {
 
     const { title , createdAt , description, images , published , _id , thumbnails } = blog
 
@@ -63,16 +64,7 @@ const BlogDetailspage = ({blog , author , otherBlogs , Testimonials }:{blog:Blog
                         { Testimonials.length ? <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Testimonials</h4> : null }
                         { Testimonials.length ? <div className='flex flex-col gap-y-3'>
                             {
-                                Testimonials.map((ts:any) => <div key={ts.user._id} className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl w-full'>
-                                        {/* Display sender profile picture with fallback */}
-                                        <ImageWithFallback src={ts.user.profile_picture || ""} alt={ts.user.email} style={"rounded-b-2xl w-14 h-14"} />
-                                        <div className='w-full'>
-                                            {/* Show 'new' label for unread messages */}
-                                            <p className='md:text-Body-SM-XSmall mb-1 lg:text-Body-SM-Small'>{ts.user.name} {ts.user.last_name}</p> 
-                                            <ShowRating rating={ts.Testimonial.rate} />
-                                            <p className='md:text-Body-RL-XSmall lg:text-Body-RL-Small mt-5 border border-Greyscale-100 py-2 px-4 w-full rounded-xl'>{ts.Testimonial.message}</p>
-                                        </div>       
-                                </div>)
+                                Testimonials.map((ts:any) => <BlogTestimonialsCard v='large' ts={ts} userIsAdmin={userIsAdmin}  key={ts.user._id} />)
                             }
                         </div> : null}
                     </div>
@@ -108,17 +100,7 @@ const BlogDetailspage = ({blog , author , otherBlogs , Testimonials }:{blog:Blog
                         { Testimonials.length ? <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Testimonials</h4> : null }
                         { Testimonials.length ? <div className='flex flex-col gap-y-3'>
                             {
-                                Testimonials.map((ts:any) => <div key={ts.user._id} className='p-3 border border-Greyscale-100 rounded-3xl w-full'>
-                                        <div className='flex gap-x-4 '>
-                                            <ImageWithFallback src={ts.user.profile_picture || ""} alt={ts.user.email} style={"rounded-b-2xl w-14 h-14"} />
-                                            <div className=''>
-                                                {/* Show 'new' label for unread messages */}
-                                                <p className='md:text-Body-SM-XSmall mb-1 lg:text-Body-SM-Small'>{ts.user.name} {ts.user.last_name}</p> 
-                                                <ShowRating rating={ts.Testimonial.rate} />
-                                            </div>  
-                                        </div>
-                                        <p className='md:text-Body-RL-XSmall lg:text-Body-RL-Small mt-4 border border-Greyscale-100 py-2 px-4 w-full rounded-xl'>{ts.Testimonial.message}</p>
-                                </div>)
+                                Testimonials.map((ts:any) => <BlogTestimonialsCard ts={ts} userIsAdmin={userIsAdmin}  key={ts.user._id} />)
                             }
                         </div> : null}
                     </div>   

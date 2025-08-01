@@ -3,6 +3,7 @@ import Agent from "@/models/agent";
 import AgentTestimonialsReply from "@/models/AgentTestimonialsReply";
 import Blog from "@/models/Blog";
 import BlogTestimonials from "@/models/Blogtestimonials";
+import BlogTestimonialsReply from "@/models/BlogtestimonialsReply";
 import Log from "@/models/log";
 import User from "@/models/user";
 import { LogsActions } from "@/types/enums/generalEnums";
@@ -55,16 +56,21 @@ export async function POST(req: Request) {
       { status: 422 }
     );}
 
+    console.log("test---------");
+    
+
     const BLOG = await Blog.findOne({ _id : blog_id})
     if (!BLOG) return NextResponse.json({ error: ERROR.CANT_FIND_BLog }, { status: 404 });
 
     const Testimonial = await BlogTestimonials.findOne({_id : parent_id})
     if (!Testimonial) return NextResponse.json({ error: ERROR.CANT_FIND_TESTIMONIALS }, { status: 404 });
 
-    const REPLY = await AgentTestimonialsReply.create({
+    const REPLY = await BlogTestimonialsReply.create({
       parent_id,     
       author_id,  
-      message  
+      message,
+      createdAt: new Date(),
+      updatedAt: new Date(),  
     })
 
     Testimonial.replies = [...Testimonial.replies , REPLY._id]

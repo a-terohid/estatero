@@ -2,6 +2,7 @@ import Agent from "@/models/agent";
 import Blog from "@/models/Blog";
 import User from "@/models/user";
 import BlogsPage from "@/template/blog/BlogsPage";
+import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -44,6 +45,8 @@ export const metadata: Metadata = {
 };
 
 const page = async ({ searchParams }: { searchParams: {page : string} }) => {
+
+  await connectDB()
 
     const { page = "1" } = searchParams;
 

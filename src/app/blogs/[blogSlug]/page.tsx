@@ -4,6 +4,7 @@ import BlogTestimonials from "@/models/Blogtestimonials";
 import User from "@/models/user";
 import BlogDetailspage from "@/template/blog/BlogDetailspage";
 import { Blog_Interface } from "@/types/modelTypes";
+import { checkSession } from "@/utils/CheckSession";
 import connectDB from "@/utils/connectDB";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -96,6 +97,10 @@ const page = async ({ params }: { params: { blogSlug: string } }) => {
 
   if (!BLOG) redirect("/blogs")
 
+  const { session, user } = await checkSession();
+  
+  const userIsAdmin = user?.role.includes("Admin") || user?.role.includes("Owner") || false;
+
   const autor =
     (await User.findOne({ _id: BLOG.autor_id })) ||
     (await Agent.findOne({ _id: BLOG.autor_id }));
@@ -130,7 +135,8 @@ const page = async ({ params }: { params: { blogSlug: string } }) => {
   return ( <BlogDetailspage 
                 blog={BLOG} 
                 author={autor} 
-                otherBlogs={otherBlogsWithAuthors}  
+                otherBlogs={otherBlogsWithAuthors} 
+                userIsAdmin={userIsAdmin} 
                 Testimonials={Testimonials}/>);
 };
 
