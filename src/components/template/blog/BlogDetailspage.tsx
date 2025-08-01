@@ -63,7 +63,7 @@ const BlogDetailspage = ({blog , author , otherBlogs , Testimonials }:{blog:Blog
                         { Testimonials.length ? <h4 className='text-Heading-4 mb-3 lg:text-Heading-2'>Testimonials</h4> : null }
                         { Testimonials.length ? <div className='flex flex-col gap-y-3'>
                             {
-                                Testimonials.map((ts:any) => <div className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl w-full'>
+                                Testimonials.map((ts:any) => <div key={ts.user._id} className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl w-full'>
                                         {/* Display sender profile picture with fallback */}
                                         <ImageWithFallback src={ts.user.profile_picture || ""} alt={ts.user.email} style={"rounded-b-2xl w-14 h-14"} />
                                         <div className='w-full'>
