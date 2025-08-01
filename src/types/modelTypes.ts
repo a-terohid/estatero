@@ -203,3 +203,14 @@ export interface Blog_Interface {
     }
     testimonials : string[]
 }
+
+export interface Blog_Testimonials_interface {
+    _id?: string;
+    user_id: string;            
+    blog_id: string;            
+    rate: number;                 
+    replies: string[];            
+    message: string;            
+    createdAt: Date;
+    updatedAt?: Date;
+}
