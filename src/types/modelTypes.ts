@@ -115,102 +115,127 @@ export interface Message_Interface {
 }
 
 
-
+/**
+ * Interface representing a frequently asked question (FAQ)
+ */
 export interface FAQ_Interface {
-    question: string
-    answer : string
-    _id ?: string
+    question: string;           // Question text
+    answer: string;             // Answer text
+    _id?: string;               // Optional unique identifier
 }
 
-
+/**
+ * Interface representing a contact or inquiry form submission
+ */
 export interface Form_Interface {
-    _id?: string;           // Optional unique identifier for the message
-    full_name : string;
-    email : string;
-    location: string
-    subject ?: string, 
-    message: string;        // Content of the message
-    is_read: boolean;       // Indicates whether the message has been read
-    createdAt: Date;        // Timestamp of when the message was created
+    _id?: string;               // Optional unique identifier
+    full_name: string;          // Full name of the person submitting the form
+    email: string;              // Email address of the sender
+    location: string;           // Location of the sender
+    subject?: string;           // Subject of the message (optional)
+    message: string;            // Message content
+    is_read: boolean;           // Flag to check if the message has been read
+    createdAt: Date;            // Timestamp of form submission
 }
 
+/**
+ * Interface representing the location details of a property
+ */
 export interface Property_location_interface {
-        country : string
-        state : string
-        city : string,
-        zipcode : string
-        street : string
-        unparsedAddress : string
-        coordinates : {
-            Latitude : string
-            Longitude : string
-        }
-    }
+    country: string;            // Country name
+    state: string;              // State or province
+    city: string;               // City name
+    zipcode: string;            // Postal code
+    street: string;             // Street address
+    unparsedAddress: string;    // Full address string (unstructured)
+    coordinates: {
+        Latitude: string;       // Geographic latitude
+        Longitude: string;      // Geographic longitude
+    };
+}
 
+/**
+ * Interface representing a real estate property
+ */
 export interface Property_Interface {
-    _id ?: string
-    title : string
-    description : string
-    price : number
-    property_type : Property_Types
-    property_Category: property_Categories
-    area : number
-    property_size_unit: "sqm" | "sqft" 
-    bedrooms : number
-    bathrooms : number
-    parking_spaces : number
-    year_built : string
-    Agents_id : string[]
-    status : property_Status
-    Location : Property_location_interface
-    tags ?: property_TAGS[],
-    thumbnail : string,
-    images : string[]
-    images_dir : string
-    floor_plan ?: string
-    published : boolean
-    createdAt: Date;
-    updatedAt?: Date;
-    PublishedBY ?: {
-        _id: string,
-        email : string
-    }
-    Rejected : boolean
-    RejectNUM: number
-    facts_features : {
-        F_description : string,
-        outdoor_details : property_outdoor_details_features[],
-        interior_details : property_interior_details_features[]
-        utilities_central : property_utilities_central_features[]
-        other : property_other_features[]
-    }
+    _id?: string;                                      // Optional unique identifier
+    title: string;                                     // Title of the property listing
+    description: string;                               // Full description of the property
+    price: number;                                     // Listing price
+    property_type: Property_Types;                     // Enum for type (e.g., apartment, house)
+    property_Category: property_Categories;            // Enum for category (e.g., sale, rent)
+    area: number;                                      // Area size of the property
+    property_size_unit: "sqm" | "sqft";                // Unit for area (square meters or feet)
+    bedrooms: number;                                  // Number of bedrooms
+    bathrooms: number;                                 // Number of bathrooms
+    parking_spaces: number;                            // Number of parking spaces
+    year_built: string;                                // Construction year
+    Agents_id: string[];                               // IDs of associated agents
+    status: property_Status;                           // Enum indicating status (e.g., available, sold)
+    Location: Property_location_interface;             // Detailed location object
+    tags?: property_TAGS[];                            // Optional array of tags (e.g., "sea view")
+    thumbnail: string;                                 // Thumbnail image URL
+    images: string[];                                  // Array of image URLs
+    images_dir: string;                                // Directory path where images are stored
+    floor_plan?: string;                               // Optional floor plan image URL
+    published: boolean;                                // If the property is published
+    createdAt: Date;                                   // Creation date
+    updatedAt?: Date;                                  // Last updated timestamp
+    PublishedBY?: {                                    // User who published the property
+        _id: string;
+        email: string;
+    };
+    Rejected: boolean;                                 // Flag indicating if the property was rejected
+    RejectNUM: number;                                 // Count of rejections
+    facts_features: {                                  // Object holding various features
+        F_description: string;                         // General description of features
+        outdoor_details: property_outdoor_details_features[];  // Outdoor feature enums
+        interior_details: property_interior_details_features[]; // Interior feature enums
+        utilities_central: property_utilities_central_features[]; // Utility features
+        other: property_other_features[];              // Other miscellaneous features
+    };
 }
 
-
+/**
+ * Interface representing a blog post
+ */
 export interface Blog_Interface { 
-    _id ?: string
-    title : string
-    description : string 
-    autor_id : string
-    thumbnails : string
-    images : string[]
-    published : boolean
-    createdAt: Date;
-    updatedAt?: Date;
-    PublishedBY : {
-        userId : string,
-        email : string
-    }
-    testimonials : string[]
+    _id?: string;                                       // Optional unique blog ID
+    title: string;                                     // Title of the blog
+    description: string;                               // Blog content in HTML or rich text
+    autor_id: string;                                  // ID of the author (user or agent)
+    thumbnails: string;                                // Thumbnail image URL
+    images: string[];                                  // Array of image URLs
+    published: boolean;                                // Whether blog is published
+    createdAt: Date;                                   // Date of creation
+    updatedAt?: Date;                                  // Optional update timestamp
+    PublishedBY: {                                     // Publisher details
+        userId: string;                                // Publisher user ID
+        email: string;                                 // Publisher email
+    };
+    testimonials: string[];                            // Array of testimonial IDs
 }
 
+/**
+ * Interface representing a testimonial left on a blog
+ */
 export interface Blog_Testimonials_interface {
-    _id?: string;
-    user_id: string;            
-    blog_id: string;            
-    rate: number;                 
-    replies: string[];            
-    message: string;            
+    _id?: string;              // Optional testimonial ID
+    user_id: string;           // ID of the user leaving the testimonial
+    blog_id: string;           // ID of the blog the testimonial is for
+    rate: number;              // Rating (e.g., 1-5)
+    replies: string[];         // Array of reply IDs
+    message: string;           // Testimonial content
+    createdAt: Date;           // Creation date
+    updatedAt?: Date;          // Optional last update
+}
+
+
+export interface Blog_Testimonials_reply_interface {
+    _id?: string;                  // Optional testimonial ID
+    parent_id: string;            // ID of the testimonial or reply being replied to
+    author_id: string;            // ID of the author of the reply
+    message: string;              // Text content of the reply
     createdAt: Date;
     updatedAt?: Date;
 }
