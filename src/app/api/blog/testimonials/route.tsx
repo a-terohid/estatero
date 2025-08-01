@@ -1,4 +1,5 @@
 import { authOptions } from "@/lib/auth";
+import Blog from "@/models/Blog";
 import BlogTestimonials from "@/models/Blogtestimonials";
 import Log from "@/models/log";
 import { LogsActions } from "@/types/enums/generalEnums";
@@ -6,7 +7,9 @@ import { ERROR, MESSAGE } from "@/types/enums/MessageUnum";
 import { Blog_Testimonials_interface } from "@/types/modelTypes";
 import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import slugify from "slugify";
 
 export async function POST(req: Request) {
   try {
@@ -37,6 +40,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Invalid rating value" }, { status: 400 });
     }
 
+    const BLOG = await Blog.findOne({ _id : blog_id})
+
     // Create a new Testimonial entry object
     const newTestimonials: Blog_Testimonials_interface = {
         user_id,
@@ -50,6 +55,12 @@ export async function POST(req: Request) {
 
     // Save the new form entry to the database
     const Testimonials = await BlogTestimonials.create(newTestimonials);
+
+
+    const slug = slugify(`${BLOG._id}-${BLOG.title}-${session.user?.name}${session.user?.last_name}`,{ lower: true, strict: true })
+              
+    revalidatePath(`/Blogs/${slug}`);
+    
 
     // Log the form submission action
     await Log.create({
