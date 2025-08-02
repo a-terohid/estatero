@@ -61,11 +61,10 @@ const BlogTestimonialsCard = ({v , ts , userIsAdmin}:{v?:string , ts: any, userI
 
     if(v === "large" ){
         return(
-            <div key={ts.user._id} className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl w-full'>
-                                                    
+            <div>
+                <div key={ts.user._id} className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl w-full'>                            
                     <ImageWithFallback src={ts.user.profile_picture || ""} alt={ts.user.email} style={"rounded-b-2xl w-14 h-14"} />
                     <div className='w-full'>
-                        {/* Show 'new' label for unread messages */}
                         <p className='md:text-Body-SM-XSmall mb-1 lg:text-Body-SM-Small'>{ts.user.name} {ts.user.last_name}</p> 
                         <ShowRating rating={ts.Testimonial.rate} />
                         <p className='md:text-Body-RL-XSmall lg:text-Body-RL-Small mt-5 border border-Greyscale-100 py-2 px-4 w-full rounded-xl'>{ts.Testimonial.message}</p>
@@ -99,6 +98,25 @@ const BlogTestimonialsCard = ({v , ts , userIsAdmin}:{v?:string , ts: any, userI
                             </div> : null
                         }
                     </div>       
+                </div>
+                <div>
+                    {
+                        ts.replies.length ? <div className='flex flex-col gap-y-3 mt-3 pl-8'>{
+
+                            ts.replies.map((rep:any) => <div key={rep.author._id} className='flex gap-x-4 p-3 border border-Greyscale-100 rounded-3xl bg-Secondary-0 w-full'>                            
+                                    <ImageWithFallback src={rep.author.profile_picture || ""} alt={rep.author.email} style={"rounded-b-2xl w-14 h-14"} />
+                                    <div className='w-full'>
+                                        <p className='md:text-Body-SM-XSmall mb-1 lg:text-Body-SM-Small'>{rep.author.name} {rep.author.last_name}</p> 
+                                        <p className='md:text-Body-RL-XSmall lg:text-Body-RL-Small mt-5 border border-Greyscale-100 py-2 px-4 w-full rounded-xl'>
+                                            <p className='border border-Greyscale-100 py-2 px-4 w-full rounded-xl bg-Neutral'>{ts.Testimonial.message}</p>
+                                            <p className='py-2 px-4 '>{rep.reply.message}</p>
+                                        </p>
+                                    </div> 
+                            </div> )
+                            
+                        }</div> : null
+                    }
+                </div>
             </div>
         )
     } else{

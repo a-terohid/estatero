@@ -1,6 +1,7 @@
 import Agent from "@/models/agent";
 import Blog from "@/models/Blog";
 import BlogTestimonials from "@/models/Blogtestimonials";
+import BlogTestimonialsReply from "@/models/BlogtestimonialsReply";
 import User from "@/models/user";
 import BlogDetailspage from "@/template/blog/BlogDetailspage";
 import { Blog_Interface } from "@/types/modelTypes";
@@ -121,13 +122,28 @@ const page = async ({ params }: { params: { blogSlug: string } }) => {
   const BLogTestimonials = await BlogTestimonials.find({blog_id : mongoId})
   const Testimonials = await Promise.all(
     (await BLogTestimonials).map(async (ts)=>{
-      const user =
-        (await User.findOne({ _id: ts.user_id })) ||
-        (await Agent.findOne({ _id: ts.user_id }));
+      const user = (await User.findOne({ _id: ts.user_id })) || (await Agent.findOne({ _id: ts.user_id }));
+
+      const replies = await BlogTestimonialsReply.find({ parent_id : ts._id })
+
+      const replyWithAuthors = await Promise.all(
+        replies.map(async (reply:any) => {
+          const author =
+            (await User.findOne({ _id: reply.author_id })) ||
+            (await Agent.findOne({ _id: reply.author_id }));
+
+          return {
+            reply,
+            author,
+          };
+        })
+      );
+
 
       return {
         Testimonial : ts,
         user,
+        replies: replyWithAuthors,
       };
     })
   )

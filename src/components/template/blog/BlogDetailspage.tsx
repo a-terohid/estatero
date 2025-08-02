@@ -8,7 +8,7 @@ import { replaceDescriptionImageSrc } from '@/utils/BlogDescriptionImageHandler'
 import Image from 'next/image';
 import React from 'react';
 
-const BlogDetailspage = ({blog , author , otherBlogs , Testimonials , userIsAdmin }:{blog:Blog_Interface , author : User_Interface | Agent_Interface  , otherBlogs : any , Testimonials:any , userIsAdmin : boolean}) => {
+const BlogDetailspage = ({blog , author , otherBlogs , Testimonials , userIsAdmin }:{blog:Blog_Interface , author : User_Interface | Agent_Interface  , otherBlogs : any , Testimonials:any , userIsAdmin : boolean }) => {
 
     const { title , createdAt , description, images , published , _id , thumbnails } = blog
 
