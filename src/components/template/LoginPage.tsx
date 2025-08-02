@@ -61,7 +61,7 @@ const LoginPage = () => {
 
         setDataError(LoginFormsValidation(DATA, DATA_Error));
 
-    }, [DATA , DATA_Error]);
+    }, [DATA ]);
     
     // Handle input changes
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +94,9 @@ const LoginPage = () => {
             password,
             redirect: false
         });
+
+        console.log(res);
+        
 
         setLoading(false);
         
@@ -175,7 +178,7 @@ const LoginPage = () => {
                     <p className="text-Heading-4 text-Neutral">
                         “Having dealt with many real estate firms over the years, Dwellfinder stands out for their exceptional service and understanding of the luxury market. Their discretion, and attention”
                     </p>
-                    <p className="text-Heading-5 mt-6 text-primary-50">
+                    <p className="text-Heading-5 mt-6 text-primary-50 ">
                         Robert Thompson <span className="text-Neutral">•</span> First-Time Homebuyers
                     </p>
                 </div>
