@@ -33,7 +33,7 @@ const ForgotPasswordPage = () => {
             return
         }
         setEmailError(forgotPasswordFormsValidation({ email }, { email_error }).email_error); 
-    },[ email , email_error])
+    },[ email])
 
     // Function to handle form submission when the user clicks "Send Reset Link"
     const handleForgotPasswords = async (event: any) => {

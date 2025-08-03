@@ -105,7 +105,7 @@ const EditPropertyDashboardPage = ({property , agents}: {property: Property_Inte
     
             setDataError(propertyFormValidation(data, DATA_Error));
     
-    }, [data , DATA_Error]);
+    }, [data]);
 
     // Switch form tab
     const switchTab = (tab: typeof activeTab) => setActiveTab(tab);

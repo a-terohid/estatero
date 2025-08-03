@@ -57,7 +57,7 @@ const RegisterPage = () => {
             return
         }
         setDataError(RegisterFormsValidation(DATA, DATA_Error));
-    } , [DATA , DATA_Error]);
+    } , [DATA]);
 
     // Function to handle user registration
     const handleSignUp = async (event: any) => {
