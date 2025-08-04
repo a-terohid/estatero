@@ -1,4 +1,7 @@
+import Property from "@/models/Property";
 import HomePage from "@/template/HomePage"
+import { property_TAGS } from "@/types/enums/generalEnums";
+import connectDB from "@/utils/connectDB";
 
 export const metadata = {
   title: "Estatero | Buy, Sell, and Rent Properties",
@@ -39,6 +42,7 @@ export const metadata = {
 };
 
 const page = () => {
+
     return (
       <>
         <HomePage />
