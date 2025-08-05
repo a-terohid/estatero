@@ -18,7 +18,7 @@ const PropertyCard = ({property}: {property:Property_Interface}) => {
     const slug = slugify(`${_id}-${title}-${Location.unparsedAddress}-${bedrooms}bedrooms-${bathrooms}bathrooms-${property_type}-${area}${property_size_unit}`,{ lower: true, strict: true })
 
     return (
-        <div className='p-2 border border-Greyscale-100 rounded-2xl '>
+        <div className='w-full h-full p-2 border border-Greyscale-100 bg-Neutral block rounded-2xl '>
             <div className=' relative'>
                 <Link href={`/property/${slug}`} className='hover:grayscale-[0.5]'>
                     <ImageWithFallback src={thumbnail || ""} alt={description} type='thumbnail' style='w-full !rounded-2xl' />
