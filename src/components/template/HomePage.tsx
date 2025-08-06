@@ -1,4 +1,5 @@
 import FeaturedPropertiesHomePage from "@/elements/FeaturedPropertiesHomePage";
+import PropertiesHomepage from "@/elements/PropertiesHomepage";
 
 
 const HomePage = () => {
@@ -50,6 +51,27 @@ const HomePage = () => {
                 </div>
                 <div className="py-8 md:py-16 lg:py-24 my-8 md:my-16 lg:my-24 bg-Greyscale-75">
                     <FeaturedPropertiesHomePage />
+                </div>
+                <PropertiesHomepage />
+                <div className="mt-8 md:mt-16 lg:mt-24 container">
+                    <h2 className="text-Heading-4 md:text-Heading-2 mb-12">How to Works?</h2>
+                    <div className=" flex flex-col-reverse lg:flex-row gap-y-12 gap-x-6 ">
+                        <img src="/img/homepaglastSection.png" alt="ESTATERO" className='rounded-md lg:w-1/2'/>
+                        <ul className="text-Heading-4 flex flex-col gap-y-12 lg:gap-y-0 lg:justify-between w-full">
+                            <li className="flex md:items-center gap-x-3 pb-2 border-b border-Greyscale-200 ">
+                                <span className="text-Heading-4 md:text-Heading-3">01</span>
+                                <p>Find Your Ideal Property</p>
+                            </li>
+                            <li className="flex md:items-center gap-x-3 pb-2 border-b border-Greyscale-200 ">
+                                <span className="text-Heading-4 md:text-Heading-3">02</span>
+                                <p>Find Your Ideal Property</p>
+                            </li>
+                            <li className="flex md:items-center gap-x-3 pb-2 border-b border-Greyscale-200 ">
+                                <span className="text-Heading-4 md:text-Heading-3">03</span>
+                                <p>Find Your Ideal Property</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>
