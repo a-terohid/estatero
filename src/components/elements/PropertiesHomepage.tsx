@@ -15,11 +15,13 @@ const PropertiesHomepage = () => {
         const fetchProperties = async () => {
           try {
             setLoading(true);
-            const res = await fetch("/api/property");
+            const res = await fetch("/api/property/GetSix");
             if (!res.ok) throw new Error("Failed to fetch properties");
     
             const data = await res.json();
             SetProperties(data.data);
+            console.log(data.data);
+            
           } catch (error) {
             console.error("Error fetching properties:", error);
           } finally {
