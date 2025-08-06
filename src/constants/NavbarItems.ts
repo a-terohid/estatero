@@ -9,7 +9,6 @@ export const navItems = [
         children: [
             { name: "Residential", href: "/property/residential" },
             { name: "Commercial", href: "/property/commercial" },
-            { name: "Luxury", href: "/property/luxury" }
         ]
     },
     { name: "Agents", href: "/agents" },
