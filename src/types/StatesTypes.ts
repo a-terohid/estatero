@@ -128,6 +128,7 @@ export interface MyMessagesPageSearchParams_interface {
     endDate ?:string
     status ?: string
     is_read ?: string
+    fullName ?: string
 }
 
 

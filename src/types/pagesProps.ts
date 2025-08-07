@@ -1,5 +1,5 @@
 import { UserRole } from "./enums/generalEnums";
-import { Agent_Interface, Blog_Interface, FAQ_Interface, LOG_Interface, Message_Interface, Property_Interface, User_Interface } from "./modelTypes";
+import { Agent_Interface, Blog_Interface, FAQ_Interface, Form_Interface, LOG_Interface, Message_Interface, Property_Interface, User_Interface } from "./modelTypes";
 import { LogsPageSearchParams_interface } from "./StatesTypes";
 
 export interface inputComponent_input {
@@ -57,6 +57,12 @@ export interface UsersDashboradPage_interface {
 
 export interface MymessagesPage_interface { 
     messages: Message_Interface[]
+    currentPage : number, 
+    totalPages : number
+}
+
+export interface formpage_interface { 
+    forms: Form_Interface[]
     currentPage : number, 
     totalPages : number
 }

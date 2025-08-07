@@ -1,25 +1,23 @@
-
 import PaginationButtons from '@/elements/buttons/PaginationButtons';
-import MessageCard from '@/elements/cards/MessageCard';
+import Formscard from '@/elements/cards/Formscard';
 import MyMessageFilterSection from '@/elements/filter/MyMessageFilterSection';
-import { MymessagesPage_interface } from '@/types/pagesProps';
+import { formpage_interface } from '@/types/pagesProps';
 import React from 'react';
 
-const AllMessage =  ({messages , currentPage, totalPages } : MymessagesPage_interface) => {
-
+const FormsDashboardPage = ({forms , currentPage, totalPages } : formpage_interface) => {
     return (
         <div className='px-5 py-5 md:px-7'>
             {/* Page title */}
-            <h1 className='text-Heading-4 mb-6'>All Messages:</h1>
+            <h1 className='text-Heading-4 mb-6'>Forms:</h1>
             <div>
                 {/* Filter section for messages */}
-                <MyMessageFilterSection  PATH="/dashboard/all_messages"  />
+                <MyMessageFilterSection  PATH="/dashboard/forms"  />
                 {/* User list section */}
                 <div className="flex flex-col gap-y-2 mt-4">
-                    {messages.length ? (
+                    {forms.length ? (
                         // Render each user with DashboardUserCard
-                        messages.map((msg, index) => (
-                           <MessageCard key={index} msg={msg} my={false} />
+                        forms.map((msg, index) => (
+                           <Formscard key={index} msg={msg}/>
                         ))
                     ) : (
                         
@@ -34,6 +32,6 @@ const AllMessage =  ({messages , currentPage, totalPages } : MymessagesPage_inte
             </div>
         </div>
     );
-
 };
-export default AllMessage;
+
+export default FormsDashboardPage;

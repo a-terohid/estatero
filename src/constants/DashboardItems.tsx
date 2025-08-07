@@ -5,7 +5,7 @@ import { FiEdit } from "react-icons/fi";
 import { LuBookCopy, LuBookPlus, LuLayoutDashboard } from "react-icons/lu";
 import { MdAddHomeWork, MdHomeWork, MdLockReset } from "react-icons/md";
 import { RiFootprintFill } from "react-icons/ri";
-import { FaUserFriends } from "react-icons/fa";
+import { FaUserFriends, FaWpforms } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 import { FaBuildingUser, FaFileCircleQuestion, FaRegCircleQuestion } from "react-icons/fa6";
 import { TbMessage } from "react-icons/tb";
@@ -92,6 +92,13 @@ export const DashboardItems : DashboardItem_interface[] = [
         href: "/dashboard/all_messages" , 
         accessibility: [ UserRole.OWNER , UserRole.AGENTOWNER],
         icon : <LuMessagesSquare />,
+        children : []
+    },
+    { 
+        name: "Forms", 
+        href: "/dashboard/forms" , 
+        accessibility: [ UserRole.OWNER , UserRole.AGENTOWNER , UserRole.AGENTADMIN , UserRole.ADMIN],
+        icon : <FaWpforms />,
         children : []
     },
     { 
