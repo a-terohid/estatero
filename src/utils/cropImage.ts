@@ -5,7 +5,7 @@ import { Area } from "react-easy-crop";
 const createImage = (url: string): Promise<HTMLImageElement> => {
     return new Promise((resolve, reject) => {
       const image = new Image();
-      image.crossOrigin = "anonymous"; // Prevent CORS issues
+      image.crossOrigin = "anonymous"; // Prevent CORS issues 
       image.src = url;
       image.onload = () => resolve(image); // Resolves the Promise with the image object once loaded
       image.onerror = (error) => reject(error); // Rejects the Promise if there's an error loading the image

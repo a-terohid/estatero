@@ -229,7 +229,7 @@ export interface Blog_Testimonials_interface {
     createdAt: Date;           // Creation date
     updatedAt?: Date;          // Optional last update
 }
-
+ 
 
 export interface Blog_Testimonials_reply_interface {
     _id?: string;                  // Optional testimonial ID

@@ -5,21 +5,37 @@ import { authOptions } from "@/lib/auth";
 import User from "@/models/user";
 import Agent from "@/models/agent";
 
-export const checkSession = async (): Promise<{ session: any; user: User_Interface | Agent_Interface | null }> => {
-  await connectDB();
+/**
+	 * Checks the current user's session and retrieves the corresponding user record from the database.
+	 *
+	 * @returns An object containing:
+	 *   - `session`: The current authenticated session (if any).
+	 *   - `user`: The user or agent document from the database, or `null` if not found or not logged in.
+ */
 
-  const session = await getServerSession(authOptions);
-  let user: User_Interface | Agent_Interface | null = null;
+export const checkSession = async (): Promise<{ session: any; user: User_Interface | Agent_Interface | null; }> => {
+	// Ensure the database connection is established
+	await connectDB();
 
-  if(!session) return { session, user };
+	// Retrieve the current session using NextAuth
+	const session = await getServerSession(authOptions);
+	let user: User_Interface | Agent_Interface | null = null;
 
-  const role = session?.user.role;
+	// If no session exists, return immediately
+	if (!session) return { session, user };
 
-  if (role.includes("Agent")) {
-    user = await Agent.findOne({ email: session?.user.email });
-  } else {
-    user = await User.findOne({ email: session?.user.email });
-  }
+	// Extract the user's role from the session
+	const role = session?.user.role;
 
-  return { session, user };
+	// Fetch the user record based on role
+	if (role.includes("Agent")) {
+		// If the role contains "Agent", search in the Agent collection
+		user = await Agent.findOne({ email: session?.user.email });
+	} else {
+		// Otherwise, search in the User collection
+		user = await User.findOne({ email: session?.user.email });
+	}
+
+	// Return both the session and the retrieved user
+	return { session, user };
 };

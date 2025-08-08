@@ -82,7 +82,7 @@ export const RegisterFormsValidation = (
 
 // Function to validate login form data and return an object containing error messages.
 export const LoginFormsValidation = (
-    data: loginData_interface, 
+    data: loginData_interface , 
     date_error: loginDataError_interface
 ): loginDataError_interface => {
 

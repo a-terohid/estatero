@@ -6,15 +6,39 @@ import { UserRole } from "@/types/enums/generalEnums";
 import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 
-const HomeLayout = ({ children , role  } : {children: React.ReactNode , role : UserRole}) => {
+/**
+     * HomeLayout component wraps the page content with Navbar and Footer.
+     * It conditionally hides Navbar and Footer on specific routes like login or password pages.
+     * 
+     * @param children - The main content to be rendered inside the layout.
+     * @param role - The user role, used to customize the Navbar.
+ */
+
+const HomeLayout = ({ children, role }: { children: React.ReactNode; role: UserRole }) => {
+    // Get current route pathname
     const pathname = usePathname();
-    const hideLayout = ["/login", "/register" , "/forgot-password" , "/reset-password", "/set-password"].includes(pathname);
-    
+
+    // Define routes where layout components (Navbar, Footer) should be hidden
+    const hideLayout = [
+        "/login",
+        "/register",
+        "/forgot-password",
+        "/reset-password",
+        "/set-password"
+    ].includes(pathname);
+
     return (
         <body className="font-Manrope">
-            {!hideLayout && <Navbar role={role}  />}
+            {/* Conditionally render Navbar unless on excluded routes */}
+            {!hideLayout && <Navbar role={role} />}
+            
+            {/* Render main page content */}
             <div className={``}>{children}</div>
+
+            {/* Conditionally render Footer unless on excluded routes */}
             {!hideLayout && <Footer />}
+            
+            {/* Toast notifications container */}
             <Toaster />
         </body>
     );
