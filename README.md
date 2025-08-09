@@ -6,36 +6,37 @@ A full-featured real estate platform built with Next.js (App Router), TypeScript
 Estatero provides role-based dashboards, listing and blog management, agent–owner collaboration, messaging, and advanced search — designed for scalability and easy customization.
 
 🚀 Features
-	Role-based Access Control
+
+Role-based Access Control:
 	•	Primary roles: user, agent, admin, owner
 	•	Mixed roles: agent-owner, agent-admin
 	•	Owners and admins can dynamically change permissions
 
-Listings Management
+Listings Management:
 	•	Create, edit, delete property listings
 	•	Listings require admin/owner approval before being public
 	•	Multiple agents can be assigned to a single listing
 	•	Like functionality for listings
  
- Blog Management
+ Blog Management:
 	•	Create, edit, delete blog posts
 	•	Approval workflow before publication
 	•	Comments and replies by admins and owners
  
- Messaging System
+ Messaging System:
 	•	Users can message agents directly
 	•	Agents have an inbox in their dashboard
 	•	Contact form sends messages to owners/admins
  
- Advanced Search
+ Advanced Search:
 	•	Dashboard search for listings, blogs, and logs
 	•	Public-facing property search
 
-Audit Logging
+Audit Logging:
 	•	All key actions are logged (who, when, what type)
 	•	Owners can filter logs by type, date, and actor
  
- Rich Text Editing
+ Rich Text Editing:
 	•	Integrated Tiptap editor for blogs & descriptions
 
 🛠 Tech Stack
