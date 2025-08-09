@@ -7,44 +7,44 @@ Estatero provides role-based dashboards, listing and blog management, agent–ow
 
 🚀 Features
 
-Role-based Access Control:
-	•	Primary roles: user, agent, admin, owner
-	•	Mixed roles: agent-owner, agent-admin
-	•	Owners and admins can dynamically change permissions
+## Role-based Access Control:
+- Primary roles: user, agent, admin, owner
+- Mixed roles: agent-owner, agent-admin
+- Owners and admins can dynamically change permissions
 
-Listings Management:
-	•	Create, edit, delete property listings
-	•	Listings require admin/owner approval before being public
-	•	Multiple agents can be assigned to a single listing
-	•	Like functionality for listings
+## Listings Management:
+- Create, edit, delete property listings
+- Listings require admin/owner approval before being public
+- Multiple agents can be assigned to a single listing
+- Like functionality for listings
  
- Blog Management:
-	•	Create, edit, delete blog posts
-	•	Approval workflow before publication
-	•	Comments and replies by admins and owners
+## Blog Management:
+- Create, edit, delete blog posts
+- Approval workflow before publication
+- Comments and replies by admins and owners
  
- Messaging System:
-	•	Users can message agents directly
-	•	Agents have an inbox in their dashboard
-	•	Contact form sends messages to owners/admins
+## Messaging System:
+- Users can message agents directly
+- Agents have an inbox in their dashboard
+- Contact form sends messages to owners/admins
  
- Advanced Search:
-	•	Dashboard search for listings, blogs, and logs
-	•	Public-facing property search
+## Advanced Search:
+- Dashboard search for listings, blogs, and logs
+- Public-facing property search
 
-Audit Logging:
-	•	All key actions are logged (who, when, what type)
-	•	Owners can filter logs by type, date, and actor
+## Audit Logging:
+- All key actions are logged (who, when, what type)
+- Owners can filter logs by type, date, and actor
  
- Rich Text Editing:
-	•	Integrated Tiptap editor for blogs & descriptions
+## Rich Text Editing:
+- Integrated Tiptap editor for blogs & descriptions
 
 🛠 Tech Stack
-	•	Frontend: Next.js (App Router), TypeScript, TailwindCSS
-	•	Backend: Next.js API Routes, Mongoose/MongoDB
-	•	Editor: Tiptap rich text editor
-	•	Authentication: JWT or Session (NextAuth or custom)
-	•	Deployment: Vercel / Node.js environment
+- Frontend: Next.js (App Router), TypeScript, TailwindCSS
+- Backend: Next.js API Routes, Mongoose/MongoDB
+- Editor: Tiptap rich text editor
+- Authentication: JWT or Session (NextAuth or custom)
+- Deployment: Vercel / Node.js environment
 
 📂 Project Structure
 ```JavaScript
